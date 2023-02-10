@@ -1,0 +1,120 @@
+---
+title: "Ch1_ShinyApp"
+format: 
+  html:
+    theme: "lumen"
+editor: visual
+toc: true
+---
+
+## **What is Shiny?**
+
+Shiny is an R package that builds interactive web applications using R and RStudio to compile HTML files. The HTML files can be used locally, (just opened up using your browser from a local directory), or placed on a server to make public to anyone to use. Its not just for data, either! There are used as an education tool, a map for finding resources, business intelligence (BI) dashboards, tracking activities, calculators, file type conversion, and of course, for displaying the results of data analysis through interactive visualizations.
+
+You are not restricted to just the web browser. You can configure your shiny app to include export to other document types, like PDFs, Word, or Excel.
+
+The most important aspects of shiny are that its interactive and its responsive, which means that it resizes automatically to adjust to the device being used. This means you design once, and it can be viewed on a laptop, desktop, tablet, or phone.
+
+\[image of other document types\]
+
+In Shiny, we code in R. In the following sections code will be shown in cells:
+
+```{r}
+# this is written in R
+print("Hello lovely people!")
+```
+
+In the second chapter we'll explore R Markdown, which is a markdown language similiar to HTML but easier! We'll explore this as another method of creating a dashboard. We won't be spending much time on R Markdown, but as you have begun your journey in R and RStudio, you may want to consider it as it can make publishing much easier. You can learn more about R Markdown [here](https://shiny.rstudio.com/articles/rmarkdown.html "link to R Markdown page"). This document was created using Quarto in RStudio using RMarkdown.
+
+## **What can it do?**
+
+### examples of dashboards -
+
+#### simple
+
+#### complex
+
+## Data tables
+
+## **How does it integrate with other things?**
+
+\[insert diagram\]
+
+### shiny.io
+
+### Github desktop
+
+### github.com/
+
+### RStudio
+
+### Shiny
+
+### File Management
+
+Here we discuss how Shiny creates html files and references data within a file structure that must be maintained.
+
+## **How do I get started?**
+
+link to the tutorials at [shiny.rstudio.com](https://shiny.rstudio.com/tutorial/)
+
+Install the package down below in the console. You only need to do this once. If you uninstall and re-install your RStudio, you may need to reinstall packages.
+
+    install.packages("shiny")
+
+### Basic form: ui, server, shiny(ui, server)
+
+There are three main components to a shiny app: the ui, the server, and the shinyApp() function that calls the ui and server.
+
+The *ui* (the user interface object) specifies the layout: where items are placed on the webpage.
+
+The *server* function is the instructions for how shiny builds your app.
+
+The shinyApp() function creates the actual app from the *ui* and *server* components
+
+::: {style="background-color:LightGray;color:black;padding:20px;"}
+<i> Past versions of shiny used multi-page layouts with the ui and server components saved as separate files, such as *ui.R* and *server.R*. While this is still supported, the rest of this chapter will assume that we're using the single-page version in which the ui and server are together in one app.R file. </i>
+:::
+
+Let's open up a shiny app file, called Demo1.R and we'll go through the parts:
+
+![image of a basic shiny app components](ch1_files/images/demo1_basic1.png){fig-alt="image of a basic shiny app components"}
+
+Within the *ui* section, we can determine the layout. Shiny apps support the following layout
+
+## Basic layouts:
+
+### FluidPage
+
+#### Sidebar
+
+#### main
+
+### Tabbed
+
+## Widgets
+
+### Upload
+
+### Download
+
+## Publishing
+
+### Shiny.io
+
+### Github.io
+
+### Github desktop
+
+examples
+
+```{r}
+1 + 1
+```
+
+You can add options to executable code like this
+
+```{r}
+#| echo: false
+2 * 2
+```
