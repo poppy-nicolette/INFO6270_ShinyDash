@@ -4,9 +4,7 @@ format: html
 editor: visual
 ---
 
-## **Getting your shiny app to do something**
-
-In this chapter, we will look at how to make your shiny app respond to user input or updating based on real-time data.
+In this chapter, we will look at how to make your do stuff, respond, and calculate multiple tables and visualizations
 
 ## Reactive pages
 

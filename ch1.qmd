@@ -37,7 +37,7 @@ The [Shiny Gallery](https://shiny.rstudio.com/gallery/) is really helpful when l
 
 ![An example of a simple application from this chapter.](images/Screen%20Shot%202023-02-17%20at%208.14.16%20AM.png){width="500"}
 
-### Examples of dashboards 
+### Examples of dashboards
 
 #### Simple
 
@@ -53,7 +53,9 @@ source: https://www.delreyanalytics.com/post/an-simple-r-shiny-dashboard-for-rea
 
 Here is a link to one from the shinydashboard gallery.
 
-## Data tables
+::: {style="background-color:LightGray;color:black;padding:20px;"}
+Ok, those are impressive. But you will get there and we're going to walk through each of the elements step by step.
+:::
 
 ## **How does it integrate with other things?**
 
@@ -101,7 +103,7 @@ Once you select *Create* you will see the template shiny app. This has three sec
 
 ![The starting template for a Shiny app.](images/Screen%20Shot%202023-02-17%20at%2010.53.57%20AM.png){fig-align="left" width="600"}
 
-### Basic form: ui, server, shiny(ui, server)
+### Basic anatomy of a shiny app
 
 There are three main components to a shiny app: the ui, the server, and the shinyApp() function that calls the ui and server.
 
@@ -114,6 +116,12 @@ The shinyApp() function creates the actual app from the *ui* and *server* compon
 ::: {style="background-color:LightGray;color:black;padding:20px;"}
 <i> Past versions of shiny used multi-page layouts with the ui and server components saved as separate files, such as *ui.R* and *server.R*. While this is still supported, the rest of this chapter will assume that we're using the single-page version in which the ui and server are together in one app.R file. </i>
 :::
+
+The UI and the server both have inputs and outputs that will be assigned and called. We'll go over those next:
+
+### Inputs
+
+### Outputs
 
 ### Set up a working directory
 
@@ -140,9 +148,7 @@ That's it to run a basic Shiny app!!! The shiny library comes with many examples
 
 That's it! you've created a new app. Its simple right now, but we'll explore more options later for designing something that works for your needs. Let's discuss how we publish next so that you get a sense of the entire workflow.
 
-## Publishing
-
-### Shiny.io
+### Publishing on shinyapps.io
 
 Now we can start publishing online for the world to experience your brilliant research! A free account at shinyapps.io provides space for 5 applications and 25 active hours of server time. ([what are active hours?](https://support.posit.co/hc/en-us/articles/217717407-What-is-an-Active-Hour-for-shinyapps-io-))
 
@@ -170,7 +176,9 @@ Now we can start publishing online for the world to experience your brilliant re
 
 That's it! You've done it!! Now sit back and watch the cash and attention role in.
 
-## Basic layouts:
+At this point, you know enough to open existing apps on Shiny Gallery, modify their open code, and publish them on shinyapps.io. In the following sections, we'll be going over all the different layouts, widgets, inputs and outputs, and themes that will help you design apps based on your needs.
+
+## Layouts:
 
 Within the *ui* section, we can determine the layout. Shiny apps support the following layouts:
 
@@ -281,14 +289,25 @@ Widgets are the interactive input controls that transform your website from stat
 
 The syntax of the widget is very similar across the groups. Let's look at the code below:
 
-![](images/Screen%20Shot%202023-02-17%20at%2012.03.52%20PM.png)
+![](images/Screen%20Shot%202023-02-17%20at%201.27.30%20PM.png)
+
+Some important new fuctions are called. In the server function, you see *renderText*. This calls the values you assigned in *input_1* and places it where you assigned it in *output_1*. In addition to text, you can also render:
+
+| **render function** | **creates**                                     |
+|:--------------------|:------------------------------------------------|
+| `renderDataTable`   | DataTable                                       |
+| `renderImage`       | images (saved as a link to a source file)       |
+| `renderPlot`        | plots                                           |
+| `renderPrint`       | any printed output                              |
+| `renderTable`       | data frame, matrix, other table like structures |
+| `renderText`        | character strings                               |
+| `renderUI`          | a Shiny tag object or HTML                      |
 
 #### Download
 
 The download button is a special case and is not the same as a widget, however, its super useful for people to download a dataset or whatever you have prepared for them. The downloadHandler() function is critical to this working. In this case the downloadHandler is sending the file named *data* to the *write.csv()* function.
 
 \`\`\`
-
 
     ui <- fluidPage(
       downloadButton("downloadData", "Download")
@@ -338,24 +357,30 @@ With other libraries you can also write Excel files, such as with [*writexl*.](h
       
     shinyApp(ui, server)
 
+Next, let's play with themes.
+
 ## Themes
 
-Bootstrap themes
+Bootstrap themes control the styling of the application, unifying colors and fonts, for example.
+
+Themes are assigned in the UI.
 
 ## Conclusion
 
-In this chapter we've covered:
+Important notes about the UI and server functions of a shiny app:
 
--   what it is
+-   Inputs
 
--   how it works
-
--   how to publish it.
+-   Outputs
 
 The next chapter moves into a more detailed view of how to make shiny apps shine with interactivity and reactiveness. In other words, we'll learn how to upload data, apply code to analyze it, and then download it.
+
+To conclude, let's go back and look at the first demo of delivery times and take it apart so we understand what's going on.
 
 ## References:
 
 I took inspiration and guidance from many sources which I've tried to include here:
 
 The Bookdown library for R, at bookdown.org, provides a [tutorial](https://bookdown.org/hadrien/how_to_build_a_shiny_app_from_scratch/user-interface.html "Link to tutorial at bookdown.org") on how to build Shiny apps.
+
+Mastering Shiny
