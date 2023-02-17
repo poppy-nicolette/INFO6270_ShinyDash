@@ -121,7 +121,15 @@ The UI and the server both have inputs and outputs that will be assigned and cal
 
 ### Inputs
 
+These are also called widgets, but there are other forms in which text or numbers can be entered. There is a basic format to the inputs. First there is the input type, in this case a *sliderInput*. In the first position inside is the inputID parameter, followed by the label parameter. These two will be consistent with all inputs. After the inputID and the label, arguments that may be unique to each follow. In this case, there are arguments for *value* *min*, and *max*. In general, all inputs, (including widgets) keep this order of *inputID, label, arguments*.
+
+    sliderInput("min", "Limit (minimum)", value = 50, min = 0, max = 100)
+
+The inputID has some rules, just like any variable in R. It must be a string consisting of letters, numbers, and/or underscores. Other characters like spaces, symbols, dashes, periods, etc., won't work. Second, it must be unique as you will call this in output functions.
+
 ### Outputs
+
+Out
 
 ### Set up a working directory
 
