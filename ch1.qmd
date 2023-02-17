@@ -279,7 +279,9 @@ navbarMenu code
 
 Widgets are the interactive input controls that transform your website from static to a dynamic thing that your users can adjust, filter, select, upload or download what they need. There are 13 standard widgets you can choose from. While, we will address a few of these, you can find all of them and their code on the [shiny gallery](https://shiny.rstudio.com/gallery/widget-gallery.html).
 
-#### Upload
+The syntax of the widget is very similar across the groups. Let's look at the code below:
+
+![](images/Screen%20Shot%202023-02-17%20at%2012.03.52%20PM.png)
 
 #### Download
 

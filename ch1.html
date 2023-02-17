@@ -437,12 +437,58 @@ ui &lt;- fluidPage(
 </section>
 <section id="widgets" class="level3">
 <h3 class="anchored" data-anchor-id="widgets">Widgets</h3>
-<p>Widgets are the interactive input controls that transform your website from static to a dynamic thing that your users can adjust, filter, select, upload or download what they need. There are 13 standard widgets you can choose from. While, we will address a few of these, you can find all of them and their code on the shiny gallery.</p>
-<section id="upload" class="level4">
-<h4 class="anchored" data-anchor-id="upload">Upload</h4>
-</section>
+<p>Widgets are the interactive input controls that transform your website from static to a dynamic thing that your users can adjust, filter, select, upload or download what they need. There are 13 standard widgets you can choose from. While, we will address a few of these, you can find all of them and their code on the <a href="https://shiny.rstudio.com/gallery/widget-gallery.html">shiny gallery</a>.</p>
+<p>The syntax of the widget is very similar across the groups. Let’s look at the code below:</p>
+<p><img src="images/Screen%20Shot%202023-02-17%20at%2012.03.52%20PM.png" class="img-fluid"></p>
 <section id="download" class="level4">
 <h4 class="anchored" data-anchor-id="download">Download</h4>
+<p>The download button is a special case and is not the same as a widget, however, its super useful for people to download a dataset or whatever you have prepared for them. The downloadHandler() function is critical to this working. In this case the downloadHandler is sending the file named <em>data</em> to the <em>write.csv()</em> function.</p>
+<p>```</p>
+<pre><code>ui &lt;- fluidPage(
+  downloadButton("downloadData", "Download")
+)
+
+server &lt;- function(input, output) {
+  # Our dataset
+  data &lt;- mtcars
+
+  output$downloadData &lt;- downloadHandler(
+    filename = function() {
+      paste("data-", Sys.Date(), ".csv", sep=",")
+    },
+    content = function(file) {
+      write.csv(data, file)
+    }#close function
+  )#close downloadHandler
+}#close server function
+
+shinyApp(ui, server)</code></pre>
+<p>With other libraries you can also write Excel files, such as with <a href="https://cran.r-project.org/web/packages/writexl/index.html"><em>writexl</em>.</a> his version writes to an Excel file.</p>
+<pre><code>library(shiny)
+library(writexl)
+
+
+ui &lt;- fluidPage(
+    downloadButton("downloadData", "Download")
+  )
+  
+server &lt;- function(input, output) {
+    # Our dataset
+    data &lt;- mtcars
+    
+    output$downloadData &lt;- downloadHandler(
+      filename = function() {
+        #paste("data-", Sys.Date(), ".csv", sep="")
+        paste("data-", Sys.Date(), ".xlsx")
+      },
+      content = function(file) {
+        #write.csv(data, file)
+        writexl::write_xlsx(data, file)
+      } #close function
+    ) #close downloadHandler
+  }#close server function
+  
+shinyApp(ui, server)</code></pre>
 </section>
 </section>
 </section>
