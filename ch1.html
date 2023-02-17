@@ -128,22 +128,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul class="collapse">
   <li><a href="#starting-a-new-app" id="toc-starting-a-new-app" class="nav-link" data-scroll-target="#starting-a-new-app">Starting a new app</a></li>
   <li><a href="#basic-anatomy-of-a-shiny-app" id="toc-basic-anatomy-of-a-shiny-app" class="nav-link" data-scroll-target="#basic-anatomy-of-a-shiny-app">Basic anatomy of a shiny app</a></li>
-  <li><a href="#inputs" id="toc-inputs" class="nav-link" data-scroll-target="#inputs">Inputs</a></li>
-  <li><a href="#outputs" id="toc-outputs" class="nav-link" data-scroll-target="#outputs">Outputs</a></li>
   <li><a href="#set-up-a-working-directory" id="toc-set-up-a-working-directory" class="nav-link" data-scroll-target="#set-up-a-working-directory">Set up a working directory</a></li>
   <li><a href="#publishing-on-shinyapps.io" id="toc-publishing-on-shinyapps.io" class="nav-link" data-scroll-target="#publishing-on-shinyapps.io">Publishing on shinyapps.io</a></li>
   </ul></li>
-  <li><a href="#layouts" id="toc-layouts" class="nav-link" data-scroll-target="#layouts">Layouts:</a>
+  <li><a href="#layouts-inputs-outputs-themes" id="toc-layouts-inputs-outputs-themes" class="nav-link" data-scroll-target="#layouts-inputs-outputs-themes">Layouts, inputs, outputs, &amp; themes</a>
   <ul class="collapse">
-  <li><a href="#fluidpage" id="toc-fluidpage" class="nav-link" data-scroll-target="#fluidpage">fluidPage</a></li>
-  <li><a href="#sidebarlayout" id="toc-sidebarlayout" class="nav-link" data-scroll-target="#sidebarlayout">sidebarLayout</a></li>
+  <li><a href="#layouts" id="toc-layouts" class="nav-link" data-scroll-target="#layouts">Layouts:</a></li>
   <li><a href="#grid-layout" id="toc-grid-layout" class="nav-link" data-scroll-target="#grid-layout">Grid Layout</a></li>
   <li><a href="#tabsetpanel" id="toc-tabsetpanel" class="nav-link" data-scroll-target="#tabsetpanel">tabsetPanel</a></li>
   <li><a href="#navlistpanel" id="toc-navlistpanel" class="nav-link" data-scroll-target="#navlistpanel">navlistPanel</a></li>
   <li><a href="#navbarpage" id="toc-navbarpage" class="nav-link" data-scroll-target="#navbarpage">navbarPage</a></li>
-  <li><a href="#widgets" id="toc-widgets" class="nav-link" data-scroll-target="#widgets">Widgets</a></li>
-  </ul></li>
+  <li><a href="#inputs" id="toc-inputs" class="nav-link" data-scroll-target="#inputs">Inputs</a></li>
+  <li><a href="#outputs" id="toc-outputs" class="nav-link" data-scroll-target="#outputs">Outputs</a></li>
   <li><a href="#themes" id="toc-themes" class="nav-link" data-scroll-target="#themes">Themes</a></li>
+  </ul></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References:</a></li>
   </ul>
@@ -278,13 +276,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div style="background-color:LightGray;color:black;padding:20px;">
 <p><i> Past versions of shiny used multi-page layouts with the ui and server components saved as separate files, such as <em>ui.R</em> and <em>server.R</em>. While this is still supported, the rest of this chapter will assume that we’re using the single-page version in which the ui and server are together in one app.R file. </i></p>
 </div>
-<p>The UI and the server both have inputs and outputs that will be assigned and called. We’ll go over those next:</p>
-</section>
-<section id="inputs" class="level3">
-<h3 class="anchored" data-anchor-id="inputs">Inputs</h3>
-</section>
-<section id="outputs" class="level3">
-<h3 class="anchored" data-anchor-id="outputs">Outputs</h3>
+<p>The UI and the server both have inputs and outputs that will be assigned and called. We’ll go over those in the Widgets section later on.</p>
 </section>
 <section id="set-up-a-working-directory" class="level3">
 <h3 class="anchored" data-anchor-id="set-up-a-working-directory">Set up a working directory</h3>
@@ -340,11 +332,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>At this point, you know enough to open existing apps on Shiny Gallery, modify their open code, and publish them on shinyapps.io. In the following sections, we’ll be going over all the different layouts, widgets, inputs and outputs, and themes that will help you design apps based on your needs.</p>
 </section>
 </section>
-<section id="layouts" class="level2">
-<h2 class="anchored" data-anchor-id="layouts">Layouts:</h2>
+<section id="layouts-inputs-outputs-themes" class="level2">
+<h2 class="anchored" data-anchor-id="layouts-inputs-outputs-themes">Layouts, inputs, outputs, &amp; themes</h2>
+<section id="layouts" class="level3">
+<h3 class="anchored" data-anchor-id="layouts">Layouts:</h3>
 <p>Within the <em>ui</em> section, we can determine the layout. Shiny apps support the following layouts:</p>
-<section id="fluidpage" class="level3">
-<h3 class="anchored" data-anchor-id="fluidpage">fluidPage</h3>
+<section id="fluidpage" class="level4">
+<h4 class="anchored" data-anchor-id="fluidpage">fluidPage</h4>
 <p>The fluidPage creates your layout consisting of rows with each row dividable into columns. Rows keep things aligned along a horizontal line. Each row is a 12-unit grid and columns define how much of the 12 units are assigned to each column. However, these all scale to accommodate the browser width, hence the fluid part of the name. While there are other page types, fluidPage is so versatile, you’re likely to just use this.</p>
 <p>fluidPage looks like this in the UI:</p>
 <pre><code>ui &lt;- fluidPage(
@@ -363,8 +357,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><i> Remember: rows contain columns. So, if you add a new fluidRow within a fluidPage layout, you can specify a different column spacing. </i></p>
 </div>
 </section>
-<section id="sidebarlayout" class="level3">
-<h3 class="anchored" data-anchor-id="sidebarlayout">sidebarLayout</h3>
+<section id="sidebarlayout" class="level4">
+<h4 class="anchored" data-anchor-id="sidebarlayout">sidebarLayout</h4>
 <p>Sidebars are one of the most common elements of a UI, which is usually skinny and on the left hand side of the screen, (although it can be on the right or both).</p>
 <p>Within the fluidPage you can pass a sidebarLayout, which consists of a sidebarPanel and a MainPanel.</p>
 <pre><code>library(shiny)
@@ -383,13 +377,14 @@ ui &lt;- fluidPage(
         )# close mainPanel
       )#close sidebarPanel
     )#close fluidPage</code></pre>
-<section id="sidebarpanel" class="level4">
-<h4 class="anchored" data-anchor-id="sidebarpanel">sidebarPanel</h4>
+<section id="sidebarpanel" class="level5">
+<h5 class="anchored" data-anchor-id="sidebarpanel">sidebarPanel</h5>
 <p>The sidebarPanel can be moved to the left or the right, be narrow or wide, contain text, images, or interactive widgets. The sidebarPanel takes the following inputs:</p>
 </section>
-<section id="mainpanel" class="level4">
-<h4 class="anchored" data-anchor-id="mainpanel">mainPanel</h4>
+<section id="mainpanel" class="level5">
+<h5 class="anchored" data-anchor-id="mainpanel">mainPanel</h5>
 <p>This element determines what is the other part of the sidebarLayout, the main part of the page. This is generally where you have text or show tables.</p>
+</section>
 </section>
 </section>
 <section id="grid-layout" class="level3">
@@ -438,11 +433,24 @@ ui &lt;- fluidPage(
 </div>
 </section>
 </section>
-<section id="widgets" class="level3">
-<h3 class="anchored" data-anchor-id="widgets">Widgets</h3>
+<section id="inputs" class="level3">
+<h3 class="anchored" data-anchor-id="inputs">Inputs</h3>
+<p>Widgets are also a type of input, but there are other forms in which text or numbers can be entered. There is a basic format to the inputs, just like widgets. First there is the input type, in this case a <em>textAreaInput</em>. In the first position inside is the inputID parameter, followed by the label parameter. These two will be consistent with all inputs. After the inputID and the label, arguments that may be unique to each follow. In this case, there is an argument for <em>the number of rows</em>. In general, all inputs, (including widgets) keep this order of <em>inputID, label, arguments</em>.</p>
+<pre><code>textAreaInput("story", "Tell me about yourself", rows = 3)</code></pre>
+<p>The inputID has some rules, just like any variable in R. It must be a string consisting of letters, numbers, and/or underscores. Other characters like spaces, symbols, dashes, periods, etc., won’t work. Second, it must be unique as you will call this in output functions.</p>
+<p>We’ll cover more of these in the widgets section.</p>
+<section id="widgets" class="level4">
+<h4 class="anchored" data-anchor-id="widgets">Widgets</h4>
 <p>Widgets are the interactive input controls that transform your website from static to a dynamic thing that your users can adjust, filter, select, upload or download what they need. There are 13 standard widgets you can choose from. While, we will address a few of these, you can find all of them and their code on the <a href="https://shiny.rstudio.com/gallery/widget-gallery.html">shiny gallery</a>.</p>
 <p>The syntax of the widget is very similar across the groups. Let’s look at the code below:</p>
 <p><img src="images/Screen%20Shot%202023-02-17%20at%201.27.30%20PM.png" class="img-fluid"></p>
+</section>
+</section>
+<section id="outputs" class="level3">
+<h3 class="anchored" data-anchor-id="outputs">Outputs</h3>
+<p>Outputs are assigned in the UI to define spaces where outputs will be seen. The include a unique ID in the first position of its arguments.</p>
+<p>Output ID’s are called from the server side preceded by <em>output$outputID</em> in which <em>outputID</em> is the ID (like a variable name) you’ve assigned it. You’ll see these are always calling a render* function, such as <em>renderText</em>. As an example:</p>
+<p><img src="images/Screen%20Shot%202023-02-17%20at%203.37.39%20PM.png" class="img-fluid" width="499"></p>
 <p>Some important new fuctions are called. In the server function, you see <em>renderText</em>. This calls the values you assigned in <em>input_1</em> and places it where you assigned it in <em>output_1</em>. In addition to text, you can also render:</p>
 <table class="table">
 <colgroup>
@@ -488,8 +496,7 @@ ui &lt;- fluidPage(
 </table>
 <section id="download" class="level4">
 <h4 class="anchored" data-anchor-id="download">Download</h4>
-<p>The download button is a special case and is not the same as a widget, however, its super useful for people to download a dataset or whatever you have prepared for them. The downloadHandler() function is critical to this working. In this case the downloadHandler is sending the file named <em>data</em> to the <em>write.csv()</em> function.</p>
-<p>```</p>
+<p>The download button is a special case and is not the same as a widget, however, its a super useful output for people to download a dataset or whatever you have prepared for them. The downloadHandler() function is critical to this working. In this case the downloadHandler is sending the file named <em>data</em> to the <em>write.csv()</em> function.</p>
 <pre><code>ui &lt;- fluidPage(
   downloadButton("downloadData", "Download")
 )
@@ -538,11 +545,11 @@ shinyApp(ui, server)</code></pre>
 <p>Next, let’s play with themes.</p>
 </section>
 </section>
-</section>
-<section id="themes" class="level2">
-<h2 class="anchored" data-anchor-id="themes">Themes</h2>
+<section id="themes" class="level3">
+<h3 class="anchored" data-anchor-id="themes">Themes</h3>
 <p>Bootstrap themes control the styling of the application, unifying colors and fonts, for example.</p>
 <p>Themes are assigned in the UI.</p>
+</section>
 </section>
 <section id="conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
@@ -558,7 +565,7 @@ shinyApp(ui, server)</code></pre>
 <h2 class="anchored" data-anchor-id="references">References:</h2>
 <p>I took inspiration and guidance from many sources which I’ve tried to include here:</p>
 <p>The Bookdown library for R, at bookdown.org, provides a <a href="https://bookdown.org/hadrien/how_to_build_a_shiny_app_from_scratch/user-interface.html" title="Link to tutorial at bookdown.org">tutorial</a> on how to build Shiny apps.</p>
-<p>Mastering Shiny</p>
+<p>Mastering Shiny https://mastering-shiny.org/index.html</p>
 </section>
 
 </main>

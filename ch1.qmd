@@ -117,19 +117,7 @@ The shinyApp() function creates the actual app from the *ui* and *server* compon
 <i> Past versions of shiny used multi-page layouts with the ui and server components saved as separate files, such as *ui.R* and *server.R*. While this is still supported, the rest of this chapter will assume that we're using the single-page version in which the ui and server are together in one app.R file. </i>
 :::
 
-The UI and the server both have inputs and outputs that will be assigned and called. We'll go over those next:
-
-### Inputs
-
-These are also called widgets, but there are other forms in which text or numbers can be entered. There is a basic format to the inputs. First there is the input type, in this case a *sliderInput*. In the first position inside is the inputID parameter, followed by the label parameter. These two will be consistent with all inputs. After the inputID and the label, arguments that may be unique to each follow. In this case, there are arguments for *value* *min*, and *max*. In general, all inputs, (including widgets) keep this order of *inputID, label, arguments*.
-
-    sliderInput("min", "Limit (minimum)", value = 50, min = 0, max = 100)
-
-The inputID has some rules, just like any variable in R. It must be a string consisting of letters, numbers, and/or underscores. Other characters like spaces, symbols, dashes, periods, etc., won't work. Second, it must be unique as you will call this in output functions.
-
-### Outputs
-
-Out
+The UI and the server both have inputs and outputs that will be assigned and called. We'll go over those in the Widgets section later on.
 
 ### Set up a working directory
 
@@ -186,11 +174,13 @@ That's it! You've done it!! Now sit back and watch the cash and attention role i
 
 At this point, you know enough to open existing apps on Shiny Gallery, modify their open code, and publish them on shinyapps.io. In the following sections, we'll be going over all the different layouts, widgets, inputs and outputs, and themes that will help you design apps based on your needs.
 
-## Layouts:
+## Layouts, inputs, outputs, & themes
+
+### Layouts:
 
 Within the *ui* section, we can determine the layout. Shiny apps support the following layouts:
 
-### fluidPage
+#### fluidPage
 
 The fluidPage creates your layout consisting of rows with each row dividable into columns. Rows keep things aligned along a horizontal line. Each row is a 12-unit grid and columns define how much of the 12 units are assigned to each column. However, these all scale to accommodate the browser width, hence the fluid part of the name. While there are other page types, fluidPage is so versatile, you're likely to just use this.
 
@@ -214,7 +204,7 @@ Note that the column widths don't have to add to 12! You're just telling it how 
 <i> Remember: rows contain columns. So, if you add a new fluidRow within a fluidPage layout, you can specify a different column spacing. </i>
 :::
 
-### sidebarLayout
+#### sidebarLayout
 
 Sidebars are one of the most common elements of a UI, which is usually skinny and on the left hand side of the screen, (although it can be on the right or both).
 
@@ -237,11 +227,11 @@ Within the fluidPage you can pass a sidebarLayout, which consists of a sidebarPa
           )#close sidebarPanel
         )#close fluidPage
 
-#### sidebarPanel
+##### sidebarPanel
 
 The sidebarPanel can be moved to the left or the right, be narrow or wide, contain text, images, or interactive widgets. The sidebarPanel takes the following inputs:
 
-#### mainPanel
+##### mainPanel
 
 This element determines what is the other part of the sidebarLayout, the main part of the page. This is generally where you have text or show tables.
 
@@ -291,13 +281,31 @@ navbarMenu code
 
 ![Screen capture of a navbarPage with a navbarMenu.](images/Screen%20Shot%202023-02-16%20at%202.10.58%20PM.png){alt="Screen capture of a navbarPage with a navbarMenu." fig-align="left" width="328"}
 
-### Widgets
+### Inputs
+
+Widgets are also a type of input, but there are other forms in which text or numbers can be entered. There is a basic format to the inputs, just like widgets. First there is the input type, in this case a *textAreaInput*. In the first position inside is the inputID parameter, followed by the label parameter. These two will be consistent with all inputs. After the inputID and the label, arguments that may be unique to each follow. In this case, there is an argument for *the number of rows*. In general, all inputs, (including widgets) keep this order of *inputID, label, arguments*.
+
+    textAreaInput("story", "Tell me about yourself", rows = 3)
+
+The inputID has some rules, just like any variable in R. It must be a string consisting of letters, numbers, and/or underscores. Other characters like spaces, symbols, dashes, periods, etc., won't work. Second, it must be unique as you will call this in output functions.
+
+We'll cover more of these in the widgets section.
+
+#### Widgets
 
 Widgets are the interactive input controls that transform your website from static to a dynamic thing that your users can adjust, filter, select, upload or download what they need. There are 13 standard widgets you can choose from. While, we will address a few of these, you can find all of them and their code on the [shiny gallery](https://shiny.rstudio.com/gallery/widget-gallery.html).
 
 The syntax of the widget is very similar across the groups. Let's look at the code below:
 
 ![](images/Screen%20Shot%202023-02-17%20at%201.27.30%20PM.png)
+
+### Outputs
+
+Outputs are assigned in the UI to define spaces where outputs will be seen. The include a unique ID in the first position of its arguments.
+
+Output ID's are called from the server side preceded by *output\$outputID* in which *outputID* is the ID (like a variable name) you've assigned it. You'll see these are always calling a render\* function, such as *renderText*. As an example:
+
+![](images/Screen%20Shot%202023-02-17%20at%203.37.39%20PM.png){width="499"}
 
 Some important new fuctions are called. In the server function, you see *renderText*. This calls the values you assigned in *input_1* and places it where you assigned it in *output_1*. In addition to text, you can also render:
 
@@ -313,9 +321,7 @@ Some important new fuctions are called. In the server function, you see *renderT
 
 #### Download
 
-The download button is a special case and is not the same as a widget, however, its super useful for people to download a dataset or whatever you have prepared for them. The downloadHandler() function is critical to this working. In this case the downloadHandler is sending the file named *data* to the *write.csv()* function.
-
-\`\`\`
+The download button is a special case and is not the same as a widget, however, its a super useful output for people to download a dataset or whatever you have prepared for them. The downloadHandler() function is critical to this working. In this case the downloadHandler is sending the file named *data* to the *write.csv()* function.
 
     ui <- fluidPage(
       downloadButton("downloadData", "Download")
@@ -367,7 +373,7 @@ With other libraries you can also write Excel files, such as with [*writexl*.](h
 
 Next, let's play with themes.
 
-## Themes
+### Themes
 
 Bootstrap themes control the styling of the application, unifying colors and fonts, for example.
 
@@ -391,4 +397,4 @@ I took inspiration and guidance from many sources which I've tried to include he
 
 The Bookdown library for R, at bookdown.org, provides a [tutorial](https://bookdown.org/hadrien/how_to_build_a_shiny_app_from_scratch/user-interface.html "Link to tutorial at bookdown.org") on how to build Shiny apps.
 
-Mastering Shiny
+Mastering Shiny https://mastering-shiny.org/index.html
