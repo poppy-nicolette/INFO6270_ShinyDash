@@ -277,11 +277,64 @@ navbarMenu code
 
 ### Widgets
 
-Widgets are the interactive input controls that transform your website from static to a dynamic thing that your users can adjust, filter, select, upload or download what they need. There are 13 standard widgets you can choose from. While, we will address a few of these, you can find all of them and their code on the shiny gallery.
+Widgets are the interactive input controls that transform your website from static to a dynamic thing that your users can adjust, filter, select, upload or download what they need. There are 13 standard widgets you can choose from. While, we will address a few of these, you can find all of them and their code on the [shiny gallery](https://shiny.rstudio.com/gallery/widget-gallery.html).
 
 #### Upload
 
 #### Download
+
+The download button is a special case and is not the same as a widget, however, its super useful for people to download a dataset or whatever you have prepared for them. The downloadHandler() function is critical to this working. In this case the downloadHandler is sending the file named *data* to the *write.csv()* function.
+
+\`\`\`
+
+
+    ui <- fluidPage(
+      downloadButton("downloadData", "Download")
+    )
+
+    server <- function(input, output) {
+      # Our dataset
+      data <- mtcars
+
+      output$downloadData <- downloadHandler(
+        filename = function() {
+          paste("data-", Sys.Date(), ".csv", sep=",")
+        },
+        content = function(file) {
+          write.csv(data, file)
+        }#close function
+      )#close downloadHandler
+    }#close server function
+
+    shinyApp(ui, server)
+
+With other libraries you can also write Excel files, such as with [*writexl*.](https://cran.r-project.org/web/packages/writexl/index.html) his version writes to an Excel file.
+
+    library(shiny)
+    library(writexl)
+
+
+    ui <- fluidPage(
+        downloadButton("downloadData", "Download")
+      )
+      
+    server <- function(input, output) {
+        # Our dataset
+        data <- mtcars
+        
+        output$downloadData <- downloadHandler(
+          filename = function() {
+            #paste("data-", Sys.Date(), ".csv", sep="")
+            paste("data-", Sys.Date(), ".xlsx")
+          },
+          content = function(file) {
+            #write.csv(data, file)
+            writexl::write_xlsx(data, file)
+          } #close function
+        ) #close downloadHandler
+      }#close server function
+      
+    shinyApp(ui, server)
 
 ## Themes
 
