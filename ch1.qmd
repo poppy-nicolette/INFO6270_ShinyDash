@@ -1,5 +1,6 @@
 ---
-title: "Ch1_ShinyApp"
+title: "Chapter 1:"
+subtitle: " What's a ShinyApp?"
 format: 
   html:
     theme: "lumen"
@@ -13,7 +14,7 @@ Shiny is an R package that builds interactive web applications using R and RStud
 
 You are not restricted to just the web browser. You can configure your shiny app to include export to other document types, like PDFs, Word, or Excel.
 
-The most important aspects of shiny are that its interactive and its responsive, which means that it resizes automatically to adjust to the device being used. This means you design once, and it can be viewed on a laptop, desktop, tablet, or phone.
+The most important aspects of shiny are that its interactive and it is *responsive*, which means that it resizes automatically to adjust to the device being used. This means you design once, and it can be viewed on a laptop, desktop, tablet, or phone.
 
 \[image of other document types\]
 
@@ -26,13 +27,31 @@ print("Hello lovely people!")
 
 In the second chapter we'll explore R Markdown, which is a markdown language similiar to HTML but easier! We'll explore this as another method of creating a dashboard. We won't be spending much time on R Markdown, but as you have begun your journey in R and RStudio, you may want to consider it as it can make publishing much easier. You can learn more about R Markdown [here](https://shiny.rstudio.com/articles/rmarkdown.html "link to R Markdown page"). This document was created using Quarto in RStudio using RMarkdown.
 
+### Bootstrap
+
+You will see this term pop up occasionally especially with regards to themes. Bootstrap is the front-end web framework that provides basic security, templates (which we'll take advantage of as themes for styling), URL routing, and data architecture among other things. Other programming languages have these frameworks and you may recognize the names, such as Django for use with Python or React for JavaScript. You don't need to know too much about it, just know that its in the background behind Shiny doing all the work to actually create a secure webpage. We'll be introducing Bootstrap themes later on.
+
 ## **What can it do?**
 
-### examples of dashboards -
+The [Shiny Gallery](https://shiny.rstudio.com/gallery/) is really helpful when learning as the examples provided include their code, so you can see how they created the interfaces. Below, is an example of where we're heading with this chapter and where we'll be going in the next chapter which will lead you through the steps to creating a dashboard.
 
-#### simple
+![An example of a simple application from this chapter.](images/Screen%20Shot%202023-02-17%20at%208.14.16%20AM.png){width="500"}
 
-#### complex
+### Examples of dashboards 
+
+#### Simple
+
+A simple dashboard is one that uses data that has been placed on the server, (or you have uploaded) and shows a variety of measures or calculations. In this case, we use data from OpenAlex and we perform simple calculations on the results.
+
+Here is a link to one from the shinydashboard gallery.
+
+#### Complex
+
+A complex dashboard would be one that is a data stream, continuously updating based on real-time conditions.
+
+source: https://www.delreyanalytics.com/post/an-simple-r-shiny-dashboard-for-real-time-streaming-data
+
+Here is a link to one from the shinydashboard gallery.
 
 ## Data tables
 
@@ -40,27 +59,47 @@ In the second chapter we'll explore R Markdown, which is a markdown language sim
 
 \[insert diagram\]
 
-### shiny.io
-
-### Github desktop
-
-### github.com/
-
 ### RStudio
+
+This is the IDE, the integrated development environment, for R, (among many other prgramming languages). We'll be using RStudio to create our shiny apps, test the code, preview results, and manage files.
 
 ### Shiny
 
-### File Management
+Shiny apps are built on Bootstrap. But you don't need to worry about that. The Shiny app code does all the work to place the elements you design into an html files and automatically manages all file dependencies. We'll briefly discuss files when getting started with your first app.
 
-Here we discuss how Shiny creates html files and references data within a file structure that must be maintained.
+### shinyapps.io
+
+When running a shiny application from RStudio, you can publish directly to a server. Thankfully, the R community has a server location where you can host up to 5 apps for free at shinyapps.io. Of course, you can pay for more space, but for now, this works for us!. Later on, we'll walk you through publishing to the server directly from RStudio. Its surprisingly easy!
+
+### Github desktop
+
+This optional application works in conjunction with github.com and enables to you sync files between your local storage, (laptop, desktop, Onedrive, etc) and your github repository. Its just a means of managing files and is not necessary, but is really helpful especially for collaborative projects.
+
+### github.com/
+
+This is a free online repository where you can store your code, and all the dependent files. Files can be uploaded easily from your local storage. Like Github desktop, this is not necessary, but helpful for keep your work in a safe place.
 
 ## **How do I get started?**
 
-link to the tutorials at [shiny.rstudio.com](https://shiny.rstudio.com/tutorial/)
+This link to the tutorials at [shiny.rstudio.com](https://shiny.rstudio.com/tutorial/) can also guide you through steps to creating your own apps, including more detailed information on how to change elements to meet your needs.
 
 Install the package down below in the console. You only need to do this once. If you uninstall and re-install your RStudio, you may need to reinstall packages.
 
     install.packages("shiny")
+
+### Starting a new app
+
+from Files\>New File \> Shiny Web app OR select new file from the pull down menu in the top toolbar.
+
+![Starting up a new Shiny app.](images/Screen%20Shot%202023-02-17%20at%208.56.52%20AM-01.png){fig-align="left" width="159"}
+
+This brings up a dialog box. Enter your project name. This will become the name of the folder that is created in the location you select.
+
+![Selecting your new directory location.](images/Screen%20Shot%202023-02-17%20at%209.02.05%20AM.png){fig-align="left" width="396"}
+
+Once you select *Create* you will see the template shiny app. This has three sections which we will cover next.
+
+![The starting template for a Shiny app.](images/Screen%20Shot%202023-02-17%20at%2010.53.57%20AM.png){fig-align="left" width="600"}
 
 ### Basic form: ui, server, shiny(ui, server)
 
@@ -76,45 +115,192 @@ The shinyApp() function creates the actual app from the *ui* and *server* compon
 <i> Past versions of shiny used multi-page layouts with the ui and server components saved as separate files, such as *ui.R* and *server.R*. While this is still supported, the rest of this chapter will assume that we're using the single-page version in which the ui and server are together in one app.R file. </i>
 :::
 
-Let's open up a shiny app file, called Demo1.R and we'll go through the parts:
+### Set up a working directory
+
+1.  First set up a new working directory. In RStudio you can do this in the Files tab (usually on right lower panel). You can navigate where you want a directory, create, or modify existing directories.
+
+Under *More*, select *Set as working directory*. You can also do this in the console with:
+
+    setwd("~/your_folder_name")
+
+2.  Download the following file from [github](https://raw.githubusercontent.com/poppy-nicolette/INFO6270_ShinyDash/0191f7e4681a7a0605e07eb12fe22232dcebdd98/Demo1/demo1.R?token=GHSAT0AAAAAABUWXK4A6N4XWZ2QMGGJBNCKY7GP7AA) and save as from your browser to this directory. Then rename the file from *demo1.txt* to *demo1.R*
+3.  Let's open up a shiny app file, called Demo1.R and we'll go through the parts:
 
 ![image of a basic shiny app components](ch1_files/images/demo1_basic1.png){fig-alt="image of a basic shiny app components"}
 
-Within the *ui* section, we can determine the layout. Shiny apps support the following layout
+We'll be going through each of these items in more detail, but for now, you can see the basic structure.
 
-## Basic layouts:
+To run the app, use the *Run* icon shown below. This will run in the RStudio viewer by default, but you can also run in your browser with the *Run external* option checked.
 
-### FluidPage
+![Figure 2: Image of the run icon. Note the pull down menu arrow on the right.](ch1_files/images/demo1_runapp.png){width="523"}
 
-#### Sidebar
+That's it to run a basic Shiny app!!! The shiny library comes with many examples you can explore as well as even more sophisticated examples on the [Gallery page](https://shiny.rstudio.com/gallery/ "Link to the Shiny app Gallery page").
 
-#### main
+![Figure 3: Examples of shiny apps and functions. Image source: https://shiny.rstudio.com/tutorial/written-tutorial/lesson1/](ch1_files/images/shiny_examples.png)
 
-### Tabbed
-
-## Widgets
-
-### Upload
-
-### Download
+That's it! you've created a new app. Its simple right now, but we'll explore more options later for designing something that works for your needs. Let's discuss how we publish next so that you get a sense of the entire workflow.
 
 ## Publishing
 
 ### Shiny.io
 
-### Github.io
+Now we can start publishing online for the world to experience your brilliant research! A free account at shinyapps.io provides space for 5 applications and 25 active hours of server time. ([what are active hours?](https://support.posit.co/hc/en-us/articles/217717407-What-is-an-Active-Hour-for-shinyapps-io-))
 
-### Github desktop
+1.  Create a shinyapps.io account. You will need this [login](https://www.shinyapps.io/admin/#/signup) info to set up your RStudio to publish directly to shinyapps.io. I recommend connecting via your GitHub account, if you have one.
 
-examples
+2.  Back in RStudio, we need to connect to your shinyapp.io account. To the right of the *Run* icon, select the pull down menu.
 
-```{r}
-1 + 1
-```
+    ![](ch1_files/images/demo1_manage.png){width="325"}
 
-You can add options to executable code like this
+3.  Select *Connect...* and then choose *shinyapps.io*
 
-```{r}
-#| echo: false
-2 * 2
-```
+    ![](ch1_files/images/demo1_connect.png){width="289"}
+
+4.  Follow the instructions to find the token and paste into the space provided.
+
+    ![](ch1_files/images/demo1_connect_token.png){width="342"}
+
+5.  So exciting! Now, you are ready to publish to shinyapps.io!
+
+    ![](ch1_files/images/demo1_publish_app.png){width="343"}
+
+6.  Check all the files you want uploaded to the shinyapps.io server. In our case with this demo, it should only be one file, demo1.R.
+
+    ![](ch1_files/images/demo1_published.png){width="344"}
+
+That's it! You've done it!! Now sit back and watch the cash and attention role in.
+
+## Basic layouts:
+
+Within the *ui* section, we can determine the layout. Shiny apps support the following layouts:
+
+### fluidPage
+
+The fluidPage creates your layout consisting of rows with each row dividable into columns. Rows keep things aligned along a horizontal line. Each row is a 12-unit grid and columns define how much of the 12 units are assigned to each column. However, these all scale to accommodate the browser width, hence the fluid part of the name. While there are other page types, fluidPage is so versatile, you're likely to just use this.
+
+fluidPage looks like this in the UI:
+
+    ui <- fluidPage(
+      title = "Hello Shiny!",
+      fluidRow(
+        column(width = 4,
+               "4"
+        ),
+        column(width = 3, offset = 2,
+               "3 offset 2"
+        ) #close column
+      ) #close fluidRow
+    ) #close fluidPage
+
+Note that the column widths don't have to add to 12! You're just telling it how much of the 12 units to reserve for that column.
+
+::: {#fluidPage style="background-color:LightGray;color:black;padding:20px;"}
+<i> Remember: rows contain columns. So, if you add a new fluidRow within a fluidPage layout, you can specify a different column spacing. </i>
+:::
+
+### sidebarLayout
+
+Sidebars are one of the most common elements of a UI, which is usually skinny and on the left hand side of the screen, (although it can be on the right or both).
+
+Within the fluidPage you can pass a sidebarLayout, which consists of a sidebarPanel and a MainPanel.
+
+    library(shiny)
+
+    # Define UI
+    ui <- fluidPage(
+        # Sidebar Layout
+        sidebarLayout(
+            # Sidebar Layout Elements
+            sidebarPanel = sidebarPanel("This is the sidebar area. You can have text and widgets here like buttons or sliders."),
+            mainPanel = mainPanel(
+                "This is the main panel text.",
+                h2"You can control text size",
+                "text color",
+                " or all images."
+            )# close mainPanel
+          )#close sidebarPanel
+        )#close fluidPage
+
+#### sidebarPanel
+
+The sidebarPanel can be moved to the left or the right, be narrow or wide, contain text, images, or interactive widgets. The sidebarPanel takes the following inputs:
+
+#### mainPanel
+
+This element determines what is the other part of the sidebarLayout, the main part of the page. This is generally where you have text or show tables.
+
+### Grid Layout
+
+If you want to control the grid into multiple rows and columns, you can do that by calling fluidRow() and column() within the fluidPage. While rows will automatically align, you can make columns are different widths, and even offset widths.
+
+Column examples here
+
+### tabsetPanel
+
+A tabset panel creates tabs for multiple pages. This is a great way to present multiple datasets, or seperate text by topical areas.
+
+tabsetPanel code
+
+tabsetPanel result
+
+The tabsetPanel can also be used in conjunction with the mainPanel() of a sidebarLayout!
+
+example code
+
+example image
+
+### navlistPanel
+
+### navbarPage
+
+The navbarPage is another page type, like the fluidPage. Some may consider this a little dated, but when you need a multipage app that has distinct layout elements, then this may be appropriate.
+
+A navbarPage establishes a page that can include any of the layouts above, such as a sidebarLayout(), a grid system of fluidRows() and columns(), or a tabsetPanel().
+
+    ui <- navbarPage("Main page title",
+      tabPanel("Page 1"),
+      tabPanel("Page 2"),
+      tabPanel("Page 3"),
+      tabPanel("Page 4")
+      )#close navbarMenu
+    ) #close navbarPage
+
+![An example of the navbarPage.](images/Screen%20Shot%202023-02-16%20at%202.39.26%20PM.png){fig-align="left" width="328"}
+
+#### navbarMenu
+
+The navbarMenu() is a sub-component of the navbarPage and provides a drop-down menu for additional tabPanel() elements.
+
+navbarMenu code
+
+![Screen capture of a navbarPage with a navbarMenu.](images/Screen%20Shot%202023-02-16%20at%202.10.58%20PM.png){alt="Screen capture of a navbarPage with a navbarMenu." fig-align="left" width="328"}
+
+### Widgets
+
+Widgets are the interactive input controls that transform your website from static to a dynamic thing that your users can adjust, filter, select, upload or download what they need. There are 13 standard widgets you can choose from. While, we will address a few of these, you can find all of them and their code on the shiny gallery.
+
+#### Upload
+
+#### Download
+
+## Themes
+
+Bootstrap themes
+
+## Conclusion
+
+In this chapter we've covered:
+
+-   what it is
+
+-   how it works
+
+-   how to publish it.
+
+The next chapter moves into a more detailed view of how to make shiny apps shine with interactivity and reactiveness. In other words, we'll learn how to upload data, apply code to analyze it, and then download it.
+
+## References:
+
+I took inspiration and guidance from many sources which I've tried to include here:
+
+The Bookdown library for R, at bookdown.org, provides a [tutorial](https://bookdown.org/hadrien/how_to_build_a_shiny_app_from_scratch/user-interface.html "Link to tutorial at bookdown.org") on how to build Shiny apps.

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Ch1_ShinyApp</title>
+<title>Chapter 1:</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -108,41 +108,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#what-is-shiny" id="toc-what-is-shiny" class="nav-link active" data-scroll-target="#what-is-shiny"><strong>What is Shiny?</strong></a></li>
+  <li><a href="#what-is-shiny" id="toc-what-is-shiny" class="nav-link active" data-scroll-target="#what-is-shiny"><strong>What is Shiny?</strong></a>
+  <ul class="collapse">
+  <li><a href="#bootstrap" id="toc-bootstrap" class="nav-link" data-scroll-target="#bootstrap">Bootstrap</a></li>
+  </ul></li>
   <li><a href="#what-can-it-do" id="toc-what-can-it-do" class="nav-link" data-scroll-target="#what-can-it-do"><strong>What can it do?</strong></a>
   <ul class="collapse">
-  <li><a href="#examples-of-dashboards--" id="toc-examples-of-dashboards--" class="nav-link" data-scroll-target="#examples-of-dashboards--">examples of dashboards -</a></li>
+  <li><a href="#examples-of-dashboards" id="toc-examples-of-dashboards" class="nav-link" data-scroll-target="#examples-of-dashboards">Examples of dashboards</a></li>
   </ul></li>
   <li><a href="#data-tables" id="toc-data-tables" class="nav-link" data-scroll-target="#data-tables">Data tables</a></li>
   <li><a href="#how-does-it-integrate-with-other-things" id="toc-how-does-it-integrate-with-other-things" class="nav-link" data-scroll-target="#how-does-it-integrate-with-other-things"><strong>How does it integrate with other things?</strong></a>
   <ul class="collapse">
-  <li><a href="#shiny.io" id="toc-shiny.io" class="nav-link" data-scroll-target="#shiny.io">shiny.io</a></li>
-  <li><a href="#github-desktop" id="toc-github-desktop" class="nav-link" data-scroll-target="#github-desktop">Github desktop</a></li>
-  <li><a href="#github.com" id="toc-github.com" class="nav-link" data-scroll-target="#github.com">github.com/</a></li>
   <li><a href="#rstudio" id="toc-rstudio" class="nav-link" data-scroll-target="#rstudio">RStudio</a></li>
   <li><a href="#shiny" id="toc-shiny" class="nav-link" data-scroll-target="#shiny">Shiny</a></li>
-  <li><a href="#file-management" id="toc-file-management" class="nav-link" data-scroll-target="#file-management">File Management</a></li>
+  <li><a href="#shinyapps.io" id="toc-shinyapps.io" class="nav-link" data-scroll-target="#shinyapps.io">shinyapps.io</a></li>
+  <li><a href="#github-desktop" id="toc-github-desktop" class="nav-link" data-scroll-target="#github-desktop">Github desktop</a></li>
+  <li><a href="#github.com" id="toc-github.com" class="nav-link" data-scroll-target="#github.com">github.com/</a></li>
   </ul></li>
   <li><a href="#how-do-i-get-started" id="toc-how-do-i-get-started" class="nav-link" data-scroll-target="#how-do-i-get-started"><strong>How do I get started?</strong></a>
   <ul class="collapse">
+  <li><a href="#starting-a-new-app" id="toc-starting-a-new-app" class="nav-link" data-scroll-target="#starting-a-new-app">Starting a new app</a></li>
   <li><a href="#basic-form-ui-server-shinyui-server" id="toc-basic-form-ui-server-shinyui-server" class="nav-link" data-scroll-target="#basic-form-ui-server-shinyui-server">Basic form: ui, server, shiny(ui, server)</a></li>
-  </ul></li>
-  <li><a href="#basic-layouts" id="toc-basic-layouts" class="nav-link" data-scroll-target="#basic-layouts">Basic layouts:</a>
-  <ul class="collapse">
-  <li><a href="#fluidpage" id="toc-fluidpage" class="nav-link" data-scroll-target="#fluidpage">FluidPage</a></li>
-  <li><a href="#tabbed" id="toc-tabbed" class="nav-link" data-scroll-target="#tabbed">Tabbed</a></li>
-  </ul></li>
-  <li><a href="#widgets" id="toc-widgets" class="nav-link" data-scroll-target="#widgets">Widgets</a>
-  <ul class="collapse">
-  <li><a href="#upload" id="toc-upload" class="nav-link" data-scroll-target="#upload">Upload</a></li>
-  <li><a href="#download" id="toc-download" class="nav-link" data-scroll-target="#download">Download</a></li>
+  <li><a href="#set-up-a-working-directory" id="toc-set-up-a-working-directory" class="nav-link" data-scroll-target="#set-up-a-working-directory">Set up a working directory</a></li>
   </ul></li>
   <li><a href="#publishing" id="toc-publishing" class="nav-link" data-scroll-target="#publishing">Publishing</a>
   <ul class="collapse">
-  <li><a href="#shiny.io-1" id="toc-shiny.io-1" class="nav-link" data-scroll-target="#shiny.io-1">Shiny.io</a></li>
-  <li><a href="#github.io" id="toc-github.io" class="nav-link" data-scroll-target="#github.io">Github.io</a></li>
-  <li><a href="#github-desktop-1" id="toc-github-desktop-1" class="nav-link" data-scroll-target="#github-desktop-1">Github desktop</a></li>
+  <li><a href="#shiny.io" id="toc-shiny.io" class="nav-link" data-scroll-target="#shiny.io">Shiny.io</a></li>
   </ul></li>
+  <li><a href="#basic-layouts" id="toc-basic-layouts" class="nav-link" data-scroll-target="#basic-layouts">Basic layouts:</a>
+  <ul class="collapse">
+  <li><a href="#fluidpage" id="toc-fluidpage" class="nav-link" data-scroll-target="#fluidpage">fluidPage</a></li>
+  <li><a href="#sidebarlayout" id="toc-sidebarlayout" class="nav-link" data-scroll-target="#sidebarlayout">sidebarLayout</a></li>
+  <li><a href="#grid-layout" id="toc-grid-layout" class="nav-link" data-scroll-target="#grid-layout">Grid Layout</a></li>
+  <li><a href="#tabsetpanel" id="toc-tabsetpanel" class="nav-link" data-scroll-target="#tabsetpanel">tabsetPanel</a></li>
+  <li><a href="#navlistpanel" id="toc-navlistpanel" class="nav-link" data-scroll-target="#navlistpanel">navlistPanel</a></li>
+  <li><a href="#navbarpage" id="toc-navbarpage" class="nav-link" data-scroll-target="#navbarpage">navbarPage</a></li>
+  <li><a href="#widgets" id="toc-widgets" class="nav-link" data-scroll-target="#widgets">Widgets</a></li>
+  </ul></li>
+  <li><a href="#themes" id="toc-themes" class="nav-link" data-scroll-target="#themes">Themes</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References:</a></li>
   </ul>
 </nav>
 </div>
@@ -150,7 +155,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Ch1_ShinyApp</h1>
+<h1 class="title">Chapter 1:</h1>
+<p class="subtitle lead">What’s a ShinyApp?</p>
 </div>
 
 
@@ -169,7 +175,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 class="anchored" data-anchor-id="what-is-shiny"><strong>What is Shiny?</strong></h2>
 <p>Shiny is an R package that builds interactive web applications using R and RStudio to compile HTML files. The HTML files can be used locally, (just opened up using your browser from a local directory), or placed on a server to make public to anyone to use. Its not just for data, either! There are used as an education tool, a map for finding resources, business intelligence (BI) dashboards, tracking activities, calculators, file type conversion, and of course, for displaying the results of data analysis through interactive visualizations.</p>
 <p>You are not restricted to just the web browser. You can configure your shiny app to include export to other document types, like PDFs, Word, or Excel.</p>
-<p>The most important aspects of shiny are that its interactive and its responsive, which means that it resizes automatically to adjust to the device being used. This means you design once, and it can be viewed on a laptop, desktop, tablet, or phone.</p>
+<p>The most important aspects of shiny are that its interactive and it is <em>responsive</em>, which means that it resizes automatically to adjust to the device being used. This means you design once, and it can be viewed on a laptop, desktop, tablet, or phone.</p>
 <p>[image of other document types]</p>
 <p>In Shiny, we code in R. In the following sections code will be shown in cells:</p>
 <div class="cell">
@@ -180,16 +186,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>In the second chapter we’ll explore R Markdown, which is a markdown language similiar to HTML but easier! We’ll explore this as another method of creating a dashboard. We won’t be spending much time on R Markdown, but as you have begun your journey in R and RStudio, you may want to consider it as it can make publishing much easier. You can learn more about R Markdown <a href="https://shiny.rstudio.com/articles/rmarkdown.html" title="link to R Markdown page">here</a>. This document was created using Quarto in RStudio using RMarkdown.</p>
+<section id="bootstrap" class="level3">
+<h3 class="anchored" data-anchor-id="bootstrap">Bootstrap</h3>
+<p>You will see this term pop up occasionally especially with regards to themes. Bootstrap is the front-end web framework that provides basic security, templates (which we’ll take advantage of as themes for styling), URL routing, and data architecture among other things. Other programming languages have these frameworks and you may recognize the names, such as Django for use with Python or React for JavaScript. You don’t need to know too much about it, just know that its in the background behind Shiny doing all the work to actually create a secure webpage. We’ll be introducing Bootstrap themes later on.</p>
+</section>
 </section>
 <section id="what-can-it-do" class="level2">
 <h2 class="anchored" data-anchor-id="what-can-it-do"><strong>What can it do?</strong></h2>
-<section id="examples-of-dashboards--" class="level3">
-<h3 class="anchored" data-anchor-id="examples-of-dashboards--">examples of dashboards -</h3>
+<p>The <a href="https://shiny.rstudio.com/gallery/">Shiny Gallery</a> is really helpful when learning as the examples provided include their code, so you can see how they created the interfaces. Below, is an example of where we’re heading with this chapter and where we’ll be going in the next chapter which will lead you through the steps to creating a dashboard.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screen%20Shot%202023-02-17%20at%208.14.16%20AM.png" class="img-fluid figure-img" width="500"></p>
+<p></p><figcaption class="figure-caption">An example of a simple application from this chapter.</figcaption><p></p>
+</figure>
+</div>
+<section id="examples-of-dashboards" class="level3">
+<h3 class="anchored" data-anchor-id="examples-of-dashboards">Examples of dashboards</h3>
 <section id="simple" class="level4">
-<h4 class="anchored" data-anchor-id="simple">simple</h4>
+<h4 class="anchored" data-anchor-id="simple">Simple</h4>
+<p>A simple dashboard is one that uses data that has been placed on the server, (or you have uploaded) and shows a variety of measures or calculations. In this case, we use data from OpenAlex and we perform simple calculations on the results.</p>
+<p>Here is a link to one from the shinydashboard gallery.</p>
 </section>
 <section id="complex" class="level4">
-<h4 class="anchored" data-anchor-id="complex">complex</h4>
+<h4 class="anchored" data-anchor-id="complex">Complex</h4>
+<p>A complex dashboard would be one that is a data stream, continuously updating based on real-time conditions.</p>
+<p>source: https://www.delreyanalytics.com/post/an-simple-r-shiny-dashboard-for-real-time-streaming-data</p>
+<p>Here is a link to one from the shinydashboard gallery.</p>
 </section>
 </section>
 </section>
@@ -199,31 +221,56 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="how-does-it-integrate-with-other-things" class="level2">
 <h2 class="anchored" data-anchor-id="how-does-it-integrate-with-other-things"><strong>How does it integrate with other things?</strong></h2>
 <p>[insert diagram]</p>
-<section id="shiny.io" class="level3">
-<h3 class="anchored" data-anchor-id="shiny.io">shiny.io</h3>
-</section>
-<section id="github-desktop" class="level3">
-<h3 class="anchored" data-anchor-id="github-desktop">Github desktop</h3>
-</section>
-<section id="github.com" class="level3">
-<h3 class="anchored" data-anchor-id="github.com">github.com/</h3>
-</section>
 <section id="rstudio" class="level3">
 <h3 class="anchored" data-anchor-id="rstudio">RStudio</h3>
+<p>This is the IDE, the integrated development environment, for R, (among many other prgramming languages). We’ll be using RStudio to create our shiny apps, test the code, preview results, and manage files.</p>
 </section>
 <section id="shiny" class="level3">
 <h3 class="anchored" data-anchor-id="shiny">Shiny</h3>
+<p>Shiny apps are built on Bootstrap. But you don’t need to worry about that. The Shiny app code does all the work to place the elements you design into an html files and automatically manages all file dependencies. We’ll briefly discuss files when getting started with your first app.</p>
 </section>
-<section id="file-management" class="level3">
-<h3 class="anchored" data-anchor-id="file-management">File Management</h3>
-<p>Here we discuss how Shiny creates html files and references data within a file structure that must be maintained.</p>
+<section id="shinyapps.io" class="level3">
+<h3 class="anchored" data-anchor-id="shinyapps.io">shinyapps.io</h3>
+<p>When running a shiny application from RStudio, you can publish directly to a server. Thankfully, the R community has a server location where you can host up to 5 apps for free at shinyapps.io. Of course, you can pay for more space, but for now, this works for us!. Later on, we’ll walk you through publishing to the server directly from RStudio. Its surprisingly easy!</p>
+</section>
+<section id="github-desktop" class="level3">
+<h3 class="anchored" data-anchor-id="github-desktop">Github desktop</h3>
+<p>This optional application works in conjunction with github.com and enables to you sync files between your local storage, (laptop, desktop, Onedrive, etc) and your github repository. Its just a means of managing files and is not necessary, but is really helpful especially for collaborative projects.</p>
+</section>
+<section id="github.com" class="level3">
+<h3 class="anchored" data-anchor-id="github.com">github.com/</h3>
+<p>This is a free online repository where you can store your code, and all the dependent files. Files can be uploaded easily from your local storage. Like Github desktop, this is not necessary, but helpful for keep your work in a safe place.</p>
 </section>
 </section>
 <section id="how-do-i-get-started" class="level2">
 <h2 class="anchored" data-anchor-id="how-do-i-get-started"><strong>How do I get started?</strong></h2>
-<p>link to the tutorials at <a href="https://shiny.rstudio.com/tutorial/">shiny.rstudio.com</a></p>
+<p>This link to the tutorials at <a href="https://shiny.rstudio.com/tutorial/">shiny.rstudio.com</a> can also guide you through steps to creating your own apps, including more detailed information on how to change elements to meet your needs.</p>
 <p>Install the package down below in the console. You only need to do this once. If you uninstall and re-install your RStudio, you may need to reinstall packages.</p>
 <pre><code>install.packages("shiny")</code></pre>
+<section id="starting-a-new-app" class="level3">
+<h3 class="anchored" data-anchor-id="starting-a-new-app">Starting a new app</h3>
+<p>from Files&gt;New File &gt; Shiny Web app OR select new file from the pull down menu in the top toolbar.</p>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="images/Screen%20Shot%202023-02-17%20at%208.56.52%20AM-01.png" class="img-fluid figure-img" width="159"></p>
+<p></p><figcaption class="figure-caption">Starting up a new Shiny app.</figcaption><p></p>
+</figure>
+</div>
+<p>This brings up a dialog box. Enter your project name. This will become the name of the folder that is created in the location you select.</p>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="images/Screen%20Shot%202023-02-17%20at%209.02.05%20AM.png" class="img-fluid figure-img" width="396"></p>
+<p></p><figcaption class="figure-caption">Selecting your new directory location.</figcaption><p></p>
+</figure>
+</div>
+<p>Once you select <em>Create</em> you will see the template shiny app. This has three sections which we will cover next.</p>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="images/Screen%20Shot%202023-02-17%20at%2010.53.57%20AM.png" class="img-fluid figure-img" width="600"></p>
+<p></p><figcaption class="figure-caption">The starting template for a Shiny app.</figcaption><p></p>
+</figure>
+</div>
+</section>
 <section id="basic-form-ui-server-shinyui-server" class="level3">
 <h3 class="anchored" data-anchor-id="basic-form-ui-server-shinyui-server">Basic form: ui, server, shiny(ui, server)</h3>
 <p>There are three main components to a shiny app: the ui, the server, and the shinyApp() function that calls the ui and server.</p>
@@ -233,63 +280,190 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div style="background-color:LightGray;color:black;padding:20px;">
 <p><i> Past versions of shiny used multi-page layouts with the ui and server components saved as separate files, such as <em>ui.R</em> and <em>server.R</em>. While this is still supported, the rest of this chapter will assume that we’re using the single-page version in which the ui and server are together in one app.R file. </i></p>
 </div>
-<p>Let’s open up a shiny app file, called Demo1.R and we’ll go through the parts:</p>
+</section>
+<section id="set-up-a-working-directory" class="level3">
+<h3 class="anchored" data-anchor-id="set-up-a-working-directory">Set up a working directory</h3>
+<ol type="1">
+<li>First set up a new working directory. In RStudio you can do this in the Files tab (usually on right lower panel). You can navigate where you want a directory, create, or modify existing directories.</li>
+</ol>
+<p>Under <em>More</em>, select <em>Set as working directory</em>. You can also do this in the console with:</p>
+<pre><code>setwd("~/your_folder_name")</code></pre>
+<ol start="2" type="1">
+<li>Download the following file from <a href="https://raw.githubusercontent.com/poppy-nicolette/INFO6270_ShinyDash/0191f7e4681a7a0605e07eb12fe22232dcebdd98/Demo1/demo1.R?token=GHSAT0AAAAAABUWXK4A6N4XWZ2QMGGJBNCKY7GP7AA">github</a> and save as from your browser to this directory. Then rename the file from <em>demo1.txt</em> to <em>demo1.R</em></li>
+<li>Let’s open up a shiny app file, called Demo1.R and we’ll go through the parts:</li>
+</ol>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="ch1_files/images/demo1_basic1.png" class="img-fluid figure-img" alt="image of a basic shiny app components"></p>
 <p></p><figcaption class="figure-caption">image of a basic shiny app components</figcaption><p></p>
 </figure>
 </div>
-</section>
-</section>
-<section id="basic-layouts" class="level2">
-<h2 class="anchored" data-anchor-id="basic-layouts">Basic layouts:</h2>
-<section id="fluidpage" class="level3">
-<h3 class="anchored" data-anchor-id="fluidpage">FluidPage</h3>
-<section id="sidebar" class="level4">
-<h4 class="anchored" data-anchor-id="sidebar">Sidebar</h4>
-</section>
-<section id="main" class="level4">
-<h4 class="anchored" data-anchor-id="main">main</h4>
-</section>
-</section>
-<section id="tabbed" class="level3">
-<h3 class="anchored" data-anchor-id="tabbed">Tabbed</h3>
-</section>
-</section>
-<section id="widgets" class="level2">
-<h2 class="anchored" data-anchor-id="widgets">Widgets</h2>
-<section id="upload" class="level3">
-<h3 class="anchored" data-anchor-id="upload">Upload</h3>
-</section>
-<section id="download" class="level3">
-<h3 class="anchored" data-anchor-id="download">Download</h3>
+<p>We’ll be going through each of these items in more detail, but for now, you can see the basic structure.</p>
+<p>To run the app, use the <em>Run</em> icon shown below. This will run in the RStudio viewer by default, but you can also run in your browser with the <em>Run external</em> option checked.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="ch1_files/images/demo1_runapp.png" class="img-fluid figure-img" width="523"></p>
+<p></p><figcaption class="figure-caption">Figure 2: Image of the run icon. Note the pull down menu arrow on the right.</figcaption><p></p>
+</figure>
+</div>
+<p>That’s it to run a basic Shiny app!!! The shiny library comes with many examples you can explore as well as even more sophisticated examples on the <a href="https://shiny.rstudio.com/gallery/" title="Link to the Shiny app Gallery page">Gallery page</a>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="ch1_files/images/shiny_examples.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Figure 3: Examples of shiny apps and functions. Image source: https://shiny.rstudio.com/tutorial/written-tutorial/lesson1/</figcaption><p></p>
+</figure>
+</div>
+<p>That’s it! you’ve created a new app. Its simple right now, but we’ll explore more options later for designing something that works for your needs. Let’s discuss how we publish next so that you get a sense of the entire workflow.</p>
 </section>
 </section>
 <section id="publishing" class="level2">
 <h2 class="anchored" data-anchor-id="publishing">Publishing</h2>
-<section id="shiny.io-1" class="level3">
-<h3 class="anchored" data-anchor-id="shiny.io-1">Shiny.io</h3>
+<section id="shiny.io" class="level3">
+<h3 class="anchored" data-anchor-id="shiny.io">Shiny.io</h3>
+<p>Now we can start publishing online for the world to experience your brilliant research! A free account at shinyapps.io provides space for 5 applications and 25 active hours of server time. (<a href="https://support.posit.co/hc/en-us/articles/217717407-What-is-an-Active-Hour-for-shinyapps-io-">what are active hours?</a>)</p>
+<ol type="1">
+<li><p>Create a shinyapps.io account. You will need this <a href="https://www.shinyapps.io/admin/#/signup">login</a> info to set up your RStudio to publish directly to shinyapps.io. I recommend connecting via your GitHub account, if you have one.</p></li>
+<li><p>Back in RStudio, we need to connect to your shinyapp.io account. To the right of the <em>Run</em> icon, select the pull down menu.</p>
+<p><img src="ch1_files/images/demo1_manage.png" class="img-fluid" width="325"></p></li>
+<li><p>Select <em>Connect…</em> and then choose <em>shinyapps.io</em></p>
+<p><img src="ch1_files/images/demo1_connect.png" class="img-fluid" width="289"></p></li>
+<li><p>Follow the instructions to find the token and paste into the space provided.</p>
+<p><img src="ch1_files/images/demo1_connect_token.png" class="img-fluid" width="342"></p></li>
+<li><p>So exciting! Now, you are ready to publish to shinyapps.io!</p>
+<p><img src="ch1_files/images/demo1_publish_app.png" class="img-fluid" width="343"></p></li>
+<li><p>Check all the files you want uploaded to the shinyapps.io server. In our case with this demo, it should only be one file, demo1.R.</p>
+<p><img src="ch1_files/images/demo1_published.png" class="img-fluid" width="344"></p></li>
+</ol>
+<p>That’s it! You’ve done it!! Now sit back and watch the cash and attention role in.</p>
 </section>
-<section id="github.io" class="level3">
-<h3 class="anchored" data-anchor-id="github.io">Github.io</h3>
 </section>
-<section id="github-desktop-1" class="level3">
-<h3 class="anchored" data-anchor-id="github-desktop-1">Github desktop</h3>
-<p>examples</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
-</div>
-</div>
-<p>You can add options to executable code like this</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 4</code></pre>
-</div>
+<section id="basic-layouts" class="level2">
+<h2 class="anchored" data-anchor-id="basic-layouts">Basic layouts:</h2>
+<p>Within the <em>ui</em> section, we can determine the layout. Shiny apps support the following layouts:</p>
+<section id="fluidpage" class="level3">
+<h3 class="anchored" data-anchor-id="fluidpage">fluidPage</h3>
+<p>The fluidPage creates your layout consisting of rows with each row dividable into columns. Rows keep things aligned along a horizontal line. Each row is a 12-unit grid and columns define how much of the 12 units are assigned to each column. However, these all scale to accommodate the browser width, hence the fluid part of the name. While there are other page types, fluidPage is so versatile, you’re likely to just use this.</p>
+<p>fluidPage looks like this in the UI:</p>
+<pre><code>ui &lt;- fluidPage(
+  title = "Hello Shiny!",
+  fluidRow(
+    column(width = 4,
+           "4"
+    ),
+    column(width = 3, offset = 2,
+           "3 offset 2"
+    ) #close column
+  ) #close fluidRow
+) #close fluidPage</code></pre>
+<p>Note that the column widths don’t have to add to 12! You’re just telling it how much of the 12 units to reserve for that column.</p>
+<div id="fluidPage" style="background-color:LightGray;color:black;padding:20px;">
+<p><i> Remember: rows contain columns. So, if you add a new fluidRow within a fluidPage layout, you can specify a different column spacing. </i></p>
 </div>
 </section>
+<section id="sidebarlayout" class="level3">
+<h3 class="anchored" data-anchor-id="sidebarlayout">sidebarLayout</h3>
+<p>Sidebars are one of the most common elements of a UI, which is usually skinny and on the left hand side of the screen, (although it can be on the right or both).</p>
+<p>Within the fluidPage you can pass a sidebarLayout, which consists of a sidebarPanel and a MainPanel.</p>
+<pre><code>library(shiny)
+
+# Define UI
+ui &lt;- fluidPage(
+    # Sidebar Layout
+    sidebarLayout(
+        # Sidebar Layout Elements
+        sidebarPanel = sidebarPanel("This is the sidebar area. You can have text and widgets here like buttons or sliders."),
+        mainPanel = mainPanel(
+            "This is the main panel text.",
+            h2"You can control text size",
+            "text color",
+            " or all images."
+        )# close mainPanel
+      )#close sidebarPanel
+    )#close fluidPage</code></pre>
+<section id="sidebarpanel" class="level4">
+<h4 class="anchored" data-anchor-id="sidebarpanel">sidebarPanel</h4>
+<p>The sidebarPanel can be moved to the left or the right, be narrow or wide, contain text, images, or interactive widgets. The sidebarPanel takes the following inputs:</p>
+</section>
+<section id="mainpanel" class="level4">
+<h4 class="anchored" data-anchor-id="mainpanel">mainPanel</h4>
+<p>This element determines what is the other part of the sidebarLayout, the main part of the page. This is generally where you have text or show tables.</p>
+</section>
+</section>
+<section id="grid-layout" class="level3">
+<h3 class="anchored" data-anchor-id="grid-layout">Grid Layout</h3>
+<p>If you want to control the grid into multiple rows and columns, you can do that by calling fluidRow() and column() within the fluidPage. While rows will automatically align, you can make columns are different widths, and even offset widths.</p>
+<p>Column examples here</p>
+</section>
+<section id="tabsetpanel" class="level3">
+<h3 class="anchored" data-anchor-id="tabsetpanel">tabsetPanel</h3>
+<p>A tabset panel creates tabs for multiple pages. This is a great way to present multiple datasets, or seperate text by topical areas.</p>
+<p>tabsetPanel code</p>
+<p>tabsetPanel result</p>
+<p>The tabsetPanel can also be used in conjunction with the mainPanel() of a sidebarLayout!</p>
+<p>example code</p>
+<p>example image</p>
+</section>
+<section id="navlistpanel" class="level3">
+<h3 class="anchored" data-anchor-id="navlistpanel">navlistPanel</h3>
+</section>
+<section id="navbarpage" class="level3">
+<h3 class="anchored" data-anchor-id="navbarpage">navbarPage</h3>
+<p>The navbarPage is another page type, like the fluidPage. Some may consider this a little dated, but when you need a multipage app that has distinct layout elements, then this may be appropriate.</p>
+<p>A navbarPage establishes a page that can include any of the layouts above, such as a sidebarLayout(), a grid system of fluidRows() and columns(), or a tabsetPanel().</p>
+<pre><code>ui &lt;- navbarPage("Main page title",
+  tabPanel("Page 1"),
+  tabPanel("Page 2"),
+  tabPanel("Page 3"),
+  tabPanel("Page 4")
+  )#close navbarMenu
+) #close navbarPage</code></pre>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="images/Screen%20Shot%202023-02-16%20at%202.39.26%20PM.png" class="img-fluid figure-img" width="328"></p>
+<p></p><figcaption class="figure-caption">An example of the navbarPage.</figcaption><p></p>
+</figure>
+</div>
+<section id="navbarmenu" class="level4">
+<h4 class="anchored" data-anchor-id="navbarmenu">navbarMenu</h4>
+<p>The navbarMenu() is a sub-component of the navbarPage and provides a drop-down menu for additional tabPanel() elements.</p>
+<p>navbarMenu code</p>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="images/Screen%20Shot%202023-02-16%20at%202.10.58%20PM.png" class="img-fluid figure-img" alt="Screen capture of a navbarPage with a navbarMenu." width="328"></p>
+<p></p><figcaption class="figure-caption">Screen capture of a navbarPage with a navbarMenu.</figcaption><p></p>
+</figure>
+</div>
+</section>
+</section>
+<section id="widgets" class="level3">
+<h3 class="anchored" data-anchor-id="widgets">Widgets</h3>
+<p>Widgets are the interactive input controls that transform your website from static to a dynamic thing that your users can adjust, filter, select, upload or download what they need. There are 13 standard widgets you can choose from. While, we will address a few of these, you can find all of them and their code on the shiny gallery.</p>
+<section id="upload" class="level4">
+<h4 class="anchored" data-anchor-id="upload">Upload</h4>
+</section>
+<section id="download" class="level4">
+<h4 class="anchored" data-anchor-id="download">Download</h4>
+</section>
+</section>
+</section>
+<section id="themes" class="level2">
+<h2 class="anchored" data-anchor-id="themes">Themes</h2>
+<p>Bootstrap themes</p>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>In this chapter we’ve covered:</p>
+<ul>
+<li><p>what it is</p></li>
+<li><p>how it works</p></li>
+<li><p>how to publish it.</p></li>
+</ul>
+<p>The next chapter moves into a more detailed view of how to make shiny apps shine with interactivity and reactiveness. In other words, we’ll learn how to upload data, apply code to analyze it, and then download it.</p>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References:</h2>
+<p>I took inspiration and guidance from many sources which I’ve tried to include here:</p>
+<p>The Bookdown library for R, at bookdown.org, provides a <a href="https://bookdown.org/hadrien/how_to_build_a_shiny_app_from_scratch/user-interface.html" title="Link to tutorial at bookdown.org">tutorial</a> on how to build Shiny apps.</p>
 </section>
 
 </main>
