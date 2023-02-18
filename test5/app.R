@@ -6,20 +6,16 @@
 #
 #    http://shiny.rstudio.com/
 #
+library(shinythemes)
 library(shiny)
 
-ui <- fluidPage(
-  textOutput("text"),
-  verbatimTextOutput("code")
-)
-server <- function(input, output, session) {
-  output$text <- renderText({ 
-    "Let's see some basic stats on values from 1 to 100" 
-  })
-  output$code <- renderPrint({ 
-    summary(1:100) 
-  })
-}
+ui = fluidPage(
+  shinythemes::themeSelector()
+)#close fluidPage
 
-# Run the application 
-shinyApp(ui = ui, server = server)
+server = function(input, output) {}
+
+shinyApp(ui, server)
+
+
+

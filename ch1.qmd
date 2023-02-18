@@ -343,7 +343,7 @@ This one is better for longer sections of text, like bio's for websites, brief p
 
 ##### fileInput()
 
-file uploads and downloads are more complicated types of inputs and outputs. There is a special chapter dedicated to them on the Mastering Shiny webbook [here](https://mastering-shiny.org/action-transfer.html).
+File uploads and downloads are more complicated types of inputs and outputs. There is a special chapter dedicated to them on the Mastering Shiny webbook [here](https://mastering-shiny.org/action-transfer.html). Loading data, usually in the form of a csv, is a very common need. The following code will upload a csv based on which dataset you've chosen based on an input menu.
 
 #### Action buttons
 
@@ -357,25 +357,49 @@ There are many more inputs available on the Shiny reference documentation, these
 
 ###  Outputs
 
-Outputs are assigned in the UI to define spaces where outputs will be seen. The include a unique ID in the first position of its arguments.
+Outputs are assigned in the UI to define spaces where outputs will be seen. They include a unique ID in the first position of its arguments. UI outputs are always paired with a server output function.
 
 Output ID's are called from the server side preceded by *output\$outputID* in which *outputID* is the ID (like a variable name) you've assigned it. You'll see these are always calling a render\* function, such as *renderText*. As an example:
 
 ![](images/Screen%20Shot%202023-02-17%20at%203.37.39%20PM.png){width="499"}
 
-Some important new fuctions are called. In the server function, you see *renderText*. This calls the values you assigned in *input_1* and places it where you assigned it in *output_1*. In addition to text, you can also render:
+Some important new fuctions are called. In the server function, you see *renderText*. This calls the values you assigned in *input_1* and places it where you assigned it in *output_1*. In addition to text, you can also render tables, data tables, plots, images, and text. We'll look at these pairings of *ui* outputs and *server* outputs next.
 
-| **render function** | **creates**                                     |
-|:--------------------|:------------------------------------------------|
-| `renderDataTable`   | DataTable                                       |
-| `renderImage`       | images (saved as a link to a source file)       |
-| `renderPlot`        | plots                                           |
-| `renderPrint`       | any printed output                              |
-| `renderTable`       | data frame, matrix, other table like structures |
-| `renderText`        | character strings                               |
-| `renderUI`          | a Shiny tag object or HTML                      |
+#### Text output
 
-#### Download
+##### textOutput()
+
+##### renderText()
+
+##### verbatimTextOutput()
+
+##### renderPrint()
+
+#### Tables
+
+##### tableOutput()
+
+##### renderTable()
+
+##### dataTableOutput()
+
+##### renderDataTable()
+
+#### Plots
+
+Plots are graphs and charts from packages like [ggplot2](https://r-graph-gallery.com/ggplot2-package.html), [plotly](https://plotly.com/r/), among others. *Mastering Shiny* has an excellent [chapter](https://mastering-shiny.org/action-graphics.html) dedicated to ggplot2 for more info on making ggplot2 interactive, like plotly.
+
+##### plotOutput()
+
+##### renderPlot()
+
+#### Images
+
+##### imageOutput()
+
+##### renderImage()
+
+#### Downloads
 
 The download button is a special case and is not the same as a widget, however, its a super useful output for people to download a dataset or whatever you have prepared for them. The downloadHandler() function is critical to this working. In this case the downloadHandler is sending the file named *data* to the *write.csv()* function.
 
@@ -431,21 +455,47 @@ Next, let's play with themes.
 
 ### Themes
 
-Bootstrap themes control the styling of the application, unifying colors and fonts, for example.
+Bootstrap themes control the styling of the application, unifying colors and fonts, for example. Themes are assigned in the UI. You can find Bootstrap themes here.
 
-Themes are assigned in the UI.
+    library(shinythemes)
+
+    ui = fluidPage(theme = shinytheme("cerulean")
+      )#close fluidPage
+
+    server = function(input,output) {}
+
+    shinyApp(ui, server)
+
+Or use the theme picker option until you decide on one!
+
+    library(shinythemes)
+
+    ui = fluidPage(
+        shinythemes::themeSelector()
+        )#close fluidPage
+        
+    server = function(input, output) {}
+
+    shinyApp(ui, server)
+      
+
+It is possible to create your own themes, use themes other than Bootstrap, or modify Bootstrap themes to your own aesthetic needs. *Mastering Shiny* has a brief chapter on themes [here,](https://mastering-shiny.org/action-layout.html) and you can also find more information here on Bootstrap themes. [Here is a link](https://www.w3schools.com/colors/default.asp) for the hex codes or names you'll need for colors.
+
+To start making your own theme:
+
+    theme <- bslib::bs_theme(
+      bg = "#c4adca", 
+      fg = "white", 
+      base_font = "Times New Roman"
+    )
 
 ## Conclusion
 
-Important notes about the UI and server functions of a shiny app:
+In this chapter, we've covered what shiny is, how to get started, and dived into some of the most common elements used for applications. You now know how to publish your own content with Shiny!
 
--   Inputs
+There is an extensive amount of tutorials and documentation on making apps with Shiny and you can find some of those in the References section below. Chapters in this course are a living document, so if you have suggestions for materials you found helpful, please send them along to us.
 
--   Outputs
-
-The next chapter moves into a more detailed view of how to make shiny apps shine with interactivity and reactiveness. In other words, we'll learn how to upload data, apply code to analyze it, and then download it.
-
-To conclude, let's go back and look at the first demo of delivery times and take it apart so we understand what's going on.
+The next chapter moves into a more detailed view of how to make shiny apps shine with interactivity and reactiveness. In other words, we'll learn how to upload data, apply code to analyze it, interact with dynamic tables and visualizations, and then download results.
 
 ## References:
 
