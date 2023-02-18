@@ -138,7 +138,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#tabsetpanel" id="toc-tabsetpanel" class="nav-link" data-scroll-target="#tabsetpanel">tabsetPanel</a></li>
   <li><a href="#navlistpanel" id="toc-navlistpanel" class="nav-link" data-scroll-target="#navlistpanel">navlistPanel</a></li>
   <li><a href="#navbarpage" id="toc-navbarpage" class="nav-link" data-scroll-target="#navbarpage">navbarPage</a></li>
-  <li><a href="#inputs" id="toc-inputs" class="nav-link" data-scroll-target="#inputs">Inputs</a></li>
+  <li><a href="#inputs-widgets" id="toc-inputs-widgets" class="nav-link" data-scroll-target="#inputs-widgets">Inputs &amp; Widgets</a></li>
   <li><a href="#outputs" id="toc-outputs" class="nav-link" data-scroll-target="#outputs">Outputs</a></li>
   <li><a href="#themes" id="toc-themes" class="nav-link" data-scroll-target="#themes">Themes</a></li>
   </ul></li>
@@ -336,7 +336,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 class="anchored" data-anchor-id="layouts-inputs-outputs-themes">Layouts, inputs, outputs, &amp; themes</h2>
 <section id="layouts" class="level3">
 <h3 class="anchored" data-anchor-id="layouts">Layouts:</h3>
-<p>Within the <em>ui</em> section, we can determine the layout. Shiny apps support the following layouts:</p>
+<p>Within the <em>ui</em> section, we can determine the layout. Layout is the basic grid of how elements are placed on your page. We’ll go over the most common here, but many more can be found in the Shiny app reference <a href="https://shiny.rstudio.com/reference/shiny/1.7.4/">here.</a></p>
 <section id="fluidpage" class="level4">
 <h4 class="anchored" data-anchor-id="fluidpage">fluidPage</h4>
 <p>The fluidPage creates your layout consisting of rows with each row dividable into columns. Rows keep things aligned along a horizontal line. Each row is a 12-unit grid and columns define how much of the 12 units are assigned to each column. However, these all scale to accommodate the browser width, hence the fluid part of the name. While there are other page types, fluidPage is so versatile, you’re likely to just use this.</p>
@@ -433,17 +433,85 @@ ui &lt;- fluidPage(
 </div>
 </section>
 </section>
-<section id="inputs" class="level3">
-<h3 class="anchored" data-anchor-id="inputs">Inputs</h3>
-<p>Widgets are also a type of input, but there are other forms in which text or numbers can be entered. There is a basic format to the inputs, just like widgets. First there is the input type, in this case a <em>textAreaInput</em>. In the first position inside is the inputID parameter, followed by the label parameter. These two will be consistent with all inputs. After the inputID and the label, arguments that may be unique to each follow. In this case, there is an argument for <em>the number of rows</em>. In general, all inputs, (including widgets) keep this order of <em>inputID, label, arguments</em>.</p>
+<section id="inputs-widgets" class="level3">
+<h3 class="anchored" data-anchor-id="inputs-widgets">Inputs &amp; Widgets</h3>
+<p>Inputs are the ways users can enter, filter, or select information within your app. Widgets are a type of input that requires a different mode of input than text, such as a slider or button. There is a basic format to the inputs &amp; widgets. First there is the input type, in this case a <em>textAreaInput</em>. In the first position inside is the inputID parameter, followed by the label parameter. These two will be consistent with all inputs. After the inputID and the label, arguments that may be unique to each follow. In this case, there is an argument for <em>the number of rows</em>. In general, all inputs, (including widgets) keep this order of <em>inputID, label, arguments</em>.</p>
 <pre><code>textAreaInput("story", "Tell me about yourself", rows = 3)</code></pre>
-<p>The inputID has some rules, just like any variable in R. It must be a string consisting of letters, numbers, and/or underscores. Other characters like spaces, symbols, dashes, periods, etc., won’t work. Second, it must be unique as you will call this in output functions.</p>
-<p>We’ll cover more of these in the widgets section.</p>
-<section id="widgets" class="level4">
-<h4 class="anchored" data-anchor-id="widgets">Widgets</h4>
-<p>Widgets are the interactive input controls that transform your website from static to a dynamic thing that your users can adjust, filter, select, upload or download what they need. There are 13 standard widgets you can choose from. While, we will address a few of these, you can find all of them and their code on the <a href="https://shiny.rstudio.com/gallery/widget-gallery.html">shiny gallery</a>.</p>
-<p>The syntax of the widget is very similar across the groups. Let’s look at the code below:</p>
+<p>While, we will address a few of these, you can find all of them and their code on the <a href="https://shiny.rstudio.com/gallery/widget-gallery.html">shiny gallery</a>.</p>
+<p>The syntax of the widget the same as other inputs. Let’s look at the code below:</p>
 <p><img src="images/Screen%20Shot%202023-02-17%20at%201.27.30%20PM.png" class="img-fluid"></p>
+<p>The inputID has some rules, just like any variable in R. It must be a string consisting of letters, numbers, and/or underscores. Other characters like spaces, symbols, dashes, periods, etc., won’t work. Second, it must be unique as you will call this in output functions.</p>
+<p>You can find all of these in the input section in the shiny references documentation <a href="https://shiny.rstudio.com/reference/shiny/1.7.4/">here.</a> The following selection are some of the more commonly used ones to get you started.</p>
+<section id="text-input" class="level4">
+<h4 class="anchored" data-anchor-id="text-input">Text input</h4>
+<section id="textinput" class="level5">
+<h5 class="anchored" data-anchor-id="textinput">textInput()</h5>
+<p>This is for small amounts of text, like asking for someone’s name, address, or country. More info <a href="https://shiny.rstudio.com/reference/shiny/0.14/textinput">here</a>.</p>
+</section>
+<section id="passwordinput" class="level5">
+<h5 class="anchored" data-anchor-id="passwordinput">passwordInput()</h5>
+<p>This is for entering passwords. You can find more info <a href="https://shiny.rstudio.com/reference/shiny/latest/passwordinput">here</a> on its arguments.</p>
+</section>
+<section id="textareainput" class="level5">
+<h5 class="anchored" data-anchor-id="textareainput">textAreaInput()</h5>
+<p>This one is better for longer sections of text, like bio’s for websites, brief passages, comments, special instructions, etc. You can find more info <a href="https://shiny.rstudio.com/reference/shiny/1.7.4/textareainput">here</a> on its arguments.</p>
+<pre><code>ui &lt;- fluidPage(
+  textInput("breakfast", "What's your favorite breakfast?"),
+  passwordInput("password", "Please enter your password"),
+  textAreaInput("bio", "Please tell us about yourself in 75 words or less.", rows = 3)
+)</code></pre>
+</section>
+</section>
+<section id="number-inputs" class="level4">
+<h4 class="anchored" data-anchor-id="number-inputs">Number inputs</h4>
+<section id="numericinput" class="level5">
+<h5 class="anchored" data-anchor-id="numericinput">numericInput()</h5>
+</section>
+<section id="sliderinput" class="level5">
+<h5 class="anchored" data-anchor-id="sliderinput">sliderInput()</h5>
+</section>
+</section>
+<section id="dates" class="level4">
+<h4 class="anchored" data-anchor-id="dates">Dates</h4>
+<section id="dateinput" class="level5">
+<h5 class="anchored" data-anchor-id="dateinput">dateInput()</h5>
+</section>
+<section id="daterangeinput" class="level5">
+<h5 class="anchored" data-anchor-id="daterangeinput">dateRangeInput()</h5>
+</section>
+</section>
+<section id="choices-from-a-list" class="level4">
+<h4 class="anchored" data-anchor-id="choices-from-a-list">Choices from a list</h4>
+<section id="selectinput" class="level5">
+<h5 class="anchored" data-anchor-id="selectinput">selectInput()</h5>
+</section>
+<section id="radiobuttons" class="level5">
+<h5 class="anchored" data-anchor-id="radiobuttons">radioButtons()</h5>
+</section>
+<section id="checkboxinput" class="level5">
+<h5 class="anchored" data-anchor-id="checkboxinput">checkboxInput()</h5>
+</section>
+<section id="checkboxgroupinput" class="level5">
+<h5 class="anchored" data-anchor-id="checkboxgroupinput">checkboxGroupInput()</h5>
+</section>
+</section>
+<section id="file-uploads" class="level4">
+<h4 class="anchored" data-anchor-id="file-uploads">File uploads</h4>
+<section id="fileinput" class="level5">
+<h5 class="anchored" data-anchor-id="fileinput">fileInput()</h5>
+<p>file uploads and downloads are more complicated types of inputs and outputs. There is a special chapter dedicated to them on the Mastering Shiny webbook <a href="https://mastering-shiny.org/action-transfer.html">here</a>.</p>
+</section>
+</section>
+<section id="action-buttons" class="level4">
+<h4 class="anchored" data-anchor-id="action-buttons">Action buttons</h4>
+<p>Actions are usually used with the observeEvent() or eventReactive() functions that trigger a server side function. We’ll go over this in the next chapter. However, action buttons can alse be used for simple tasks without that reactivity.</p>
+<section id="actionbutton" class="level5">
+<h5 class="anchored" data-anchor-id="actionbutton">actionButton()</h5>
+</section>
+<section id="actionlink" class="level5">
+<h5 class="anchored" data-anchor-id="actionlink">actionLink()</h5>
+<p>There are many more inputs available on the Shiny reference documentation, these most common ones will get you started making apps. Next, let’s go over types of outputs and how these work with inputs.</p>
+</section>
 </section>
 </section>
 <section id="outputs" class="level3">

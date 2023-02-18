@@ -178,7 +178,7 @@ At this point, you know enough to open existing apps on Shiny Gallery, modify th
 
 ### Layouts:
 
-Within the *ui* section, we can determine the layout. Shiny apps support the following layouts:
+Within the *ui* section, we can determine the layout. Layout is the basic grid of how elements are placed on your page. We'll go over the most common here, but many more can be found in the Shiny app reference [here.](https://shiny.rstudio.com/reference/shiny/1.7.4/)
 
 #### fluidPage
 
@@ -281,25 +281,81 @@ navbarMenu code
 
 ![Screen capture of a navbarPage with a navbarMenu.](images/Screen%20Shot%202023-02-16%20at%202.10.58%20PM.png){alt="Screen capture of a navbarPage with a navbarMenu." fig-align="left" width="328"}
 
-### Inputs
+### Inputs & Widgets
 
-Widgets are also a type of input, but there are other forms in which text or numbers can be entered. There is a basic format to the inputs, just like widgets. First there is the input type, in this case a *textAreaInput*. In the first position inside is the inputID parameter, followed by the label parameter. These two will be consistent with all inputs. After the inputID and the label, arguments that may be unique to each follow. In this case, there is an argument for *the number of rows*. In general, all inputs, (including widgets) keep this order of *inputID, label, arguments*.
+Inputs are the ways users can enter, filter, or select information within your app. Widgets are a type of input that requires a different mode of input than text, such as a slider or button. There is a basic format to the inputs & widgets. First there is the input type, in this case a *textAreaInput*. In the first position inside is the inputID parameter, followed by the label parameter. These two will be consistent with all inputs. After the inputID and the label, arguments that may be unique to each follow. In this case, there is an argument for *the number of rows*. In general, all inputs, (including widgets) keep this order of *inputID, label, arguments*.
 
     textAreaInput("story", "Tell me about yourself", rows = 3)
 
-The inputID has some rules, just like any variable in R. It must be a string consisting of letters, numbers, and/or underscores. Other characters like spaces, symbols, dashes, periods, etc., won't work. Second, it must be unique as you will call this in output functions.
+While, we will address a few of these, you can find all of them and their code on the [shiny gallery](https://shiny.rstudio.com/gallery/widget-gallery.html).
 
-We'll cover more of these in the widgets section.
-
-#### Widgets
-
-Widgets are the interactive input controls that transform your website from static to a dynamic thing that your users can adjust, filter, select, upload or download what they need. There are 13 standard widgets you can choose from. While, we will address a few of these, you can find all of them and their code on the [shiny gallery](https://shiny.rstudio.com/gallery/widget-gallery.html).
-
-The syntax of the widget is very similar across the groups. Let's look at the code below:
+The syntax of the widget the same as other inputs. Let's look at the code below:
 
 ![](images/Screen%20Shot%202023-02-17%20at%201.27.30%20PM.png)
 
-### Outputs
+The inputID has some rules, just like any variable in R. It must be a string consisting of letters, numbers, and/or underscores. Other characters like spaces, symbols, dashes, periods, etc., won't work. Second, it must be unique as you will call this in output functions.
+
+You can find all of these in the input section in the shiny references documentation [here.](https://shiny.rstudio.com/reference/shiny/1.7.4/) The following selection are some of the more commonly used ones to get you started.
+
+#### Text input
+
+##### textInput() 
+
+This is for small amounts of text, like asking for someone's name, address, or country. More info [here](https://shiny.rstudio.com/reference/shiny/0.14/textinput).
+
+##### passwordInput()
+
+This is for entering passwords. You can find more info [here](https://shiny.rstudio.com/reference/shiny/latest/passwordinput) on its arguments.
+
+##### textAreaInput()
+
+This one is better for longer sections of text, like bio's for websites, brief passages, comments, special instructions, etc. You can find more info [here](https://shiny.rstudio.com/reference/shiny/1.7.4/textareainput) on its arguments.
+
+    ui <- fluidPage(
+      textInput("breakfast", "What's your favorite breakfast?"),
+      passwordInput("password", "Please enter your password"),
+      textAreaInput("bio", "Please tell us about yourself in 75 words or less.", rows = 3)
+    )
+
+#### Number inputs
+
+##### numericInput()
+
+##### sliderInput()
+
+#### Dates
+
+##### dateInput()
+
+##### dateRangeInput()
+
+#### Choices from a list
+
+##### selectInput()
+
+##### radioButtons()
+
+##### checkboxInput()
+
+##### checkboxGroupInput()
+
+#### File uploads
+
+##### fileInput()
+
+file uploads and downloads are more complicated types of inputs and outputs. There is a special chapter dedicated to them on the Mastering Shiny webbook [here](https://mastering-shiny.org/action-transfer.html).
+
+#### Action buttons
+
+Actions are usually used with the observeEvent() or eventReactive() functions that trigger a server side function. We'll go over this in the next chapter. However, action buttons can alse be used for simple tasks without that reactivity.
+
+##### actionButton()
+
+##### actionLink()
+
+There are many more inputs available on the Shiny reference documentation, these most common ones will get you started making apps. Next, let's go over types of outputs and how these work with inputs.
+
+###  Outputs
 
 Outputs are assigned in the UI to define spaces where outputs will be seen. The include a unique ID in the first position of its arguments.
 
