@@ -1,0 +1,239 @@
+---
+title: "Chapter 11b:"
+subtitle: "Inputs and Outputs in Action"
+format: 
+  html:
+    theme: "lumen"
+editor: visual
+toc: true
+---
+
+In this chapter, we'll be looking in more detail at the input and output functions by example using a standard R dataset. This chapter introduces you to:
+
+-   input functions for text, numbers, dates, choices, file uploads and actions,
+
+-   output functions for text, tables, plots, images, and download formats, and
+
+-   an introduction to themes to change the appearance of your application.
+
+You can see all the datasets included in R by typing `data()` in the console.
+
+### Inputs & Widgets
+
+Inputs are the ways users can enter, filter, or select information within your app. Widgets are a type of input that requires a different mode of input than text, such as a slider or button. There is a basic format to the inputs & widgets. First there is the input type, in this case a *`textAreaInput()`*. In the first position inside is the *inputID* parameter, followed by the label parameter. These two will be consistent with all inputs. After the *inputID* and the label, arguments that may be unique to each follow. In this case, there is an argument for the number of *rows*. In general, all inputs, (including widgets) keep this order of *inputID, label, arguments*.
+
+``` R
+textAreaInput("story", "Tell me about yourself", rows = 3)
+```
+
+While, we will address a few of these, you can find all of them and their code on the [shiny gallery](https://shiny.rstudio.com/gallery/widget-gallery.html).
+
+The syntax of the widget the same as other inputs. Let's look at the code below:
+
+![](images/Screen%20Shot%202023-02-17%20at%201.27.30%20PM.png)
+
+The *inputID* has some rules, just like any variable in R. It must be a string consisting of letters, numbers, and/or underscores. Other characters like spaces, symbols, dashes, periods, etc., won't work. Second, it must be unique as you will call this in output functions.
+
+You can find all of these in the input section in the shiny references documentation [here.](https://shiny.rstudio.com/reference/shiny/1.7.4/) The following selection are some of the more commonly used ones to get you started.
+
+#### Text input
+
+##### textInput()
+
+This is for small amounts of text, like asking for someone's name, address, or country. More info [here](https://shiny.rstudio.com/reference/shiny/0.14/textinput).
+
+##### passwordInput()
+
+This is for entering passwords. You can find more info [here](https://shiny.rstudio.com/reference/shiny/latest/passwordinput) on its arguments.
+
+##### textAreaInput()
+
+This one is better for longer sections of text, like bio's for websites, brief passages, comments, special instructions, etc. You can find more info [here](https://shiny.rstudio.com/reference/shiny/1.7.4/textareainput) on its arguments.
+
+``` R
+ui <- fluidPage(
+  textInput("breakfast", "What's your favorite breakfast?"),
+  passwordInput("password", "Please enter your password"),
+  textAreaInput("bio", "Please tell us about yourself in 75 words or less.", rows = 3)
+)
+```
+
+#### Number inputs
+
+##### numericInput()
+
+##### sliderInput()
+
+#### Dates
+
+##### dateInput()
+
+##### dateRangeInput()
+
+#### Choices from a list
+
+##### selectInput()
+
+##### radioButtons()
+
+##### checkboxInput()
+
+##### checkboxGroupInput()
+
+#### File uploads
+
+##### fileInput()
+
+File uploads and downloads are more complicated types of inputs and outputs. There is a special chapter dedicated to them on the Mastering Shiny webbook [here](https://mastering-shiny.org/action-transfer.html). Loading data, usually in the form of a csv, is a very common need. The following code will upload a csv based on which dataset you've chosen based on an input menu.
+
+#### Action buttons
+
+Actions are usually used with the `observeEvent()` or `eventReactive()` functions that trigger a server side function. We'll go over this in the next chapter. However, action buttons can alse be used for simple tasks without that reactivity.
+
+##### actionButton()
+
+##### actionLink()
+
+There are many more inputs available on the Shiny reference documentation, these most common ones will get you started making apps. Next, let's go over types of outputs and how these work with inputs.
+
+### Outputs
+
+Outputs are assigned in the UI to define spaces where outputs will be seen. They include a unique ID in the first position of its arguments. UI outputs are always paired with a server output function.
+
+Output ID's are called from the server side preceded by `output$outputID` in which `outputID` is the ID (like a variable name) you've assigned it. You'll see these are always calling a render\* function, such as `renderText()`. As an example:
+
+![](images/Screen%20Shot%202023-02-17%20at%203.37.39%20PM.png){width="499"}
+
+Some important new fuctions are called. In the `server()` function, you see `renderText()`. This calls the values you assigned in *`input_1`* and places it where you assigned it in *`output_1`*. In addition to text, you can also render tables, data tables, plots, images, and text. We'll look at these pairings of *`ui()`* outputs and *`server()`* outputs next.
+
+#### Text output
+
+##### textOutput()
+
+##### renderText()
+
+##### verbatimTextOutput()
+
+##### renderPrint()
+
+#### Tables
+
+##### tableOutput()
+
+##### renderTable()
+
+##### dataTableOutput()
+
+##### renderDataTable()
+
+#### Plots
+
+Plots are graphs and charts from packages like [ggplot2](https://r-graph-gallery.com/ggplot2-package.html), [plotly](https://plotly.com/r/), among others. *Mastering Shiny* has an excellent [chapter](https://mastering-shiny.org/action-graphics.html) dedicated to ggplot2 for more info on making ggplot2 interactive, like plotly.
+
+##### plotOutput()
+
+##### renderPlot()
+
+#### Images
+
+##### imageOutput()
+
+##### renderImage()
+
+#### Downloads
+
+The download button is a special case and is not the same as a widget, however, its a super useful output for people to download a dataset or whatever you have prepared for them. The `downloadHandler()` function is critical to this working. In this case the `downloadHandler()` is sending the file named *data* to the `write.csv()` function.
+
+    ui <- fluidPage(
+      downloadButton("downloadData", "Download")
+    )
+
+    server <- function(input, output) {
+      # Our dataset
+      data <- mtcars
+
+      output$downloadData <- downloadHandler(
+        filename = function() {
+          paste("data-", Sys.Date(), ".csv", sep=",")
+        },
+        content = function(file) {
+          write.csv(data, file)
+        }#close function
+      )#close downloadHandler
+    }#close server function
+
+    shinyApp(ui, server)
+
+With other libraries you can also write Excel files, such as with [*writexl*.](https://cran.r-project.org/web/packages/writexl/index.html) his version writes to an Excel file.
+
+    library(shiny)
+    library(writexl)
+
+
+    ui <- fluidPage(
+        downloadButton("downloadData", "Download")
+      )
+      
+    server <- function(input, output) {
+        # Our dataset
+        data <- mtcars
+        
+        output$downloadData <- downloadHandler(
+          filename = function() {
+            #paste("data-", Sys.Date(), ".csv", sep="")
+            paste("data-", Sys.Date(), ".xlsx")
+          },
+          content = function(file) {
+            #write.csv(data, file)
+            writexl::write_xlsx(data, file)
+          } #close function
+        ) #close downloadHandler
+      }#close server function
+      
+    shinyApp(ui, server)
+
+Next, let's play with themes.
+
+### Themes
+
+Themes control the styling of the application, unifying colors and fonts, for example. Themes are assigned in the `ui()`. You can find the shinythemes library [here](https://rstudio.github.io/shinythemes/).
+
+``` R
+library(shinythemes)
+
+ui = fluidPage(theme = shinytheme("cerulean")
+  )#close fluidPage
+
+server = function(input,output) {}
+
+shinyApp(ui, server)
+```
+
+Or use the theme picker option until you decide on one!
+
+``` R
+library(shinythemes)
+
+ui = fluidPage(
+    shinythemes::themeSelector()
+    )#close fluidPage
+    
+server = function(input, output) {}
+
+shinyApp(ui, server)
+  
+```
+
+It is possible to create your own themes, use themes other than Bootstrap, or modify Bootstrap themes to your own aesthetic needs. *Mastering Shiny* has a brief chapter on themes [here,](https://mastering-shiny.org/action-layout.html) and you can also find more information [here](https://bootswatch.com/) on Bootswatch themes. [Here is a link](https://www.w3schools.com/colors/default.asp) for the hex codes or names you'll need for colors.
+
+To start making your own theme:
+
+``` R
+theme <- bslib::bs_theme(
+  bg = "#c4adca", 
+  fg = "white", 
+  base_font = "Times New Roman"
+)
+```
+
+## 

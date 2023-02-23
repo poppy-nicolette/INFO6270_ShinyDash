@@ -1,0 +1,149 @@
+---
+title: "Chapter 12:"
+subtitle: "Layouts and Dashboards"
+format: html
+editor: visual
+---
+
+In this chapter, we will look at how to make your do stuff, respond, and calculate multiple tables and visualizations
+
+## Layouts, inputs, outputs, & themes
+
+### Layouts:
+
+Within the *`ui`* section, we can determine the layout. Layout is the basic grid of how elements are placed on your page. We'll go over the most common here, but many more can be found in the Shiny app reference [here.](https://shiny.rstudio.com/reference/shiny/1.7.4/)
+
+#### fluidPage()
+
+The `fluidPage()` creates your layout consisting of rows with each row dividable into columns. Rows keep things aligned along a horizontal line. Each row is a 12-unit grid and columns define how much of the 12 units are assigned to each column. However, these all scale to accommodate the browser width, hence the fluid part of the name. While there are other page types, `fluidPage()` is so versatile, you're likely to just use this.
+
+`fluidPage()` looks like this in the UI:
+
+``` R
+ui <- fluidPage(
+  title = "Hello Shiny!",
+  fluidRow(
+    column(width = 4,
+           "4"
+    ),
+    column(width = 3, offset = 2,
+           "3 offset 2"
+    ) #close column
+  ) #close fluidRow
+) #close fluidPage
+```
+
+Note that the column widths don't have to add to 12! You're just telling it how much of the 12 units to reserve for that column.
+
+::: callout-important
+::: {#fluidPage}
+Remember: rows contain columns. So, if you add a new fluidRow within a fluidPage layout, you can specify a different column spacing.
+:::
+:::
+
+#### sidebarLayout()
+
+Sidebars are one of the most common elements of a UI, which is usually skinny and on the left hand side of the screen, (although it can be on the right or both).
+
+Within the `fluidPage()` you can pass a `sidebarLayout()`, which consists of a `sidebarPanel()` and a `mainPanel()`.
+
+``` R
+library(shiny)
+
+# Define UI
+ui <- fluidPage(
+    # Sidebar Layout
+    sidebarLayout(
+        # Sidebar Layout Elements
+        sidebarPanel = sidebarPanel("This is the sidebar area. You can have text and widgets here like buttons or sliders."),
+        mainPanel = mainPanel(
+            "This is the main panel text.",
+            h2"You can control text size",
+            "text color",
+            " or all images."
+        )# close mainPanel
+      )#close sidebarPanel
+    )#close fluidPage
+```
+
+##### sidebarPanel()
+
+The `sidebarPanel()` can be moved to the left or the right, be narrow or wide, contain text, images, or interactive widgets. The `sidebarPanel()` takes the following inputs:
+
+##### mainPanel()
+
+This element determines what is the other part of the `sidebarLayout()`, the main part of the page. This is generally where you have text or show tables.
+
+### Grid Layouts
+
+If you want to control the grid into multiple rows and columns, you can do that by calling `fluidRow()` and `column()` within the `fluidPage()`. While rows will automatically align, you can make columns are different widths, and even offset widths.
+
+Column examples here
+
+### tabsetPanel()
+
+A `tabsetPanel()` creates tabs for multiple pages. This is a great way to present multiple datasets, or seperate text by topical areas.
+
+`tabsetPanel()` code
+
+`tabsetPanel()` result
+
+The `tabsetPanel()` can also be used in conjunction with the `mainPanel()` of a `sidebarLayout()`!
+
+example code
+
+example image
+
+### navlistPanel()
+
+### navbarPage()
+
+The `navbarPage()` is another page type, like the `fluidPage()`. Some may consider this a little dated, but when you need a multipage app that has distinct layout elements, then this may be appropriate.
+
+A `navbarPage()` establishes a page that can include any of the layouts above, such as a `sidebarLayout()`, a grid system of `fluidRows()` and `columns()`, or a `tabsetPanel(`).
+
+``` R
+ui <- navbarPage("Main page title",
+  tabPanel("Page 1"),
+  tabPanel("Page 2"),
+  tabPanel("Page 3"),
+  tabPanel("Page 4")
+  )#close navbarMenu
+) #close navbarPage
+```
+
+![An example of the navbarPage.](images/Screen%20Shot%202023-02-16%20at%202.39.26%20PM.png){alt="An example of the navbarPage." fig-align="left" width="450"}
+
+#### navbarMenu()
+
+The `navbarMenu()` is a sub-component of the `navbarPage()` and provides a drop-down menu for additional `tabPanel()` elements.
+
+`navbarMenu()` code
+
+![Screen capture of a `navbarPage(`) with a `navbarMenu()`.](images/Screen%20Shot%202023-02-16%20at%202.10.58%20PM.png){alt="Screen capture of a navbarPage with a navbarMenu." fig-align="left" width="450"}
+
+## Reactive pages
+
+### session states
+
+## DataTables
+
+## Computation output
+
+## Visualization
+
+### Basic graphs
+
+### Network
+
+## Dashboards
+
+flexdashboard: [link](https://pkgs.rstudio.com/flexdashboard/articles/flexdashboard.html "dashboard basics")
+
+uses R Markdown, easy, support static or dynamic visualizations, and uses CSS flexbox layout. (what's that?)
+
+shinydashboard: [link](https://rstudio.github.io/shinydashboard/get_started.html "shiny dashboard")
+
+shinuy UI code, not quite as easy, dynamic visualizations, and uses Bootstrap grid layout
+
+### multiple graphs, tables, networks

@@ -1,0 +1,197 @@
+---
+title: "Chapter 11a:"
+subtitle: " What's a ShinyApp?"
+format: 
+  html:
+    theme: "lumen"
+editor: visual
+toc: true
+---
+
+This chapter introduces you to ShinyApps using R code to create and publish data, research materials, or informative tutorials. Chapter 11 is divided into two parts, 11a and 11b. In chapter 11a, you will learn:
+
+-    what a ShinyApp is and how to find resources,
+
+-   how to use RStudio and shinyapps.io to publish your application and,
+
+-   how to recognize the main components of a Shiny application.
+
+Chapter 11b will take a deeper look at many of the commonly used functions for input and output so that you can begin to customize and build your own applications.
+
+## **What is Shiny?**
+
+Shiny is an R package that builds interactive web applications using R and RStudio to compile HTML files. The HTML files can be used locally, (just opened up using your browser from a local directory), or placed on a server to make public to anyone to use. Its not just for data, either! There are used as an education tool, a map for finding resources, business intelligence (BI) dashboards, tracking activities, calculators, file type conversion, and of course, for displaying the results of data analysis through interactive visualizations.
+
+You are not restricted to just the web browser. You can configure your shiny app to include export to other document types, like PDFs, Word, or Excel.
+
+The most important aspects of shiny are that its interactive and it is *responsive*, which means that it resizes automatically to adjust to the device being used. This means you design once, and it can be viewed on a laptop, desktop, tablet, or phone.
+
+\[image of other document types\]
+
+In Shiny, we code in R. In the following sections code will be shown in cells:
+
+```{r}
+# this is written in R
+print("Hello lovely people!")
+```
+
+In the second chapter we'll explore R Markdown, which is a markdown language similiar to HTML but easier! We'll explore this as another method of creating a dashboard. We won't be spending much time on R Markdown, but as you have begun your journey in R and RStudio, you may want to consider it as it can make publishing much easier. You can learn more about R Markdown [here](https://shiny.rstudio.com/articles/rmarkdown.html "link to R Markdown page"). This document was created using Quarto in RStudio using RMarkdown.
+
+## **What can it do?**
+
+The [Shiny Gallery](https://shiny.rstudio.com/gallery/) is really helpful when learning as the examples provided include their code, so you can see how they created the interfaces. Below, is an example of where we're heading with this chapter and where we'll be going in the next chapter which will lead you through the steps to creating a dashboard.
+
+![An example of a simple application from this chapter.](images/Screen%20Shot%202023-02-17%20at%208.14.16%20AM.png){width="500"}
+
+### Examples of dashboards
+
+A dashboard is one that uses data that has been placed on the server, (or you have uploaded) or streams real-time and shows a variety of graphs, charts, and tables. In this case, we use data from OpenAlex and we perform simple calculations on the results.
+
+Here is a link to one from the shinydashboard gallery.
+
+source: https://www.delreyanalytics.com/post/an-simple-r-shiny-dashboard-for-real-time-streaming-data
+
+Here is a link to one from the shinydashboard gallery.
+
+::: callout-important
+<div>
+
+Ok, those are impressive. But you will get there and we're going to walk through each of the elements step by step.
+
+</div>
+:::
+
+## **How does it integrate with other things?**
+
+\[insert diagram\]
+
+### RStudio
+
+This is the IDE, the integrated development environment, for R, (among many other prgramming languages). We'll be using RStudio to create our shiny apps, test the code, preview results, and manage files.
+
+### Shiny
+
+Shiny apps are built on Bootstrap. But you don't need to worry about that. The Shiny app code does all the work to place the elements you design into an html files and automatically manages all file dependencies. We'll briefly discuss files when getting started with your first app.
+
+### shinyapps.io
+
+When running a shiny application from RStudio, you can publish directly to a server. Thankfully, the R community has a server location where you can host up to 5 apps for free at shinyapps.io. Of course, you can pay for more space, but for now, this works for us!. Later on, we'll walk you through publishing to the server directly from RStudio. Its surprisingly easy!
+
+## **How do I get started?**
+
+This link to the tutorials at [shiny.rstudio.com](https://shiny.rstudio.com/tutorial/) can also guide you through steps to creating your own apps, including more detailed information on how to change elements to meet your needs.
+
+Install the package down below in the console. You only need to do this once. If you uninstall and re-install your RStudio, you may need to reinstall packages.
+
+``` R
+install.packages("shiny")
+```
+
+### Starting a new app
+
+from Files\>New File \> Shiny Web app OR select new file from the pull down menu in the top toolbar.
+
+![Starting up a new Shiny app.](images/Screen%20Shot%202023-02-17%20at%208.56.52%20AM-01.png){fig-align="left" width="159"}
+
+This brings up a dialog box. Enter your project name. This will become the name of the folder that is created in the location you select.
+
+![Selecting your new directory location.](images/Screen%20Shot%202023-02-17%20at%209.02.05%20AM.png){fig-align="left" width="396"}
+
+Once you select *Create* you will see the template shiny app. This has three sections which we will cover next.
+
+![The starting template for a Shiny app.](images/Screen%20Shot%202023-02-17%20at%2010.53.57%20AM.png){fig-align="left" width="600"}
+
+### Basic anatomy of a shiny app
+
+There are three parts of a shiny app: the ui, the server, and the `shinyApp()` function that calls the ui and server.
+
+The *`ui`* (the user interface object) specifies the layout: where items are placed on the webpage.
+
+The *`server`* function is the instructions for how shiny builds your app.
+
+The `shinyApp()` function creates the actual app from the *ui* and *server* components
+
+::: callout-warning
+<div>
+
+Past versions of shiny used multi-page layouts with the ui and server components saved as separate files, such as *ui.R* and *server.R*. While this is still supported, the rest of this chapter will assume that we're using the single-page version in which the ui and server are together in one app.R file.
+
+</div>
+:::
+
+The UI and the server both have inputs and outputs that will be assigned and called. We'll go over those in the Inputs & Widgets section later on.
+
+### Set up a working directory
+
+1.  First set up a new working directory. In RStudio you can do this in the Files tab (usually on right lower panel). You can navigate where you want a directory, create, or modify existing directories.
+
+Under *More*, select *Set as working directory*. You can also do this in the console with:
+
+``` R
+setwd("~/your_folder_name")
+```
+
+2.  Download the following file from [github](https://raw.githubusercontent.com/poppy-nicolette/INFO6270_ShinyDash/main/FirstAppDemo/FirstAppDemo.R?token=GHSAT0AAAAAABUWXK4ASXIXEO55MQKBPVKOY7XTYUQ) and `Save Page As...` from your browser to this directory. Then rename the file from *FirstAppDemo.txt* to *FirstAppDemo.R*
+3.  Let's open up a shiny app file, called FirstAppDemo.R. You can see there is the `ui`, the `server`, and the `shinyApp()` function.
+
+![Figure 1: Image of a basic shiny app components](ch1_files/images/demo1_basic1.png){fig-alt="image of a basic shiny app components"}
+
+We'll be going through each of these items in more detail, but for now, you can see the basic structure.
+
+To run the app, use the *Run* icon shown below. This will run in the RStudio viewer by default, but you can also run in your browser with the *Run external* option checked.
+
+![Figure 2: Image of the run icon. Note the pull down menu arrow on the right.](ch1_files/images/demo1_runapp.png){width="523"}
+
+That's it to run a basic Shiny app!!! The shiny library comes with many examples you can explore as well as even more sophisticated examples on the [Gallery page](https://shiny.rstudio.com/gallery/ "Link to the Shiny app Gallery page").
+
+![Figure 3: Examples of shiny apps and functions. Image source: https://shiny.rstudio.com/tutorial/written-tutorial/lesson1/](ch1_files/images/shiny_examples.png)
+
+That's it! you've created a new app. Its simple right now, but we'll explore more options later for designing something that works for your needs. Let's discuss how we publish next so that you get a sense of the entire workflow.
+
+### Publishing on shinyapps.io
+
+Now we can start publishing online for the world to experience your brilliant research! A free account at shinyapps.io provides space for 5 applications and 25 active hours of server time. ([what are active hours?](https://support.posit.co/hc/en-us/articles/217717407-What-is-an-Active-Hour-for-shinyapps-io-))
+
+1.  Create a shinyapps.io account. You will need this [login](https://www.shinyapps.io/admin/#/signup) info to set up your RStudio to publish directly to shinyapps.io. I recommend connecting via your GitHub account, if you have one.
+
+2.  Back in RStudio, we need to connect to your shinyapp.io account. To the right of the *Run* icon, select the pull down menu.
+
+    ![](ch1_files/images/demo1_manage.png){width="325"}
+
+3.  Select *Connect...* and then choose *shinyapps.io*
+
+    ![](ch1_files/images/demo1_connect.png){width="289"}
+
+4.  Follow the instructions to find the token and paste into the space provided.
+
+    ![](ch1_files/images/demo1_connect_token.png){width="342"}
+
+5.  So exciting! Now, you are ready to publish to shinyapps.io!
+
+    ![](ch1_files/images/demo1_publish_app.png){width="343"}
+
+6.  Check all the files you want uploaded to the shinyapps.io server. In our case with this demo, it should only be one file, demo1.R.
+
+    ![](ch1_files/images/demo1_published.png){width="344"}
+
+That's it! You've done it!! Now sit back and watch the cash and attention role in.
+
+At this point, you know enough to open existing apps on Shiny Gallery, modify their open code, and publish them on shinyapps.io. In chapter 11b, we'll be going over many of the inputs and outputs with an exercise that will help you design apps based on your needs.
+
+## Conclusion
+
+In this chapter, we've covered what shiny is and how to get started. You can open existing Shiny apps, and start exploring their code, or adapting them to your own needs.
+
+There is an extensive amount of tutorials and documentation on making apps with Shiny and you can find some of those in the References section below. Chapters in this course are a living document, so if you have suggestions for materials you found helpful, please send them along to us.
+
+The next section of chapter 11 moves into a more detailed view of the inputs and outputs. Chapter 12 will show you how to make shiny apps shine with layouts and interactivity.
+
+## References:
+
+I took inspiration and guidance from many sources which I've tried to include here:
+
+The Bookdown library for R, at bookdown.org, provides a [tutorial](https://bookdown.org/hadrien/how_to_build_a_shiny_app_from_scratch/user-interface.html "Link to tutorial at bookdown.org") on how to build Shiny apps.
+
+Mastering Shiny https://mastering-shiny.org/index.html
+
+W3 color resources: https://www.w3schools.com/colors/default.asp

@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Chapter 11b:</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="ch11b_files/libs/clipboard/clipboard.min.js"></script>
+<script src="ch11b_files/libs/quarto-html/quarto.js"></script>
+<script src="ch11b_files/libs/quarto-html/popper.min.js"></script>
+<script src="ch11b_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="ch11b_files/libs/quarto-html/anchor.min.js"></script>
+<link href="ch11b_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="ch11b_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="ch11b_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="ch11b_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="ch11b_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#inputs-widgets" id="toc-inputs-widgets" class="nav-link active" data-scroll-target="#inputs-widgets">Inputs &amp; Widgets</a></li>
+  <li><a href="#outputs" id="toc-outputs" class="nav-link" data-scroll-target="#outputs">Outputs</a></li>
+  <li><a href="#themes" id="toc-themes" class="nav-link" data-scroll-target="#themes">Themes</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Chapter 11b:</h1>
+<p class="subtitle lead">Inputs and Outputs in Action</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>In this chapter, we’ll be looking in more detail at the input and output functions by example using a standard R dataset. This chapter introduces you to:</p>
+<ul>
+<li><p>input functions for text, numbers, dates, choices, file uploads and actions,</p></li>
+<li><p>output functions for text, tables, plots, images, and download formats, and</p></li>
+<li><p>an introduction to themes to change the appearance of your application.</p></li>
+</ul>
+<p>You can see all the datasets included in R by typing <code>data()</code> in the console.</p>
+<section id="inputs-widgets" class="level3">
+<h3 class="anchored" data-anchor-id="inputs-widgets">Inputs &amp; Widgets</h3>
+<p>Inputs are the ways users can enter, filter, or select information within your app. Widgets are a type of input that requires a different mode of input than text, such as a slider or button. There is a basic format to the inputs &amp; widgets. First there is the input type, in this case a <em><code>textAreaInput()</code></em>. In the first position inside is the <em>inputID</em> parameter, followed by the label parameter. These two will be consistent with all inputs. After the <em>inputID</em> and the label, arguments that may be unique to each follow. In this case, there is an argument for the number of <em>rows</em>. In general, all inputs, (including widgets) keep this order of <em>inputID, label, arguments</em>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">textAreaInput</span>(<span class="st">"story"</span>, <span class="st">"Tell me about yourself"</span>, <span class="at">rows =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>While, we will address a few of these, you can find all of them and their code on the <a href="https://shiny.rstudio.com/gallery/widget-gallery.html">shiny gallery</a>.</p>
+<p>The syntax of the widget the same as other inputs. Let’s look at the code below:</p>
+<p><img src="images/Screen%20Shot%202023-02-17%20at%201.27.30%20PM.png" class="img-fluid"></p>
+<p>The <em>inputID</em> has some rules, just like any variable in R. It must be a string consisting of letters, numbers, and/or underscores. Other characters like spaces, symbols, dashes, periods, etc., won’t work. Second, it must be unique as you will call this in output functions.</p>
+<p>You can find all of these in the input section in the shiny references documentation <a href="https://shiny.rstudio.com/reference/shiny/1.7.4/">here.</a> The following selection are some of the more commonly used ones to get you started.</p>
+<section id="text-input" class="level4">
+<h4 class="anchored" data-anchor-id="text-input">Text input</h4>
+<section id="textinput" class="level5">
+<h5 class="anchored" data-anchor-id="textinput">textInput()</h5>
+<p>This is for small amounts of text, like asking for someone’s name, address, or country. More info <a href="https://shiny.rstudio.com/reference/shiny/0.14/textinput">here</a>.</p>
+</section>
+<section id="passwordinput" class="level5">
+<h5 class="anchored" data-anchor-id="passwordinput">passwordInput()</h5>
+<p>This is for entering passwords. You can find more info <a href="https://shiny.rstudio.com/reference/shiny/latest/passwordinput">here</a> on its arguments.</p>
+</section>
+<section id="textareainput" class="level5">
+<h5 class="anchored" data-anchor-id="textareainput">textAreaInput()</h5>
+<p>This one is better for longer sections of text, like bio’s for websites, brief passages, comments, special instructions, etc. You can find more info <a href="https://shiny.rstudio.com/reference/shiny/1.7.4/textareainput">here</a> on its arguments.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">textInput</span>(<span class="st">"breakfast"</span>, <span class="st">"What's your favorite breakfast?"</span>),</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">passwordInput</span>(<span class="st">"password"</span>, <span class="st">"Please enter your password"</span>),</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">textAreaInput</span>(<span class="st">"bio"</span>, <span class="st">"Please tell us about yourself in 75 words or less."</span>, <span class="at">rows =</span> <span class="dv">3</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="number-inputs" class="level4">
+<h4 class="anchored" data-anchor-id="number-inputs">Number inputs</h4>
+<section id="numericinput" class="level5">
+<h5 class="anchored" data-anchor-id="numericinput">numericInput()</h5>
+</section>
+<section id="sliderinput" class="level5">
+<h5 class="anchored" data-anchor-id="sliderinput">sliderInput()</h5>
+</section>
+</section>
+<section id="dates" class="level4">
+<h4 class="anchored" data-anchor-id="dates">Dates</h4>
+<section id="dateinput" class="level5">
+<h5 class="anchored" data-anchor-id="dateinput">dateInput()</h5>
+</section>
+<section id="daterangeinput" class="level5">
+<h5 class="anchored" data-anchor-id="daterangeinput">dateRangeInput()</h5>
+</section>
+</section>
+<section id="choices-from-a-list" class="level4">
+<h4 class="anchored" data-anchor-id="choices-from-a-list">Choices from a list</h4>
+<section id="selectinput" class="level5">
+<h5 class="anchored" data-anchor-id="selectinput">selectInput()</h5>
+</section>
+<section id="radiobuttons" class="level5">
+<h5 class="anchored" data-anchor-id="radiobuttons">radioButtons()</h5>
+</section>
+<section id="checkboxinput" class="level5">
+<h5 class="anchored" data-anchor-id="checkboxinput">checkboxInput()</h5>
+</section>
+<section id="checkboxgroupinput" class="level5">
+<h5 class="anchored" data-anchor-id="checkboxgroupinput">checkboxGroupInput()</h5>
+</section>
+</section>
+<section id="file-uploads" class="level4">
+<h4 class="anchored" data-anchor-id="file-uploads">File uploads</h4>
+<section id="fileinput" class="level5">
+<h5 class="anchored" data-anchor-id="fileinput">fileInput()</h5>
+<p>File uploads and downloads are more complicated types of inputs and outputs. There is a special chapter dedicated to them on the Mastering Shiny webbook <a href="https://mastering-shiny.org/action-transfer.html">here</a>. Loading data, usually in the form of a csv, is a very common need. The following code will upload a csv based on which dataset you’ve chosen based on an input menu.</p>
+</section>
+</section>
+<section id="action-buttons" class="level4">
+<h4 class="anchored" data-anchor-id="action-buttons">Action buttons</h4>
+<p>Actions are usually used with the <code>observeEvent()</code> or <code>eventReactive()</code> functions that trigger a server side function. We’ll go over this in the next chapter. However, action buttons can alse be used for simple tasks without that reactivity.</p>
+<section id="actionbutton" class="level5">
+<h5 class="anchored" data-anchor-id="actionbutton">actionButton()</h5>
+</section>
+<section id="actionlink" class="level5">
+<h5 class="anchored" data-anchor-id="actionlink">actionLink()</h5>
+<p>There are many more inputs available on the Shiny reference documentation, these most common ones will get you started making apps. Next, let’s go over types of outputs and how these work with inputs.</p>
+</section>
+</section>
+</section>
+<section id="outputs" class="level3">
+<h3 class="anchored" data-anchor-id="outputs">Outputs</h3>
+<p>Outputs are assigned in the UI to define spaces where outputs will be seen. They include a unique ID in the first position of its arguments. UI outputs are always paired with a server output function.</p>
+<p>Output ID’s are called from the server side preceded by <code>output$outputID</code> in which <code>outputID</code> is the ID (like a variable name) you’ve assigned it. You’ll see these are always calling a render* function, such as <code>renderText()</code>. As an example:</p>
+<p><img src="images/Screen%20Shot%202023-02-17%20at%203.37.39%20PM.png" class="img-fluid" width="499"></p>
+<p>Some important new fuctions are called. In the <code>server()</code> function, you see <code>renderText()</code>. This calls the values you assigned in <em><code>input_1</code></em> and places it where you assigned it in <em><code>output_1</code></em>. In addition to text, you can also render tables, data tables, plots, images, and text. We’ll look at these pairings of <em><code>ui()</code></em> outputs and <em><code>server()</code></em> outputs next.</p>
+<section id="text-output" class="level4">
+<h4 class="anchored" data-anchor-id="text-output">Text output</h4>
+<section id="textoutput" class="level5">
+<h5 class="anchored" data-anchor-id="textoutput">textOutput()</h5>
+</section>
+<section id="rendertext" class="level5">
+<h5 class="anchored" data-anchor-id="rendertext">renderText()</h5>
+</section>
+<section id="verbatimtextoutput" class="level5">
+<h5 class="anchored" data-anchor-id="verbatimtextoutput">verbatimTextOutput()</h5>
+</section>
+<section id="renderprint" class="level5">
+<h5 class="anchored" data-anchor-id="renderprint">renderPrint()</h5>
+</section>
+</section>
+<section id="tables" class="level4">
+<h4 class="anchored" data-anchor-id="tables">Tables</h4>
+<section id="tableoutput" class="level5">
+<h5 class="anchored" data-anchor-id="tableoutput">tableOutput()</h5>
+</section>
+<section id="rendertable" class="level5">
+<h5 class="anchored" data-anchor-id="rendertable">renderTable()</h5>
+</section>
+<section id="datatableoutput" class="level5">
+<h5 class="anchored" data-anchor-id="datatableoutput">dataTableOutput()</h5>
+</section>
+<section id="renderdatatable" class="level5">
+<h5 class="anchored" data-anchor-id="renderdatatable">renderDataTable()</h5>
+</section>
+</section>
+<section id="plots" class="level4">
+<h4 class="anchored" data-anchor-id="plots">Plots</h4>
+<p>Plots are graphs and charts from packages like <a href="https://r-graph-gallery.com/ggplot2-package.html">ggplot2</a>, <a href="https://plotly.com/r/">plotly</a>, among others. <em>Mastering Shiny</em> has an excellent <a href="https://mastering-shiny.org/action-graphics.html">chapter</a> dedicated to ggplot2 for more info on making ggplot2 interactive, like plotly.</p>
+<section id="plotoutput" class="level5">
+<h5 class="anchored" data-anchor-id="plotoutput">plotOutput()</h5>
+</section>
+<section id="renderplot" class="level5">
+<h5 class="anchored" data-anchor-id="renderplot">renderPlot()</h5>
+</section>
+</section>
+<section id="images" class="level4">
+<h4 class="anchored" data-anchor-id="images">Images</h4>
+<section id="imageoutput" class="level5">
+<h5 class="anchored" data-anchor-id="imageoutput">imageOutput()</h5>
+</section>
+<section id="renderimage" class="level5">
+<h5 class="anchored" data-anchor-id="renderimage">renderImage()</h5>
+</section>
+</section>
+<section id="downloads" class="level4">
+<h4 class="anchored" data-anchor-id="downloads">Downloads</h4>
+<p>The download button is a special case and is not the same as a widget, however, its a super useful output for people to download a dataset or whatever you have prepared for them. The <code>downloadHandler()</code> function is critical to this working. In this case the <code>downloadHandler()</code> is sending the file named <em>data</em> to the <code>write.csv()</code> function.</p>
+<pre><code>ui &lt;- fluidPage(
+  downloadButton("downloadData", "Download")
+)
+
+server &lt;- function(input, output) {
+  # Our dataset
+  data &lt;- mtcars
+
+  output$downloadData &lt;- downloadHandler(
+    filename = function() {
+      paste("data-", Sys.Date(), ".csv", sep=",")
+    },
+    content = function(file) {
+      write.csv(data, file)
+    }#close function
+  )#close downloadHandler
+}#close server function
+
+shinyApp(ui, server)</code></pre>
+<p>With other libraries you can also write Excel files, such as with <a href="https://cran.r-project.org/web/packages/writexl/index.html"><em>writexl</em>.</a> his version writes to an Excel file.</p>
+<pre><code>library(shiny)
+library(writexl)
+
+
+ui &lt;- fluidPage(
+    downloadButton("downloadData", "Download")
+  )
+  
+server &lt;- function(input, output) {
+    # Our dataset
+    data &lt;- mtcars
+    
+    output$downloadData &lt;- downloadHandler(
+      filename = function() {
+        #paste("data-", Sys.Date(), ".csv", sep="")
+        paste("data-", Sys.Date(), ".xlsx")
+      },
+      content = function(file) {
+        #write.csv(data, file)
+        writexl::write_xlsx(data, file)
+      } #close function
+    ) #close downloadHandler
+  }#close server function
+  
+shinyApp(ui, server)</code></pre>
+<p>Next, let’s play with themes.</p>
+</section>
+</section>
+<section id="themes" class="level3">
+<h3 class="anchored" data-anchor-id="themes">Themes</h3>
+<p>Themes control the styling of the application, unifying colors and fonts, for example. Themes are assigned in the <code>ui()</code>. You can find the shinythemes library <a href="https://rstudio.github.io/shinythemes/">here</a>.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shinythemes)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">=</span> <span class="fu">fluidPage</span>(<span class="at">theme =</span> <span class="fu">shinytheme</span>(<span class="st">"cerulean"</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  )<span class="co">#close fluidPage</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>server <span class="ot">=</span> <span class="cf">function</span>(input,output) {}</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Or use the theme picker option until you decide on one!</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shinythemes)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">=</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    shinythemes<span class="sc">::</span><span class="fu">themeSelector</span>()</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    )<span class="co">#close fluidPage</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>server <span class="ot">=</span> <span class="cf">function</span>(input, output) {}</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>It is possible to create your own themes, use themes other than Bootstrap, or modify Bootstrap themes to your own aesthetic needs. <em>Mastering Shiny</em> has a brief chapter on themes <a href="https://mastering-shiny.org/action-layout.html">here,</a> and you can also find more information <a href="https://bootswatch.com/">here</a> on Bootswatch themes. <a href="https://www.w3schools.com/colors/default.asp">Here is a link</a> for the hex codes or names you’ll need for colors.</p>
+<p>To start making your own theme:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>theme <span class="ot">&lt;-</span> bslib<span class="sc">::</span><span class="fu">bs_theme</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">bg =</span> <span class="st">"#c4adca"</span>, </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">fg =</span> <span class="st">"white"</span>, </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">base_font =</span> <span class="st">"Times New Roman"</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="section" class="level2">
+<h2 class="anchored" data-anchor-id="section"></h2>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
