@@ -237,33 +237,62 @@ Tip
 </section>
 <section id="dates" class="level4">
 <h4 class="anchored" data-anchor-id="dates">Dates</h4>
-<section id="dateinput" class="level5">
-<h5 class="anchored" data-anchor-id="dateinput">dateInput()</h5>
-</section>
-<section id="daterangeinput" class="level5">
-<h5 class="anchored" data-anchor-id="daterangeinput">dateRangeInput()</h5>
+<p>For single date entry, use the <code>dateInput()</code> function. For a range of dates, use the <code>dateRangeInput()</code>. Easy, right? There are format options for date inputs, such as <code>format</code>, <code>language</code>, and <code>value</code> which defines the starting date. The default starting date is today’s date on your system. You can use the help section to find out more.</p>
+<section id="dateinput-and-daterangeinput" class="level5">
+<h5 class="anchored" data-anchor-id="dateinput-and-daterangeinput">dateInput() and dateRangeInput()</h5>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dateInput</span>(<span class="st">"order_1"</span>, <span class="st">"What date do you want to order donuts?"</span>),</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dateRangeInput</span>(<span class="st">"delivery_1"</span>,<span class="st">"Between what dates do you want the donuts delivered?"</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>)<span class="co">#close fluidPage</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
 <section id="choices-from-a-list" class="level4">
 <h4 class="anchored" data-anchor-id="choices-from-a-list">Choices from a list</h4>
 <section id="selectinput" class="level5">
 <h5 class="anchored" data-anchor-id="selectinput">selectInput()</h5>
+<p>This provides a drop down list based on a list. In the following example, the list has been defined first, but this list could also be passed within the <code>selectInput()</code> function.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>flavors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"chocolate"</span>, <span class="st">"plain"</span>, <span class="st">"raspberry"</span>, <span class="st">"maple"</span>, <span class="st">"unicorn"</span>, <span class="st">"creme-filled"</span>, <span class="st">"sprinkles"</span>, <span class="st">"chef's choice"</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">selectInput</span>(<span class="st">"flavor_1"</span>, <span class="st">"What flavor of donut would you like?"</span>, flavors)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>)<span class="co">#close fluidPage</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="radiobuttons" class="level5">
 <h5 class="anchored" data-anchor-id="radiobuttons">radioButtons()</h5>
+<p>Radio buttons provide a specified list of options that can be chosen. It is possible to change the text to other display types like images, icons, or HTML using the <code>choiceNames</code> and <code>choiceValues</code> aguments.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>flavors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"chocolate"</span>, <span class="st">"plain"</span>, <span class="st">"raspberry"</span>, <span class="st">"maple"</span>, <span class="st">"unicorn"</span>, <span class="st">"creme-filled"</span>, <span class="st">"sprinkles"</span>, <span class="st">"chef's choice"</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">radioButtons</span>(<span class="st">"flavor_button"</span>, <span class="st">"What is your second favorite flavor?"</span>, flavors)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>)<span class="co">#close fluidPage</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="checkboxinput" class="level5">
-<h5 class="anchored" data-anchor-id="checkboxinput">checkboxInput()</h5>
-</section>
-<section id="checkboxgroupinput" class="level5">
-<h5 class="anchored" data-anchor-id="checkboxgroupinput">checkboxGroupInput()</h5>
-</section>
-</section>
-<section id="file-uploads" class="level4">
-<h4 class="anchored" data-anchor-id="file-uploads">File uploads</h4>
-<section id="fileinput" class="level5">
-<h5 class="anchored" data-anchor-id="fileinput">fileInput()</h5>
-<p>File uploads and downloads are more complicated types of inputs and outputs. There is a special chapter dedicated to them on the Mastering Shiny webbook <a href="https://mastering-shiny.org/action-transfer.html">here</a>. Loading data, usually in the form of a csv, is a very common need. The following code will upload a csv based on which dataset you’ve chosen based on an input menu.</p>
+<section id="checkboxinput-and-checkboxgroupinput" class="level5">
+<h5 class="anchored" data-anchor-id="checkboxinput-and-checkboxgroupinput">checkboxInput() and checkboxGroupInput()</h5>
+<p>An alternative to radio buttons is check boxes which can be used for lists, surveys, or yes/no decions. For checkboxInput(), the value argument is a boolean TRUE or FALSE that determines if its automatically checked. <code>checkboxGroupInput()</code> also lets you select multiple choices, which the radio button does not.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>flavors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"chocolate"</span>, <span class="st">"plain"</span>, <span class="st">"raspberry"</span>, <span class="st">"maple"</span>, <span class="st">"unicorn"</span>, <span class="st">"creme-filled"</span>, <span class="st">"sprinkles"</span>, <span class="st">"chef's choice"</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">checkboxInput</span>(<span class="st">"choice_1"</span>, <span class="st">"Eat here"</span>, <span class="at">value=</span><span class="cn">TRUE</span>),</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">checkboxInput</span>(<span class="st">"choice_2"</span>, <span class="st">"Take home"</span>),</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">checkboxGroupInput</span>(<span class="st">"multiple_choice"</span>, <span class="st">"What flavors would you like?"</span>, flavors, <span class="at">selected =</span> <span class="cn">NULL</span>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>)<span class="co">#closed fluidPage</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>By now, you should be using the <code>?function,</code> (such as <code>?checkboxGroupInput)</code> in the console or searching for the function in the help page, (usually on the right in RStudio). This is a normal part of workflow and will help you add arguments to control input behaviours.</p>
+</div>
+</div>
 </section>
 </section>
 <section id="action-buttons" class="level4">
@@ -271,9 +300,26 @@ Tip
 <p>Actions are usually used with the <code>observeEvent()</code> or <code>eventReactive()</code> functions that trigger a server side function. We’ll go over this in the next chapter. However, action buttons can alse be used for simple tasks without that reactivity.</p>
 <section id="actionbutton" class="level5">
 <h5 class="anchored" data-anchor-id="actionbutton">actionButton()</h5>
-</section>
-<section id="actionlink" class="level5">
-<h5 class="anchored" data-anchor-id="actionlink">actionLink()</h5>
+<p>There are different button types already formatted for you. These include <code>btn-primary</code>, <code>btn-success</code>, <code>btn-info</code>, <code>btn-warning</code>, or <code>btn-danger</code>. You can modify these with sizes, such as <code>btn-lg</code>, <code>btn-sm</code>, <code>btn-x</code>s.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fluidRow</span>(</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">actionButton</span>(<span class="st">"btn_1"</span>, <span class="st">"Place your order"</span>, <span class="at">class =</span> <span class="st">"btn-primary"</span>),</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">actionButton</span>(<span class="st">"btn_2"</span>, <span class="st">"Reset your order"</span>, <span class="at">class =</span> <span class="st">"btn-warning"</span>),</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">actionButton</span>(<span class="st">"btn_3"</span>, <span class="st">"Preview your order"</span>, <span class="at">class =</span> <span class="st">"btn-info"</span>),</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">actionButton</span>(<span class="st">"btn_4"</span>, <span class="st">"Pay for your order"</span>, <span class="at">class =</span> <span class="st">"btn-warning"</span>)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    ),<span class="co">#close fluidRow</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">fluidRow</span>(</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">actionButton</span>(<span class="st">"btn_5"</span>, <span class="st">"I can't eat any more donuts"</span>, <span class="at">class =</span> <span class="st">"btn-block"</span>)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  )<span class="co">#close fluidRow</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>)<span class="co">#close fluidPage</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You can also pass icons from the <a href="https://fontawesome.com/icons">FontAwesome library</a> to buttons and connect to web links.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">actionButton</span>(<span class="at">inputId=</span><span class="st">'link_1'</span>, <span class="at">label=</span><span class="st">"See our location"</span>, </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">icon =</span> <span class="fu">icon</span>(<span class="st">"heart"</span>), </span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">onclick =</span><span class="st">"window.open("</span>https<span class="sc">:</span><span class="er">//</span>goo.gl<span class="sc">/</span>maps<span class="sc">/</span>PrUi3qKEc3WFg9Hz7<span class="st">", '_blank')"</span>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="er">)</span><span class="co">#close fluidPage</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>There are many more inputs available on the Shiny reference documentation, these most common ones will get you started making apps. Next, let’s go over types of outputs and how these work with inputs.</p>
 </section>
 </section>
@@ -333,9 +379,43 @@ Tip
 <h5 class="anchored" data-anchor-id="renderimage">renderImage()</h5>
 </section>
 </section>
+<section id="file-uploads" class="level4">
+<h4 class="anchored" data-anchor-id="file-uploads">File uploads</h4>
+<section id="fileinput" class="level5">
+<h5 class="anchored" data-anchor-id="fileinput">fileInput()</h5>
+<p>File uploads and downloads are more complicated types of inputs and outputs. There is a special chapter dedicated to them on the Mastering Shiny webbook <a href="https://mastering-shiny.org/action-transfer.html">here</a>. Loading data, usually in the form of a csv, is a very common need. The following code will upload a csv based on which dataset you’ve chosen based on an input menu. However, this code also makes the upload available to the servery function and reads it into a table.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sidebarLayout</span>(</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">sidebarPanel</span>(</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">fileInput</span>(<span class="st">"file1"</span>, <span class="st">"Choose a CSV  format File"</span>, <span class="at">accept =</span> <span class="st">".csv"</span>),</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">checkboxInput</span>(<span class="st">"header"</span>, <span class="st">"Header"</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mainPanel</span>(</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>        <span class="fu">tableOutput</span>(<span class="st">"contents"</span>)</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>      ) <span class="co">#close mainPanel</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    )<span class="co">#close sidebarLayout</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  )<span class="co">#close fluidPage</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) {</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    output<span class="sc">$</span>contents <span class="ot">&lt;-</span> <span class="fu">renderTable</span>({</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>      file <span class="ot">&lt;-</span> input<span class="sc">$</span>file1</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>      ext <span class="ot">&lt;-</span> tools<span class="sc">::</span><span class="fu">file_ext</span>(file<span class="sc">$</span>datapath)</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>      <span class="fu">req</span>(file)</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>      <span class="fu">validate</span>(<span class="fu">need</span>(ext <span class="sc">==</span> <span class="st">"csv"</span>, <span class="st">"Please upload a csv format file"</span>))</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>      <span class="fu">read.csv</span>(file<span class="sc">$</span>datapath, <span class="at">header =</span> input<span class="sc">$</span>header)</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>    })<span class="co">#close renderTable</span></span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>  }<span class="co">#close function</span></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
 <section id="downloads" class="level4">
 <h4 class="anchored" data-anchor-id="downloads">Downloads</h4>
-<p>The download button is a special case and is not the same as a widget, however, its a super useful output for people to download a dataset or whatever you have prepared for them. The <code>downloadHandler()</code> function is critical to this working. In this case the <code>downloadHandler()</code> is sending the file named <em>data</em> to the <code>write.csv()</code> function.</p>
+<p>The download button is a special case and is not the same as a widget, however, it’s a super useful output for people to download a dataset or whatever you have prepared for them. The <code>downloadHandler()</code> function is critical to this working. In this case the <code>downloadHandler()</code> is sending the file named <em>data</em> to the <code>write.csv()</code> function.</p>
 <pre><code>ui &lt;- fluidPage(
   downloadButton("downloadData", "Download")
 )
@@ -387,32 +467,32 @@ shinyApp(ui, server)</code></pre>
 <section id="themes" class="level3">
 <h3 class="anchored" data-anchor-id="themes">Themes</h3>
 <p>Themes control the styling of the application, unifying colors and fonts, for example. Themes are assigned in the <code>ui()</code>. You can find the shinythemes library <a href="https://rstudio.github.io/shinythemes/">here</a>.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shinythemes)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">=</span> <span class="fu">fluidPage</span>(<span class="at">theme =</span> <span class="fu">shinytheme</span>(<span class="st">"cerulean"</span>)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  )<span class="co">#close fluidPage</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>server <span class="ot">=</span> <span class="cf">function</span>(input,output) {}</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shinythemes)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">=</span> <span class="fu">fluidPage</span>(<span class="at">theme =</span> <span class="fu">shinytheme</span>(<span class="st">"cerulean"</span>)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  )<span class="co">#close fluidPage</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>server <span class="ot">=</span> <span class="cf">function</span>(input,output) {}</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Or use the theme picker option until you decide on one!</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shinythemes)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">=</span> <span class="fu">fluidPage</span>(</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    shinythemes<span class="sc">::</span><span class="fu">themeSelector</span>()</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    )<span class="co">#close fluidPage</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>server <span class="ot">=</span> <span class="cf">function</span>(input, output) {}</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shinythemes)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">=</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    shinythemes<span class="sc">::</span><span class="fu">themeSelector</span>()</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    )<span class="co">#close fluidPage</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>server <span class="ot">=</span> <span class="cf">function</span>(input, output) {}</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>It is possible to create your own themes, use themes other than Bootstrap, or modify Bootstrap themes to your own aesthetic needs. <em>Mastering Shiny</em> has a brief chapter on themes <a href="https://mastering-shiny.org/action-layout.html">here,</a> and you can also find more information <a href="https://bootswatch.com/">here</a> on Bootswatch themes. <a href="https://www.w3schools.com/colors/default.asp">Here is a link</a> for the hex codes or names you’ll need for colors.</p>
 <p>To start making your own theme:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>theme <span class="ot">&lt;-</span> bslib<span class="sc">::</span><span class="fu">bs_theme</span>(</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">bg =</span> <span class="st">"#c4adca"</span>, </span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">fg =</span> <span class="st">"white"</span>, </span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">base_font =</span> <span class="st">"Times New Roman"</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>theme <span class="ot">&lt;-</span> bslib<span class="sc">::</span><span class="fu">bs_theme</span>(</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">bg =</span> <span class="st">"#c4adca"</span>, </span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">fg =</span> <span class="st">"white"</span>, </span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">base_font =</span> <span class="st">"Times New Roman"</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="section" class="level2">
 <h2 class="anchored" data-anchor-id="section"></h2>

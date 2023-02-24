@@ -149,17 +149,48 @@ ui <- fluidPage(
 
 ##### selectInput()
 
+This provides a drop down list based on a list. In the following example, the list has been defined first, but this list could also be passed within the `selectInput()` function.
+
+``` R
+flavors <- c("chocolate", "plain", "raspberry", "maple", "unicorn", "creme-filled", "sprinkles", "chef's choice")
+
+ui <- fluidPage(
+  selectInput("flavor_1", "What flavor of donut would you like?", flavors)
+
+)#close fluidPage
+```
+
 ##### radioButtons()
 
-##### checkboxInput()
+Radio buttons provide a specified list of options that can be chosen. It is possible to change the text to other display types like images, icons, or HTML using the `choiceNames` and `choiceValues` aguments.
 
-##### checkboxGroupInput()
+``` R
+flavors <- c("chocolate", "plain", "raspberry", "maple", "unicorn", "creme-filled", "sprinkles", "chef's choice")
 
-#### File uploads
+ui <- fluidPage(
+  radioButtons("flavor_button", "What is your second favorite flavor?", flavors)
 
-##### fileInput()
+)#close fluidPage
+```
 
-File uploads and downloads are more complicated types of inputs and outputs. There is a special chapter dedicated to them on the Mastering Shiny webbook [here](https://mastering-shiny.org/action-transfer.html). Loading data, usually in the form of a csv, is a very common need. The following code will upload a csv based on which dataset you've chosen based on an input menu.
+##### checkboxInput() and checkboxGroupInput()
+
+An alternative to radio buttons is check boxes which can be used for lists, surveys, or yes/no decions. For checkboxInput(), the value argument is a boolean TRUE or FALSE that determines if its automatically checked. `checkboxGroupInput()` also lets you select multiple choices, which the radio button does not.
+
+``` R
+flavors <- c("chocolate", "plain", "raspberry", "maple", "unicorn", "creme-filled", "sprinkles", "chef's choice")
+
+ui <- fluidPage(
+  checkboxInput("choice_1", "Eat here", value=TRUE),
+  checkboxInput("choice_2", "Take home"),
+  checkboxGroupInput("multiple_choice", "What flavors would you like?", flavors, selected = NULL)
+
+)#closed fluidPage
+```
+
+::: callout-tip
+By now, you should be using the `?function,` (such as `?checkboxGroupInput)` in the console or searching for the function in the help page, (usually on the right in RStudio). This is a normal part of workflow and will help you add arguments to control input behaviours.
+:::
 
 #### Action buttons
 
@@ -167,9 +198,35 @@ Actions are usually used with the `observeEvent()` or `eventReactive()` function
 
 ##### actionButton()
 
-##### actionLink()
+There are different button types already formatted for you. These include `btn-primary`, `btn-success`, `btn-info`, `btn-warning`, or `btn-danger`. You can modify these with sizes, such as `btn-lg`, `btn-sm`, `btn-x`s.
 
-There are many more inputs available on the Shiny reference documentation, these most common ones will get you started making apps. Next, let's go over types of outputs and how these work with inputs.
+``` R
+ui <- fluidPage(
+  fluidRow(
+    actionButton("btn_1", "Place your order", class = "btn-primary"),
+    actionButton("btn_2", "Reset your order", class = "btn-warning"),
+    actionButton("btn_3", "Preview your order", class = "btn-info"),
+    actionButton("btn_4", "Pay for your order", class = "btn-warning")
+    ),#close fluidRow
+    fluidRow(
+    actionButton("btn_5", "I can't eat any more donuts", class = "btn-block")
+  )#close fluidRow
+
+)#close fluidPage
+```
+
+You can also pass icons from the [FontAwesome library](https://fontawesome.com/icons) to buttons and connect to web links.
+
+``` R
+ui <- fluidPage(
+  actionButton(inputId='link_1', label="See our location", 
+                          icon = icon("heart"), 
+                          onclick ="window.open("https://goo.gl/maps/PrUi3qKEc3WFg9Hz7", '_blank')")
+  )
+)#close fluidPage
+```
+
+There are many more inputs available on the Shiny reference documentation, these most common ones will get you started making apps. OK! Enough with the donuts! Next, let's go over types of outputs and how these work with inputs using a standard R dataset
 
 ### Outputs
 
@@ -183,23 +240,83 @@ Some important new fuctions are called. In the `server()` function, you see `ren
 
 #### Text output
 
-##### textOutput()
+##### textOutput() & renderText()
 
-##### renderText()
+This outputs regular text. You can see the placeholder `textOutput()` in the ui, and the `renderText()` function passed in the server.
 
-##### verbatimTextOutput()
+``` R
+ui <- fluidPage(
+  textOutput("text")
 
-##### renderPrint()
+)#close fluidPage
+
+server <- function(input, output) {
+  output$text <- renderText({
+  "Hello. The following is a summary of a standard R dataset, mtcars"
+  })#close renderText
+}#close server
+```
+
+##### verbatimTextOutput() & renderPrint()
+
+This creates a console like output in the application. Lets add the dataset summary. `renderPrint()` prints the results of expressions, where `renderText()` prints text together in a string.
+
+``` R
+ui <- fluidPage(
+  textOutput("text"),
+  verbatimTextOutput("code")
+  
+)#close fluidPage
+
+server <- function(input, output) {
+  output$text <- renderText({
+    "Hello. The following is a summary of a standard R dataset, mtcars"
+  })
+  output$code <- renderPrint({
+    summary(mtcars)
+  })
+}#close server
+```
 
 #### Tables
 
-##### tableOutput()
+Oh, tables! Tables are powerful. There are two types of tables, static tables of data, and dynamic tables that are interactive.
 
-##### renderTable()
+##### tableOutput() & renderTable()
 
-##### dataTableOutput()
+Static tables are great for summaries or concise results. They're good at preserving data just the way you made it.
 
-##### renderDataTable()
+``` R
+ui <- fluidPage(
+  tableOutput("static")
+)#close fluidPage
+
+server <- function(input, output) {
+  output$static <- renderTable(head(mtcars))
+}#close server
+```
+
+##### dataTableOutput() & renderDataTable()
+
+DataTables are much more dynamic and a have huge range of arguments of customizing behaviours.
+
+``` R
+ui <- fluidPage(
+  dataTableOutput("dynamic")
+
+)#close fluidPage
+
+server <- function(input, output) {
+  output$dynamic <- renderDataTable(mtcars, options=list(pageLength = 6)
+  )#cloe renderDataTable
+}#close server
+```
+
+DataTables are more appropriate for larger dataframes where someone may need to explore, filter, and sort data.
+
+There are two libraries that make DataTables amazing. One is reactable and the other is DT. Both are great but reactable is much easier to use and integrate with Shiny and even Quarto.
+
+[![](images/reactable.png){fig-align="left" width="100"}](https://glin.github.io/reactable/index.html)
 
 #### Plots
 
@@ -215,9 +332,45 @@ Plots are graphs and charts from packages like [ggplot2](https://r-graph-gallery
 
 ##### renderImage()
 
+#### File uploads
+
+##### fileInput()
+
+File uploads and downloads are more complicated types of inputs and outputs. There is a special chapter dedicated to them on the Mastering Shiny webbook [here](https://mastering-shiny.org/action-transfer.html). Loading data, usually in the form of a csv, is a very common need. The following code will upload a csv based on which dataset you've chosen based on an input menu. However, this code also makes the upload available to the servery function and reads it into a table.
+
+``` R
+library(shiny)
+
+ui <- fluidPage(
+    sidebarLayout(
+      sidebarPanel(
+        fileInput("file1", "Choose a CSV  format File", accept = ".csv"),
+        checkboxInput("header", "Header", TRUE)
+      ),
+      mainPanel(
+        tableOutput("contents")
+      ) #close mainPanel
+    )#close sidebarLayout
+  )#close fluidPage
+  
+server <- function(input, output) {
+    output$contents <- renderTable({
+      file <- input$file1
+      ext <- tools::file_ext(file$datapath)
+      
+      req(file)
+      validate(need(ext == "csv", "Please upload a csv format file"))
+      
+      read.csv(file$datapath, header = input$header)
+    })#close renderTable
+  }#close function
+  
+shinyApp(ui, server)
+```
+
 #### Downloads
 
-The download button is a special case and is not the same as a widget, however, its a super useful output for people to download a dataset or whatever you have prepared for them. The `downloadHandler()` function is critical to this working. In this case the `downloadHandler()` is sending the file named *data* to the `write.csv()` function.
+The download button is a special case and is not the same as a widget, however, it's a super useful output for people to download a dataset or whatever you have prepared for them. The `downloadHandler()` function is critical to this working. In this case the `downloadHandler()` is sending the file named *data* to the `write.csv()` function.
 
     ui <- fluidPage(
       downloadButton("downloadData", "Download")

@@ -3,13 +3,13 @@
 library(shiny)
 
 ui <- fluidPage(
-  dateInput("order_1", "What date do you want to order donuts?"),
-  dateRangeInput("delivery_1","Between what dates do you want the donuts delivered?")
+  dataTableOutput("dynamic")
   
 )#close fluidPage
 
-server <- function(input, output){
-}
-
-# Run the application 
-shinyApp(ui = ui, server = server)
+server <- function(input, output) {
+  output$dynamic <- renderDataTable(mtcars, options=list(pageLength = 6)
+  )#close renderDataTable
+}#close server
+  
+shinyApp(ui, server)
