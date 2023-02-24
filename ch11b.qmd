@@ -16,7 +16,7 @@ In this chapter, we'll be looking in more detail at the input and output functio
 
 -   an introduction to themes to change the appearance of your application.
 
-You can see all the datasets included in R by typing `data()` in the console.
+You can see all the datasets included in R by typing `data()` in the console. You may also find the RStudio [cheatsheet](https://posit.co/resources/cheatsheets/) helpful to learn some hotkeys to speed up your workflow.
 
 ### Inputs & Widgets
 
@@ -26,7 +26,7 @@ Inputs are the ways users can enter, filter, or select information within your a
 textAreaInput("story", "Tell me about yourself", rows = 3)
 ```
 
-While, we will address a few of these, you can find all of them and their code on the [shiny gallery](https://shiny.rstudio.com/gallery/widget-gallery.html).
+While, we will address a few of these, you can find all of them and their code on the [shiny gallery](https://shiny.rstudio.com/gallery/widget-gallery.html)
 
 The syntax of the widget the same as other inputs. Let's look at the code below:
 
@@ -34,7 +34,25 @@ The syntax of the widget the same as other inputs. Let's look at the code below:
 
 The *inputID* has some rules, just like any variable in R. It must be a string consisting of letters, numbers, and/or underscores. Other characters like spaces, symbols, dashes, periods, etc., won't work. Second, it must be unique as you will call this in output functions.
 
-You can find all of these in the input section in the shiny references documentation [here.](https://shiny.rstudio.com/reference/shiny/1.7.4/) The following selection are some of the more commonly used ones to get you started.
+You can find all of these in the input section in the shiny references documentation [here.](https://shiny.rstudio.com/reference/shiny/1.7.4/) The following selection are some of the more commonly used ones to get you started. Inputs and outputs will be shown in context of the ui or server component. You can build an app as you go along. You may want to start with the basic structure first and try different inputs as your read through the chapter.
+
+``` R
+library(shiny)
+
+ui <- fluidPage(
+
+)#close fluidPage
+
+server <- function(input, output) {
+
+} #close server function
+
+shinyApp(ui, server)
+```
+
+::: callout-tip
+If you ever want to know more about a function, you can always use the help section in RStudio or use the console to place a `?` before the function, such as `?fluidPage`.
+:::
 
 #### Text input
 
@@ -42,9 +60,22 @@ You can find all of these in the input section in the shiny references documenta
 
 This is for small amounts of text, like asking for someone's name, address, or country. More info [here](https://shiny.rstudio.com/reference/shiny/0.14/textinput).
 
+``` R
+ui <- fluidPage(
+  textInput("input_1", "What's your favorite donut?"),
+  )#close fluidPage
+```
+
 ##### passwordInput()
 
 This is for entering passwords. You can find more info [here](https://shiny.rstudio.com/reference/shiny/latest/passwordinput) on its arguments.
+
+``` R
+ui <- fluidPage(
+  textInput("input_1", "What's your favorite donut?"),
+  passwordInput("pword_1", "If a donut was your password, what would it be?")
+)#close fluidPage
+```
 
 ##### textAreaInput()
 
@@ -52,23 +83,67 @@ This one is better for longer sections of text, like bio's for websites, brief p
 
 ``` R
 ui <- fluidPage(
-  textInput("breakfast", "What's your favorite breakfast?"),
-  passwordInput("password", "Please enter your password"),
-  textAreaInput("bio", "Please tell us about yourself in 75 words or less.", rows = 3)
-)
+  textInput("input_1", "What's your favorite donut?"),
+  passwordInput("pword_1", "If a donut was your password, what would it be?"),
+  textAreaInput("bio", "Please describe yourself as a donut", rows = 3)
+  
+)#close fluidPage
+```
+
+So, let's see these inputs as a complete application.
+
+``` R
+library(shiny)
+
+ui <- fluidPage(
+  textInput("input_1", "What's your favorite donut?"),
+  passwordInput("pword_1", "If a donut was your password, what would it be?"),
+  textAreaInput("bio", "Please describe yourself as a donut", rows = 3)
+)#close fluidPage
+
+server <- function(input, output){
+}
+
+# Run the application 
+shinyApp(ui = ui, server = server)
 ```
 
 #### Number inputs
 
+Here are three inputs for numbers.
+
 ##### numericInput()
+
+``` R
+ui <- fluidPage(
+  numericInput("num_1", "Enter the quantity of donuts", value = 0, min = 0, max = 12)
+)#close fluidPage
+```
 
 ##### sliderInput()
 
+Slider inputs can be used to select a single number or specify a range. Note the list argument passed in the second `sliderInput()` function named *num_3*.
+
+``` R
+ui <- fluidPage(
+  sliderInput("num_2", "Enter the maximum number you can eat in one go", value = 6, min = 0, max = 12),
+  sliderInput("num_3", "Enter the range of donuts you have been known to eat", value=c(3,9), min=0, max=12 )
+)#close fluidPage
+```
+
 #### Dates
 
-##### dateInput()
+For single date entry, use the `dateInput()` function. For a range of dates, use the `dateRangeInput()`. Easy, right? There are format options for date inputs, such as `format`, `language`, and `value` which defines the starting date. The default starting date is today's date on your system. You can use the help section to find out more.
 
-##### dateRangeInput()
+##### dateInput() and dateRangeInput()
+
+``` R
+ui <- fluidPage(
+  dateInput("order_1", "What date do you want to order donuts?"),
+  dateRangeInput("delivery_1","Between what dates do you want the donuts delivered?")
+
+)#close fluidPage
+```
 
 #### Choices from a list
 

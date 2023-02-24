@@ -1,13 +1,3 @@
-#
-# This is a Shiny web application. You can run the application by clicking
-# the 'Run App' button above.
-#
-# You can place any info you'd like here, such as 
-# author:
-# date
-# license
-# references : http://shiny.rstudio.com/
-#
 
 #import our library
 library(shiny)
@@ -44,7 +34,7 @@ server <- function(input, output) {
         bins <- seq(min(x), max(x), length.out = input$bins +1 ) #close bins
 
         # draw the histogram with the specified number of bins
-        hist(x, breaks = bins, col = 'darkgray', border = 'white',
+        hist(x, breaks = bins, col = 'magenta', border = 'white',
              xlab = 'Categories of goods delivered',
              ylab = 'Days',
              main = 'Amazon Prime delivery times in Atlantic Canada (in days)') #close hist

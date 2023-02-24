@@ -134,17 +134,17 @@ setwd("~/your_folder_name")
 2.  Download the following file from [github](https://raw.githubusercontent.com/poppy-nicolette/INFO6270_ShinyDash/main/FirstAppDemo/FirstAppDemo.R?token=GHSAT0AAAAAABUWXK4ASXIXEO55MQKBPVKOY7XTYUQ) and `Save Page As...` from your browser to this directory. Then rename the file from *FirstAppDemo.txt* to *FirstAppDemo.R*
 3.  Let's open up a shiny app file, called FirstAppDemo.R. You can see there is the `ui`, the `server`, and the `shinyApp()` function.
 
-![Figure 1: Image of a basic shiny app components](ch1_files/images/demo1_basic1.png){fig-alt="image of a basic shiny app components"}
+![Figure 1: Image of a basic shiny app components](images/basic.png){fig-alt="image of a basic shiny app components" width="450"}
 
 We'll be going through each of these items in more detail, but for now, you can see the basic structure.
 
 To run the app, use the *Run* icon shown below. This will run in the RStudio viewer by default, but you can also run in your browser with the *Run external* option checked.
 
-![Figure 2: Image of the run icon. Note the pull down menu arrow on the right.](ch1_files/images/demo1_runapp.png){width="523"}
+![Figure 2: Image of the run icon. Note the pull down menu arrow on the right.](images/run_icon.png){width="450"}
 
 That's it to run a basic Shiny app!!! The shiny library comes with many examples you can explore as well as even more sophisticated examples on the [Gallery page](https://shiny.rstudio.com/gallery/ "Link to the Shiny app Gallery page").
 
-![Figure 3: Examples of shiny apps and functions. Image source: https://shiny.rstudio.com/tutorial/written-tutorial/lesson1/](ch1_files/images/shiny_examples.png)
+![Figure 3: Examples of shiny apps and functions. Image source: https://shiny.rstudio.com/tutorial/written-tutorial/lesson1/](images/shiny_examples.png){width="800"}
 
 That's it! you've created a new app. Its simple right now, but we'll explore more options later for designing something that works for your needs. Let's discuss how we publish next so that you get a sense of the entire workflow.
 
@@ -152,29 +152,31 @@ That's it! you've created a new app. Its simple right now, but we'll explore mor
 
 Now we can start publishing online for the world to experience your brilliant research! A free account at shinyapps.io provides space for 5 applications and 25 active hours of server time. ([what are active hours?](https://support.posit.co/hc/en-us/articles/217717407-What-is-an-Active-Hour-for-shinyapps-io-))
 
-1.  Create a shinyapps.io account. You will need this [login](https://www.shinyapps.io/admin/#/signup) info to set up your RStudio to publish directly to shinyapps.io. I recommend connecting via your GitHub account, if you have one.
+1.  Create a shinyapps.io account. You will need this [login](https://www.shinyapps.io/admin/#/signup) info to set up your RStudio to publish directly to shinyapps.io. I recommend connecting via your GitHub account, if you have one. Otherwise, just start a new account.
 
 2.  Back in RStudio, we need to connect to your shinyapp.io account. To the right of the *Run* icon, select the pull down menu.
 
-    ![](ch1_files/images/demo1_manage.png){width="325"}
+    ![](images/pull_down_menu.png){width="450"}
 
 3.  Select *Connect...* and then choose *shinyapps.io*
 
-    ![](ch1_files/images/demo1_connect.png){width="289"}
+    ![](images/connect.png){width="450"}
 
 4.  Follow the instructions to find the token and paste into the space provided.
 
-    ![](ch1_files/images/demo1_connect_token.png){width="342"}
+    ![](images/tokens.png){width="450"}
 
 5.  So exciting! Now, you are ready to publish to shinyapps.io!
 
-    ![](ch1_files/images/demo1_publish_app.png){width="343"}
+    ![](images/publish_pull_down.png){width="450"}
 
-6.  Check all the files you want uploaded to the shinyapps.io server. In our case with this demo, it should only be one file, demo1.R.
+6.  Check all the files you want uploaded to the shinyapps.io server. In our case with this demo, it should only be one file, FirstDemoApp.R.
 
-    ![](ch1_files/images/demo1_published.png){width="344"}
+    ![](images/publish.png){width="450"}
 
-That's it! You've done it!! Now sit back and watch the cash and attention role in.
+That's it! You've done it!! Now sit back and watch the cash and attention role in! If you want to find your app on the shinyapps.io dashboard, you can login [here](https://www.shinyapps.io/admin/#/login) or below.
+
+[![](images/shinyapps.png){width="150"}](https://www.shinyapps.io/admin/#/login)
 
 At this point, you know enough to open existing apps on Shiny Gallery, modify their open code, and publish them on shinyapps.io. In chapter 11b, we'll be going over many of the inputs and outputs with an exercise that will help you design apps based on your needs.
 
