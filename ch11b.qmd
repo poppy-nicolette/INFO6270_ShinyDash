@@ -6,6 +6,7 @@ format:
     theme: "lumen"
 editor: visual
 toc: true
+runtime: shiny
 ---
 
 In this chapter, we'll be looking in more detail at the input and output functions by example using a standard R dataset. This chapter introduces you to:
@@ -312,25 +313,93 @@ server <- function(input, output) {
 }#close server
 ```
 
-DataTables are more appropriate for larger dataframes where someone may need to explore, filter, and sort data.
+DataTables are more appropriate for larger dataframes where someone may need to explore, filter, and sort data. You can find more information on modifying DataTables [here.](https://shiny.rstudio.com/articles/datatables.html)
 
-There are two libraries that make DataTables amazing. One is reactable and the other is DT. Both are great but reactable is much easier to use and integrate with Shiny and even Quarto.
+There are two libraries that make DataTables amazing. One is reactable and the other is [DT](https://rstudio.github.io/DT/shiny.html). Both are great but reactable is much easier to use and integrate with Shiny and even Quarto.
 
-[![](images/reactable.png){fig-align="left" width="100"}](https://glin.github.io/reactable/index.html)
+::: callout-important
+DataTables refers to both functions in Shiny and from the DT library. For any examples in this chapter, we'll be refering to the Shiny version.
+:::
 
 #### Plots
 
-Plots are graphs and charts from packages like [ggplot2](https://r-graph-gallery.com/ggplot2-package.html), [plotly](https://plotly.com/r/), among others. *Mastering Shiny* has an excellent [chapter](https://mastering-shiny.org/action-graphics.html) dedicated to ggplot2 for more info on making ggplot2 interactive, like plotly.
+Plots are graphs and charts from packages like [ggplot2](https://r-graph-gallery.com/ggplot2-package.html), [plotly](https://plotly.com/r/), [r2d3,](https://rstudio.github.io/r2d3/) and many others. *Mastering Shiny* has an excellent [chapter](https://mastering-shiny.org/action-graphics.html) dedicated to ggplot2 for more info on making ggplot2 interactive. For now, we're going to stick with some simple ones to explain the basic plot output functions.
 
-##### plotOutput()
+##### plotOutput() & renderPlot()
 
-##### renderPlot()
+This work together to generate an R graphic, usually based on ggplot2 or similar graphic library.
+
+``` R
+library(shiny)
+library(gglplot2)
+
+ui <- fluidPage(
+  plotOutput("plot", width = "400px")
+)#close fluidPage
+server <- function(input, output) {
+  output$plot <- renderPlot(plot(1:10), res = 96)
+}#close server
+
+shinyApp(ui, server)
+```
+
+![A rather boring plot.](images/plot_output.png){width="450"}
+
+Let's look at something more interesting. ggplot2 supports interactive mouse inputs, such as `click`, `dblclick`, `hover`, and `brush` (rectangular select). This time we're looking at the iris dataset.
+
+``` R
+
+library(shiny)
+library(ggplot2)
+
+ui <- fluidPage(
+  plotOutput("plot", click = "plot_click"),
+  tableOutput("data")
+)
+server <- function(input, output) {
+  output$plot <- renderPlot({
+    ggplot(iris, aes(x=Sepal.Length, y=Sepal.Width)) + 
+      geom_point()})
+  
+  output$data <- renderTable({
+    nearPoints(iris, input$plot_click)
+  })
+}
+shinyApp(ui, server) 
+```
+
+![](images/chart%20types.png)
+
+![](images/scatterplot.png){width="900"}
+
+More plot types can be found on the [R Graph Library](https://r-graph-gallery.com/) with helpful example code to get you started. This library focuses on ggplot 2 and tidyverse, so you have already learned what you need to make and modify these!
+
+[![](images/chart%20types.png){width="900"}](https://r-graph-gallery.com/index.html)
 
 #### Images
 
-##### imageOutput()
+Images in your app as part of text. Of course, you also use `fluidRow()` and `column` arguments to organize your space with text and images.
 
-##### renderImage()
+``` R
+library("shiny")
+ui <- fluidPage(
+      mainPanel(
+        img(src='Donut.jpg', align = "center")
+      )
+    )#close fluidPage
+
+server <- function(input, output) {
+
+}#close server
+shinyApp(ui, server)
+```
+
+Your files should be saved in a folder
+
+     | shinyApp/
+        | app.R
+        | www/
+           | Donut.jpg
 
 #### File uploads
 
@@ -372,53 +441,57 @@ shinyApp(ui, server)
 
 The download button is a special case and is not the same as a widget, however, it's a super useful output for people to download a dataset or whatever you have prepared for them. The `downloadHandler()` function is critical to this working. In this case the `downloadHandler()` is sending the file named *data* to the `write.csv()` function.
 
-    ui <- fluidPage(
-      downloadButton("downloadData", "Download")
-    )
+``` R
+ui <- fluidPage(
+  downloadButton("downloadData", "Download")
+)
 
-    server <- function(input, output) {
-      # Our dataset
-      data <- mtcars
+server <- function(input, output) {
+  # Our dataset
+  data <- mtcars
 
-      output$downloadData <- downloadHandler(
-        filename = function() {
-          paste("data-", Sys.Date(), ".csv", sep=",")
-        },
-        content = function(file) {
-          write.csv(data, file)
-        }#close function
-      )#close downloadHandler
-    }#close server function
+  output$downloadData <- downloadHandler(
+    filename = function() {
+      paste("data-", Sys.Date(), ".csv", sep=",")
+    },
+    content = function(file) {
+      write.csv(data, file)
+    }#close function
+  )#close downloadHandler
+}#close server function
 
-    shinyApp(ui, server)
+shinyApp(ui, server)
+```
 
 With other libraries you can also write Excel files, such as with [*writexl*.](https://cran.r-project.org/web/packages/writexl/index.html) his version writes to an Excel file.
 
-    library(shiny)
-    library(writexl)
+``` R
+library(shiny)
+library(writexl)
 
 
-    ui <- fluidPage(
-        downloadButton("downloadData", "Download")
-      )
-      
-    server <- function(input, output) {
-        # Our dataset
-        data <- mtcars
-        
-        output$downloadData <- downloadHandler(
-          filename = function() {
-            #paste("data-", Sys.Date(), ".csv", sep="")
-            paste("data-", Sys.Date(), ".xlsx")
-          },
-          content = function(file) {
-            #write.csv(data, file)
-            writexl::write_xlsx(data, file)
-          } #close function
-        ) #close downloadHandler
-      }#close server function
-      
-    shinyApp(ui, server)
+ui <- fluidPage(
+    downloadButton("downloadData", "Download")
+  )
+  
+server <- function(input, output) {
+    # Our dataset
+    data <- mtcars
+    
+    output$downloadData <- downloadHandler(
+      filename = function() {
+        #paste("data-", Sys.Date(), ".csv", sep="")
+        paste("data-", Sys.Date(), ".xlsx")
+      },
+      content = function(file) {
+        #write.csv(data, file)
+        writexl::write_xlsx(data, file)
+      } #close function
+    ) #close downloadHandler
+  }#close server function
+  
+shinyApp(ui, server)
+```
 
 Next, let's play with themes.
 
@@ -454,7 +527,7 @@ shinyApp(ui, server)
 
 It is possible to create your own themes, use themes other than Bootstrap, or modify Bootstrap themes to your own aesthetic needs. *Mastering Shiny* has a brief chapter on themes [here,](https://mastering-shiny.org/action-layout.html) and you can also find more information [here](https://bootswatch.com/) on Bootswatch themes. [Here is a link](https://www.w3schools.com/colors/default.asp) for the hex codes or names you'll need for colors.
 
-To start making your own theme:
+To start making your own theme. Colors are hex or by HTML names. Collections of web safe fonts can be found [here.](https://www.w3schools.com/csSref/css_websafe_fonts.php)
 
 ``` R
 theme <- bslib::bs_theme(
@@ -464,4 +537,8 @@ theme <- bslib::bs_theme(
 )
 ```
 
-## 
+## Wrap up
+
+That's chapter 11b! By the end of this you have learned more about the inputs and output functions, how they work together, an introduction to reactivity with file uploads and downloads, and a brief look at themes.
+
+In the next chapter, we'll look more at reactivity and how to create dashboards!!
