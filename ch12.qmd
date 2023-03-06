@@ -7,124 +7,87 @@ editor: visual
 
 In this chapter, we will look at how to make your do stuff, respond, and calculate multiple tables and visualizations
 
-## Layouts, inputs, outputs, & themes
-
-### Layouts:
-
-Within the *`ui`* section, we can determine the layout. Layout is the basic grid of how elements are placed on your page. We'll go over the most common here, but many more can be found in the Shiny app reference [here.](https://shiny.rstudio.com/reference/shiny/1.7.4/)
-
-#### fluidPage()
-
-The `fluidPage()` creates your layout consisting of rows with each row dividable into columns. Rows keep things aligned along a horizontal line. Each row is a 12-unit grid and columns define how much of the 12 units are assigned to each column. However, these all scale to accommodate the browser width, hence the fluid part of the name. While there are other page types, `fluidPage()` is so versatile, you're likely to just use this.
-
-`fluidPage()` looks like this in the UI:
-
-``` R
-ui <- fluidPage(
-  title = "Hello Shiny!",
-  fluidRow(
-    column(width = 4,
-           "4"
-    ),
-    column(width = 3, offset = 2,
-           "3 offset 2"
-    ) #close column
-  ) #close fluidRow
-) #close fluidPage
-```
-
-Note that the column widths don't have to add to 12! You're just telling it how much of the 12 units to reserve for that column.
-
-::: callout-important
-::: {#fluidPage}
-Remember: rows contain columns. So, if you add a new fluidRow within a fluidPage layout, you can specify a different column spacing.
-:::
-:::
-
-#### sidebarLayout()
-
-Sidebars are one of the most common elements of a UI, which is usually skinny and on the left hand side of the screen, (although it can be on the right or both).
-
-Within the `fluidPage()` you can pass a `sidebarLayout()`, which consists of a `sidebarPanel()` and a `mainPanel()`.
-
-``` R
-library(shiny)
-
-# Define UI
-ui <- fluidPage(
-    # Sidebar Layout
-    sidebarLayout(
-        # Sidebar Layout Elements
-        sidebarPanel = sidebarPanel("This is the sidebar area. You can have text and widgets here like buttons or sliders."),
-        mainPanel = mainPanel(
-            "This is the main panel text.",
-            h2"You can control text size",
-            "text color",
-            " or all images."
-        )# close mainPanel
-      )#close sidebarPanel
-    )#close fluidPage
-```
-
-##### sidebarPanel()
-
-The `sidebarPanel()` can be moved to the left or the right, be narrow or wide, contain text, images, or interactive widgets. The `sidebarPanel()` takes the following inputs:
-
-##### mainPanel()
-
-This element determines what is the other part of the `sidebarLayout()`, the main part of the page. This is generally where you have text or show tables.
-
-### Grid Layouts
-
-If you want to control the grid into multiple rows and columns, you can do that by calling `fluidRow()` and `column()` within the `fluidPage()`. While rows will automatically align, you can make columns are different widths, and even offset widths.
-
-Column examples here
-
-### tabsetPanel()
-
-A `tabsetPanel()` creates tabs for multiple pages. This is a great way to present multiple datasets, or seperate text by topical areas.
-
-`tabsetPanel()` code
-
-`tabsetPanel()` result
-
-The `tabsetPanel()` can also be used in conjunction with the `mainPanel()` of a `sidebarLayout()`!
-
-example code
-
-example image
-
-### navlistPanel()
-
-### navbarPage()
-
-The `navbarPage()` is another page type, like the `fluidPage()`. Some may consider this a little dated, but when you need a multipage app that has distinct layout elements, then this may be appropriate.
-
-A `navbarPage()` establishes a page that can include any of the layouts above, such as a `sidebarLayout()`, a grid system of `fluidRows()` and `columns()`, or a `tabsetPanel(`).
-
-``` R
-ui <- navbarPage("Main page title",
-  tabPanel("Page 1"),
-  tabPanel("Page 2"),
-  tabPanel("Page 3"),
-  tabPanel("Page 4")
-  )#close navbarMenu
-) #close navbarPage
-```
-
-![An example of the navbarPage.](images/Screen%20Shot%202023-02-16%20at%202.39.26%20PM.png){alt="An example of the navbarPage." fig-align="left" width="450"}
-
-#### navbarMenu()
-
-The `navbarMenu()` is a sub-component of the `navbarPage()` and provides a drop-down menu for additional `tabPanel()` elements.
-
-`navbarMenu()` code
-
-![Screen capture of a `navbarPage(`) with a `navbarMenu()`.](images/Screen%20Shot%202023-02-16%20at%202.10.58%20PM.png){alt="Screen capture of a navbarPage with a navbarMenu." fig-align="left" width="450"}
-
 ## Reactive pages
 
-### session states
+### basics of reactivity
+
+reactivity refers to the ability of an app to recaculate or perform some action when an input is changed. In a non-reactive Shiny app, all calculations are run when the session begins. However, if you want a user to change an input and display a new calculated resullt, then reactivity in Shiny apps allow only that part of the app to be computed and redisplayed, not the entire app. This is important for making things fast and able to display immediate changes.
+
+#### server \<- function(input, output, session)
+
+the first thing you'll see is the session argument in the function(). you can read a detailed account of it here:
+
+But this is what we'll use in the server function to make sure there is a session state that is active and updates the webpage when asked.
+
+\[insert basic structure for reactivity\]
+
+#### two different types of programming: imperative and declarative
+
+imperative is like the analysis functions you've been running. you write a series of commands and R executes them. You see errors if something doesn't match. The UI layout is imperative. you write code that says where something will be, like a radio button or sidebar text.
+
+declarative provides options for the program if conditions are right. So, it might execute the code if conditions are met. This is what we see on the server side function. Its a series of codes that will run if something happens in the UI.
+
+declarative is harder to identify errors, typos, etc. because it running depends on the conditions provided for it.
+
+#### execution order
+
+Unlike imperative, declarative coding such as in the `server`, run only when needed. so order is not as important in the `server` function. However, this can make code very difficult to read for humans as we tend to assume top to bottom.
+
+Keeping things lightweight
+
+Data can be very large. To prevent this from slowing down the application, every time a new input is sent to the server function, do as much of your data cleaning and manipulation outside of the ShinyApp as possible. Of course, there are just some situations where this is not possible. But as a general rule, keep it minimal inside the ShinyApp. However, you can run code before the `ui` and `server` functions if data needs to be cleaned.
+
+\[insert example code\]
+
+#### Internal Events
+
+##### eventReactive()
+
+On click events
+
+\[insert eventReactive() with an action button\]
+
+\[revisit download code\]
+
+#### External Events
+
+##### observerEvent()
+
+control events outside the app, such sending a request to an API, updating a database, or saving a file. These events are called observers and use the `observeEvent()` function.
+
+two arguments: `eventExpr` and `handlerExpr`
+
+first input is the input or expression to take a dependency upon, the second is the code that willl be executed.
+
+observeEvent() functions do not update the HTML in the browser. Note that the following code changes in the HTML to the webpage with the reactive and also prints something in the console.
+
+\[insert code showing reactive and observeEvent...\]
+
+\[insert results of reactive\]
+
+\[insert results of observeEvent\] - maybe a popup?
+
+#### What is session?
+
+Session is an optional argument passed to the server function that enables inputs or outputs related to the current instance of the app to be used. You may see some examples with this, such as with the downloadHandler() function.
+
+If you see it in a code example, its likely there to and input or output that is unique to this instance and do something with it. You can experiment with removing it or adding it back in with this code;
+
+\[insert session code example\]
+
+### Summary
+
+Reactivity is different due to the nature of declarative programming. It makes code less complex and provdies conditions that could be met, rather than a linear progression of code to be executed. We use reactivity so that people can change inputs and receive different outputs or make external actions happen.
+
+Recognizing reactive functions of eventReactive() and observeEvent() and why its used on the back-end of a Shiny app will help in diagnosing and designing your code. The file upload input and the download button output are two examples where reactivity can be seen.
+
+-   session is added as an optional argument to the server function call
+
+-   put as much code before the shinyapp as possible to reduce calculation time.
+
+-   eventReactive() is used for internal events triggering a change
+
+-   observeEvent() is used for triggering external events, such as downloading a file to the users downloads folder.
 
 ## DataTables
 
@@ -147,3 +110,11 @@ shinydashboard: [link](https://rstudio.github.io/shinydashboard/get_started.html
 shinuy UI code, not quite as easy, dynamic visualizations, and uses Bootstrap grid layout
 
 ### multiple graphs, tables, networks
+
+### styling dashboards
+
+#### The shinydashboard way
+
+#### using shiny.semantic
+
+https://appsilon.github.io/shiny.semantic/

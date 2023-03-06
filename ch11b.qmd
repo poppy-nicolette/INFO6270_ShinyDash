@@ -6,7 +6,6 @@ format:
     theme: "lumen"
 editor: visual
 toc: true
-runtime: shiny
 ---
 
 In this chapter, we'll be looking in more detail at the input and output functions by example using a standard R dataset. This chapter introduces you to:
@@ -19,11 +18,11 @@ In this chapter, we'll be looking in more detail at the input and output functio
 
 You can see all the datasets included in R by typing `data()` in the console. You may also find the RStudio [cheatsheet](https://posit.co/resources/cheatsheets/) helpful to learn some hotkeys to speed up your workflow.
 
-### Inputs & Widgets
+## Inputs & Widgets
 
 Inputs are the ways users can enter, filter, or select information within your app. Widgets are a type of input that requires a different mode of input than text, such as a slider or button. There is a basic format to the inputs & widgets. First there is the input type, in this case a *`textAreaInput()`*. In the first position inside is the *inputID* parameter, followed by the label parameter. These two will be consistent with all inputs. After the *inputID* and the label, arguments that may be unique to each follow. In this case, there is an argument for the number of *rows*. In general, all inputs, (including widgets) keep this order of *inputID, label, arguments*.
 
-``` R
+``` r
 textAreaInput("story", "Tell me about yourself", rows = 3)
 ```
 
@@ -37,7 +36,7 @@ The *inputID* has some rules, just like any variable in R. It must be a string c
 
 You can find all of these in the input section in the shiny references documentation [here.](https://shiny.rstudio.com/reference/shiny/1.7.4/) The following selection are some of the more commonly used ones to get you started. Inputs and outputs will be shown in context of the ui or server component. You can build an app as you go along. You may want to start with the basic structure first and try different inputs as your read through the chapter.
 
-``` R
+``` r
 library(shiny)
 
 ui <- fluidPage(
@@ -55,13 +54,13 @@ shinyApp(ui, server)
 If you ever want to know more about a function, you can always use the help section in RStudio or use the console to place a `?` before the function, such as `?fluidPage`.
 :::
 
-#### Text input
+### Text input
 
 ##### textInput()
 
-This is for small amounts of text, like asking for someone's name, address, or country. More info [here](https://shiny.rstudio.com/reference/shiny/0.14/textinput).
+This is for small amounts of text, like asking for someone's name, address, or country. More info [here](https://shiny.rstudio.com/reference/shiny/0.14/textinput). To format text, for size, emphasis, color, etc, please see the *Formatting text* section at the end of the chapter.
 
-``` R
+``` r
 ui <- fluidPage(
   textInput("input_1", "What's your favorite donut?"),
   )#close fluidPage
@@ -71,7 +70,7 @@ ui <- fluidPage(
 
 This is for entering passwords. You can find more info [here](https://shiny.rstudio.com/reference/shiny/latest/passwordinput) on its arguments.
 
-``` R
+``` r
 ui <- fluidPage(
   textInput("input_1", "What's your favorite donut?"),
   passwordInput("pword_1", "If a donut was your password, what would it be?")
@@ -82,7 +81,7 @@ ui <- fluidPage(
 
 This one is better for longer sections of text, like bio's for websites, brief passages, comments, special instructions, etc. You can find more info [here](https://shiny.rstudio.com/reference/shiny/1.7.4/textareainput) on its arguments.
 
-``` R
+``` r
 ui <- fluidPage(
   textInput("input_1", "What's your favorite donut?"),
   passwordInput("pword_1", "If a donut was your password, what would it be?"),
@@ -93,7 +92,7 @@ ui <- fluidPage(
 
 So, let's see these inputs as a complete application.
 
-``` R
+``` r
 library(shiny)
 
 ui <- fluidPage(
@@ -109,13 +108,13 @@ server <- function(input, output){
 shinyApp(ui = ui, server = server)
 ```
 
-#### Number inputs
+### Number inputs
 
 Here are three inputs for numbers.
 
 ##### numericInput()
 
-``` R
+``` r
 ui <- fluidPage(
   numericInput("num_1", "Enter the quantity of donuts", value = 0, min = 0, max = 12)
 )#close fluidPage
@@ -125,7 +124,7 @@ ui <- fluidPage(
 
 Slider inputs can be used to select a single number or specify a range. Note the list argument passed in the second `sliderInput()` function named *num_3*.
 
-``` R
+``` r
 ui <- fluidPage(
   sliderInput("num_2", "Enter the maximum number you can eat in one go", value = 6, min = 0, max = 12),
   sliderInput("num_3", "Enter the range of donuts you have been known to eat", value=c(3,9), min=0, max=12 )
@@ -138,7 +137,7 @@ For single date entry, use the `dateInput()` function. For a range of dates, use
 
 ##### dateInput() and dateRangeInput()
 
-``` R
+``` r
 ui <- fluidPage(
   dateInput("order_1", "What date do you want to order donuts?"),
   dateRangeInput("delivery_1","Between what dates do you want the donuts delivered?")
@@ -152,7 +151,7 @@ ui <- fluidPage(
 
 This provides a drop down list based on a list. In the following example, the list has been defined first, but this list could also be passed within the `selectInput()` function.
 
-``` R
+``` r
 flavors <- c("chocolate", "plain", "raspberry", "maple", "unicorn", "creme-filled", "sprinkles", "chef's choice")
 
 ui <- fluidPage(
@@ -165,7 +164,7 @@ ui <- fluidPage(
 
 Radio buttons provide a specified list of options that can be chosen. It is possible to change the text to other display types like images, icons, or HTML using the `choiceNames` and `choiceValues` aguments.
 
-``` R
+``` r
 flavors <- c("chocolate", "plain", "raspberry", "maple", "unicorn", "creme-filled", "sprinkles", "chef's choice")
 
 ui <- fluidPage(
@@ -178,7 +177,7 @@ ui <- fluidPage(
 
 An alternative to radio buttons is check boxes which can be used for lists, surveys, or yes/no decions. For checkboxInput(), the value argument is a boolean TRUE or FALSE that determines if its automatically checked. `checkboxGroupInput()` also lets you select multiple choices, which the radio button does not.
 
-``` R
+``` r
 flavors <- c("chocolate", "plain", "raspberry", "maple", "unicorn", "creme-filled", "sprinkles", "chef's choice")
 
 ui <- fluidPage(
@@ -201,7 +200,7 @@ Actions are usually used with the `observeEvent()` or `eventReactive()` function
 
 There are different button types already formatted for you. These include `btn-primary`, `btn-success`, `btn-info`, `btn-warning`, or `btn-danger`. You can modify these with sizes, such as `btn-lg`, `btn-sm`, `btn-x`s.
 
-``` R
+``` r
 ui <- fluidPage(
   fluidRow(
     actionButton("btn_1", "Place your order", class = "btn-primary"),
@@ -218,7 +217,7 @@ ui <- fluidPage(
 
 You can also pass icons from the [FontAwesome library](https://fontawesome.com/icons) to buttons and connect to web links.
 
-``` R
+``` r
 ui <- fluidPage(
   actionButton(inputId='link_1', label="See our location", 
                           icon = icon("heart"), 
@@ -229,7 +228,7 @@ ui <- fluidPage(
 
 There are many more inputs available on the Shiny reference documentation, these most common ones will get you started making apps. OK! Enough with the donuts! Next, let's go over types of outputs and how these work with inputs using a standard R dataset
 
-### Outputs
+## Outputs
 
 Outputs are assigned in the UI to define spaces where outputs will be seen. They include a unique ID in the first position of its arguments. UI outputs are always paired with a server output function.
 
@@ -245,7 +244,7 @@ Some important new fuctions are called. In the `server()` function, you see `ren
 
 This outputs regular text. You can see the placeholder `textOutput()` in the ui, and the `renderText()` function passed in the server.
 
-``` R
+``` r
 ui <- fluidPage(
   textOutput("text")
 
@@ -262,7 +261,7 @@ server <- function(input, output) {
 
 This creates a console like output in the application. Lets add the dataset summary. `renderPrint()` prints the results of expressions, where `renderText()` prints text together in a string.
 
-``` R
+``` r
 ui <- fluidPage(
   textOutput("text"),
   verbatimTextOutput("code")
@@ -287,7 +286,7 @@ Oh, tables! Tables are powerful. There are two types of tables, static tables of
 
 Static tables are great for summaries or concise results. They're good at preserving data just the way you made it.
 
-``` R
+``` r
 ui <- fluidPage(
   tableOutput("static")
 )#close fluidPage
@@ -301,7 +300,7 @@ server <- function(input, output) {
 
 DataTables are much more dynamic and a have huge range of arguments of customizing behaviours.
 
-``` R
+``` r
 ui <- fluidPage(
   dataTableOutput("dynamic")
 
@@ -329,7 +328,7 @@ Plots are graphs and charts from packages like [ggplot2](https://r-graph-gallery
 
 This work together to generate an R graphic, usually based on ggplot2 or similar graphic library.
 
-``` R
+``` r
 library(shiny)
 library(gglplot2)
 
@@ -347,7 +346,7 @@ shinyApp(ui, server)
 
 Let's look at something more interesting. ggplot2 supports interactive mouse inputs, such as `click`, `dblclick`, `hover`, and `brush` (rectangular select). This time we're looking at the iris dataset.
 
-``` R
+``` r
 
 library(shiny)
 library(ggplot2)
@@ -380,7 +379,7 @@ More plot types can be found on the [R Graph Library](https://r-graph-gallery.co
 
 Images in your app as part of text. Of course, you also use `fluidRow()` and `column` arguments to organize your space with text and images.
 
-``` R
+``` r
 library("shiny")
 ui <- fluidPage(
       mainPanel(
@@ -407,7 +406,7 @@ Your files should be saved in a folder
 
 File uploads and downloads are more complicated types of inputs and outputs. There is a special chapter dedicated to them on the Mastering Shiny webbook [here](https://mastering-shiny.org/action-transfer.html). Loading data, usually in the form of a csv, is a very common need. The following code will upload a csv based on which dataset you've chosen based on an input menu. However, this code also makes the upload available to the servery function and reads it into a table.
 
-``` R
+``` r
 library(shiny)
 
 ui <- fluidPage(
@@ -441,7 +440,7 @@ shinyApp(ui, server)
 
 The download button is a special case and is not the same as a widget, however, it's a super useful output for people to download a dataset or whatever you have prepared for them. The `downloadHandler()` function is critical to this working. In this case the `downloadHandler()` is sending the file named *data* to the `write.csv()` function.
 
-``` R
+``` r
 ui <- fluidPage(
   downloadButton("downloadData", "Download")
 )
@@ -465,7 +464,7 @@ shinyApp(ui, server)
 
 With other libraries you can also write Excel files, such as with [*writexl*.](https://cran.r-project.org/web/packages/writexl/index.html) his version writes to an Excel file.
 
-``` R
+``` r
 library(shiny)
 library(writexl)
 
@@ -499,7 +498,7 @@ Next, let's play with themes.
 
 Themes control the styling of the application, unifying colors and fonts, for example. Themes are assigned in the `ui()`. You can find the shinythemes library [here](https://rstudio.github.io/shinythemes/).
 
-``` R
+``` r
 library(shinythemes)
 
 ui = fluidPage(theme = shinytheme("cerulean")
@@ -512,7 +511,7 @@ shinyApp(ui, server)
 
 Or use the theme picker option until you decide on one!
 
-``` R
+``` r
 library(shinythemes)
 
 ui = fluidPage(
@@ -529,7 +528,7 @@ It is possible to create your own themes, use themes other than Bootstrap, or mo
 
 To start making your own theme. Colors are hex or by HTML names. Collections of web safe fonts can be found [here.](https://www.w3schools.com/csSref/css_websafe_fonts.php)
 
-``` R
+``` r
 theme <- bslib::bs_theme(
   bg = "#c4adca", 
   fg = "white", 
@@ -537,8 +536,74 @@ theme <- bslib::bs_theme(
 )
 ```
 
+## Formatting text
+
+#### HTML functions
+
+You can apply HTML equivalent functions in shiny to format your text by creating distinct paragraphs, emphasize text, or change the font or color. The table below shows the shiny function, such as p(), and its HTML equivalent and what is modified.
+
+Table source: https://shiny.rstudio.com/tutorial/written-tutorial/lesson2/
+
+| **shiny function** | **HTML5 equivalent** | **creates**                                      |
+|:-------------------|:---------------------|:-------------------------------------------------|
+| `p`                | `<p>`                | A paragraph of text                              |
+| `h1`               | `<h1>`               | A first level header                             |
+| `h2`               | `<h2>`               | A second level header                            |
+| `h3`               | `<h3>`               | A third level header                             |
+| `h4`               | `<h4>`               | A fourth level header                            |
+| `h5`               | `<h5>`               | A fifth level header                             |
+| `h6`               | `<h6>`               | A sixth level header                             |
+| `a`                | `<a>`                | A hyper link                                     |
+| `br`               | `<br>`               | A line break (e.g. a blank line)                 |
+| `div`              | `<div>`              | A division of text with a uniform style          |
+| `span`             | `<span>`             | An in-line division of text with a uniform style |
+| `pre`              | `<pre>`              | Text \'as is\' in a fixed width font             |
+| `code`             | `<code>`             | A formatted block of code                        |
+| `img`              | `<img>`              | An image                                         |
+| `strong`           | `<strong>`           | Bold text                                        |
+| `em`               | `<em>`               | Italicized text                                  |
+| `HTML`             |                      | Directly passes a character string as HTML code  |
+
+Below is an example with many types of the HTML modifiers.
+
+``` R
+library(shiny)
+
+ui <- fluidPage(
+  titlePanel("My Shiny App"),
+  sidebarLayout(
+    sidebarPanel(),
+    mainPanel(
+      h1(" h1() creates a level 1 header."),
+      h2(" h2() creates a level 2 header, and so on..."),
+      p("Use p() to create a new paragraph. "),
+      p("You can apply style to a paragraph using style", style = "font-family: 'times'; font-si16pt"),
+      strong("Using strong() bolds text."),
+      em("Italics can be applied with em(). "),
+      br(),
+      p("Use br() to apply a line break."),
+      br(),
+      code("You can create a code box with code()."),
+      div("div creates a container that can apply styles within it using 'style = color:magenta'", style = "color:blue"),
+      br(),
+      p("span is similar to div but can affect smaller sections",
+        span("such as words or phrases", style = "color:purple"),
+        "within a paragraph or body of text."),
+      h3(p("You can also combine ", 
+           em(span("HTML", style="color:magenta")), 
+           "functions."))
+    )#close mainPanel
+  )#close sidebarLayout
+)#close fluidPage
+server <- function(input, output) {
+  
+}
+
+shinyApp(ui, server)
+```
+
 ## Wrap up
 
-That's chapter 11b! By the end of this you have learned more about the inputs and output functions, how they work together, an introduction to reactivity with file uploads and downloads, and a brief look at themes.
+That's chapter 11b! By the end of this you have learned more about many of the Shiny inputs and output functions, how they work together, an introduction to themes, and formatting text.
 
-In the next chapter, we'll look more at reactivity and how to create dashboards!!
+In the next chapter, we'll look at reactivity and how to create dashboards!!

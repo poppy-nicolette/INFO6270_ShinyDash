@@ -10,7 +10,7 @@ toc: true
 
 This chapter introduces you to ShinyApps using R code to create and publish data, research materials, or informative tutorials. Chapter 11 is divided into two parts, 11a and 11b. In chapter 11a, you will learn:
 
--    what a ShinyApp is and how to find resources,
+-   what a ShinyApp is and how to find resources,
 
 -   how to use RStudio and shinyapps.io to publish your application and,
 
@@ -83,7 +83,7 @@ This link to the tutorials at [shiny.rstudio.com](https://shiny.rstudio.com/tuto
 
 Install the package down below in the console. You only need to do this once. If you uninstall and re-install your RStudio, you may need to reinstall packages.
 
-``` R
+``` r
 install.packages("shiny")
 ```
 
@@ -127,7 +127,7 @@ The UI and the server both have inputs and outputs that will be assigned and cal
 
 Under *More*, select *Set as working directory*. You can also do this in the console with:
 
-``` R
+``` r
 setwd("~/your_folder_name")
 ```
 
