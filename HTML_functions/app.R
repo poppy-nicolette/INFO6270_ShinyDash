@@ -23,9 +23,9 @@ ui <- fluidPage(
       h3(p("You can also combine ", 
            em(span("HTML", style="color:magenta")), 
            "functions."))
-    )
-  )
-)
+    )#close mainPanel
+  )#close sidebarLayout
+)#close fluidPage
 server <- function(input, output) {
   
 }

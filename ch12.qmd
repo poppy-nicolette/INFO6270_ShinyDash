@@ -41,6 +41,8 @@ Data can be very large. To prevent this from slowing down the application, every
 
 #### Internal Events
 
+##### reactive()
+
 ##### eventReactive()
 
 On click events
@@ -83,17 +85,146 @@ Recognizing reactive functions of eventReactive() and observeEvent() and why its
 
 -   session is added as an optional argument to the server function call
 
--   put as much code before the shinyapp as possible to reduce calculation time.
+-   you can put code before the shiny code to reduce calculation time.
 
--   eventReactive() is used for internal events triggering a change
+-   `eventReactive()` is used for internal events triggering a change.
 
--   observeEvent() is used for triggering external events, such as downloading a file to the users downloads folder.
+-   `observeEvent()` is used for triggering external events, such as downloading a file to the users downloads folder.
 
 ## DataTables
 
+In this section, we are going to explore importing data and displaying it in a DataTable using the DT library. This is different than the data.table library. The DT library makes a lovely table that can be searched, filtered, and sorted which is great for data exploration. You can find more info [here](https://shiny.rstudio.com/articles/datatables.html) and [here](https://rstudio.github.io/DT/shiny.html) for the DT documentation.
+
+``` R
+library(shiny)
+library(DT)
+
+ui <- fluidPage(
+  h2("Some data about flowers"),
+  DT::dataTableOutput("table_1")
+
+)#close fluidPage
+
+server <- function(input, output) {
+  output$table_1 = DT::renderDataTable({
+  iris
+  })#close output
+
+}#close server
+
+shinyApp(ui, server)
+```
+
 ## Computation output
 
+But what if we wanted to perform some operations on the data, such as to use the summarizing functions you did in earlier chapters on the mtcars dataset? In the code below, we first import some data from a remote location, then create a DataTable for exploration. Then we summarize the data.
+
+``` R
+library(shiny)
+library(DT)
+library(tidyverse)
+
+
+path <- "https://raw.githubusercontent.com/fivethirtyeight/data/master/comic-characters/marvel-wikia-data.csv"
+
+# This will read the first sheet of the Excel file
+comics_data <- read_csv(path)
+
+ui <- fluidPage(
+  sidebarLayout(
+    sidebarPanel(
+      h2("How to use DataTables from the DT library"),
+      br(),
+      p("To the right is a dataset displayed as a DataTable"), 
+      p("This dataset is from the fivethirtyeight GitHub repository.")
+    ),#close sidebarPanel
+    mainPanel(
+  h2("the dataset"),
+  br(),
+  
+  DT::dataTableOutput("table_1"), 
+  
+  
+    )#close mainPanel
+  )#close sidebarLayout
+)#close fluidPage
+
+server <- function(input, output) {
+  data_to_display <- comics_data
+
+  output$table_1 <- renderDataTable({
+   (data_to_display)
+    })
+  
+}#close server
+
+shinyApp(ui, server)
+```
+
+First, we can drop urlslug, and page_id. We also want to correct the column names.
+
+``` R
+library(shiny)
+library(DT)
+library(tidyverse)
+
+
+path <- "https://raw.githubusercontent.com/fivethirtyeight/data/master/comic-characters/marvel-wikia-data.csv"
+
+# This will read the first sheet of the Excel file
+comics_data <- read_csv(path)
+
+comics_data <- select(comics_data, "name", "ID", "ALIGN", "EYE", 
+                      "HAIR", "SEX", "GSM", "ALIVE", "APPEARANCES",
+                      "FIRST APPEARANCE", "Year" ) %>% 
+                rename(Name = name,
+                       Alignment=ALIGN,
+                       Eye = EYE, 
+                       Hair = HAIR,
+                       Gender = SEX, 
+                       Gender_or_sexual_identity = GSM,
+                       Status = ALIVE, 
+                       Appearances = APPEARANCES,
+                       First_appearance = 'FIRST APPEARANCE')
+
+ui <- fluidPage(
+  sidebarLayout(
+    sidebarPanel(
+      h2("How to use DataTables from the DT library"),
+      br(),
+      p("To the right is a dataset displayed as a DataTable"), 
+      p("This dataset is from the fivethirtyeight GitHub repository.")
+    ),#close sidebarPanel
+    mainPanel(
+      h2("the dataset"),
+      br(),
+      DT::dataTableOutput("table_1")#close dataTableOutput
+  
+    )#close mainPanel
+  )#close sidebarLayout
+)#close fluidPage
+
+server <- function(input, output) {
+  data_to_display <- comics_data
+
+  output$table_1 <- renderDataTable(
+   data_to_display,
+    options = list(
+      scrollX = TRUE, 
+      scrollY = TRUE,
+      autoWidth = TRUE,
+      rownames = FALSE)
+    ) #close renderDataTable
+}#close server
+
+shinyApp(ui, server)
+```
+
+You can see from this example, there are new options added to the `renderDataTable()` function. We also modified our data *before* the `ui`. You can find an excellent explanation of options as well as integration with the formattable library from [this blog](https://clarewest.github.io/blog/post/making-tables-shiny/).
+
 ## Visualization
+
+Ok, we have some table options with the data.table library and the more dynamic DT library. Let's seem what this data looks like. We're going to introduce the ggplot library, introduce the igraph llibrary for networks, and provide some resources for plotly and leaflet for further exploration in visualilzation.
 
 ### Basic graphs
 

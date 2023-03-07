@@ -494,7 +494,7 @@ shinyApp(ui, server)
 
 Next, let's play with themes.
 
-### Themes
+## Themes
 
 Themes control the styling of the application, unifying colors and fonts, for example. Themes are assigned in the `ui()`. You can find the shinythemes library [here](https://rstudio.github.io/shinythemes/).
 
@@ -535,6 +535,8 @@ theme <- bslib::bs_theme(
   base_font = "Times New Roman"
 )
 ```
+
+There is also the shiny.semantic library for a different look. You can find the link [here.](https://appsilon.github.io/shiny.semantic/)
 
 ## Formatting text
 
