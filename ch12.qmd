@@ -7,21 +7,28 @@ editor: visual
 
 In this chapter, we will look at how to make your do stuff, respond, and calculate multiple tables and visualizations
 
-## Reactive pages
+# Reactive pages
 
-### basics of reactivity
+## Basics of reactivity
 
-reactivity refers to the ability of an app to recaculate or perform some action when an input is changed. In a non-reactive Shiny app, all calculations are run when the session begins. However, if you want a user to change an input and display a new calculated resullt, then reactivity in Shiny apps allow only that part of the app to be computed and redisplayed, not the entire app. This is important for making things fast and able to display immediate changes.
+Reactivity refers to the ability of an app to recalculate or perform some action when an input is changed. In a non-reactive Shiny app, all calculations are run when the session begins. However, if you want a user to change an input and display a new *calculated* result, then reactivity in Shiny apps allow only that part of the app to be computed and re-displayed, not the entire app. This is important for making things fast and able to display immediate changes. So, in a sense, reactivity is something that happens in the background. But, knowing about it will help you use the following functions successfully.
 
-#### server \<- function(input, output, session)
+``` R
+#insert code that shows what happens with input a with and without a reactive function
 
-the first thing you'll see is the session argument in the function(). you can read a detailed account of it here:
+ui <- fluidPage(
+  sliderInput("input_1", )
+  
+)#close fluidPage
 
-But this is what we'll use in the server function to make sure there is a session state that is active and updates the webpage when asked.
+server <- function(input, output){
+  output
+}
 
-\[insert basic structure for reactivity\]
+shinyApp(ui, server)
+```
 
-#### two different types of programming: imperative and declarative
+### Two different types of programming: imperative and declarative
 
 imperative is like the analysis functions you've been running. you write a series of commands and R executes them. You see errors if something doesn't match. The UI layout is imperative. you write code that says where something will be, like a radio button or sidebar text.
 
@@ -29,67 +36,89 @@ declarative provides options for the program if conditions are right. So, it mig
 
 declarative is harder to identify errors, typos, etc. because it running depends on the conditions provided for it.
 
-#### execution order
+### Code execution order
 
 Unlike imperative, declarative coding such as in the `server`, run only when needed. so order is not as important in the `server` function. However, this can make code very difficult to read for humans as we tend to assume top to bottom.
 
-Keeping things lightweight
-
 Data can be very large. To prevent this from slowing down the application, every time a new input is sent to the server function, do as much of your data cleaning and manipulation outside of the ShinyApp as possible. Of course, there are just some situations where this is not possible. But as a general rule, keep it minimal inside the ShinyApp. However, you can run code before the `ui` and `server` functions if data needs to be cleaned.
 
-\[insert example code\]
+``` R
+#insert example code
+take mtcars and apply some calculation based on existing data, maybe $ to drive 100 miles or km in today.
+```
 
-#### Internal Events
+In the context of reactive expressions, all code is run when you start a session and results are stored in the cache. This means that if you move a slider and a new value can be retrieved from that cache, your app will show the result. However, if you move a slider and a new calculated value needs to be shown, this value will not be in your cache. You need some part of the app to calculate and store a new value to be shown. This is where reactivity steps in. Only the part of the code that needs to run, is executed - not the entire app. These declarative bits of code are wrapped in reactive function.
 
-##### reactive()
+In the following section, let's look at two reactive functions commonly found. More information on reactive functions can be found [here](https://shiny.rstudio.com/reference/shiny/1.7.4/) in the Shiny documentation.
 
-##### eventReactive()
+#### eventReactive()
 
-On click events
+This is basic reactivity in that there is no display of information when the session is first run. When you select the `actionButton()`, the just the part of the code that needs to run updates what you see. This is great for click events like action buttons, radio buttons, or check boxes. Details of the options and examples of eventReactive() can be found [here in the documentation](https://shiny.rstudio.com/reference/shiny/1.7.4/observeevent).
 
-\[insert eventReactive() with an action button\]
+#### observeEvent()
 
-\[revisit download code\]
+`observeEvent()` has two arguments: `eventExpr` and `handlerExpr`. The first input is the input or expression to take a dependency upon, the second is the code that will be executed.
 
-#### External Events
+`observeEvent()` functions provide the set-up for the `eventReactive()` by observing the data to check for updates. When updates are noticed, the `eventReactive()` pulls the new updated data and the HTML updates. Note that the following code changes in the HTML to the webpage with the reactive and also prints something in the console.
 
-##### observerEvent()
+``` R
+#source: https://shiny.rstudio.com/reference/shiny/1.7.4/observeevent
+ui = fluidPage(
+    column(4,
+           numericInput("x", "# of rows of the mtcars dataset", 5),
+           br(),
+           actionButton("button", "Show the rows")
+    ),
+    column(8, tableOutput("table"))
+  )
+  
+server = function(input, output) {
 
-control events outside the app, such sending a request to an API, updating a database, or saving a file. These events are called observers and use the `observeEvent()` function.
+    observeEvent(input$button, {
+      cat("Showing", input$x, "rows\n")
+    })
 
-two arguments: `eventExpr` and `handlerExpr`
+    df <- eventReactive(input$button, {
+      head(mtcars, input$x)
+    })
+    output$table <- renderTable({
+      df()
+    })
+  }
+shinyApp(ui, server)
+```
 
-first input is the input or expression to take a dependency upon, the second is the code that willl be executed.
-
-observeEvent() functions do not update the HTML in the browser. Note that the following code changes in the HTML to the webpage with the reactive and also prints something in the console.
-
-\[insert code showing reactive and observeEvent...\]
-
-\[insert results of reactive\]
-
-\[insert results of observeEvent\] - maybe a popup?
+::: callout-important
+Reactivity in Shiny is regretably complex. However the two functions above cover the most common ones you'll see. The free, online book, [*Mastering Shiny*](https://mastering-shiny.org/reactivity-intro.html), has 4 chapters dedicated to reactivity in Shiny. For now, when you see `observeEvent()` and `eventReactive()` functions in code you are getting from other sources, you should recognize these as reactive parts of the app that will update when some input has been changed.
+:::
 
 #### What is session?
 
-Session is an optional argument passed to the server function that enables inputs or outputs related to the current instance of the app to be used. You may see some examples with this, such as with the downloadHandler() function.
+Session is an optional argument passed to the server function that enables inputs or outputs related to the current instance of the app to be used. You may see some examples with this.
 
-If you see it in a code example, its likely there to and input or output that is unique to this instance and do something with it. You can experiment with removing it or adding it back in with this code;
+If you see it in a code example, its likely there to pull an input or output that is unique to this instance and do something with it. You can experiment with removing it or adding it back in with this code;
 
-\[insert session code example\]
+``` R
+server <- function(input, output, session){
+    ## some operation here
+}#close server
+```
+
+The session state is used when we need to retrieve some data that has been stored as a result of calculations or inputs from a user's session. It could be user data, or it could be a file they uploaded that your Shiny app then performed an operation on.
 
 ### Summary
 
-Reactivity is different due to the nature of declarative programming. It makes code less complex and provdies conditions that could be met, rather than a linear progression of code to be executed. We use reactivity so that people can change inputs and receive different outputs or make external actions happen.
+Reactivity is different due to the nature of declarative programming. It makes code less complex and providies conditions that could be met, rather than a linear progression of code to be executed. We use reactivity so that people can change inputs and receive different outputs or make external actions happen.
 
-Recognizing reactive functions of eventReactive() and observeEvent() and why its used on the back-end of a Shiny app will help in diagnosing and designing your code. The file upload input and the download button output are two examples where reactivity can be seen.
+Recognizing reactive functions of `eventReactive()` and `observeEvent()` and why its used on the back-end of a Shiny app will help in diagnosing and designing your code.
 
 -   session is added as an optional argument to the server function call
 
 -   you can put code before the shiny code to reduce calculation time.
 
--   `eventReactive()` is used for internal events triggering a change.
+-   `observeEvent()` sets up the reactivity by signaling which inputs the app should look for change.
 
--   `observeEvent()` is used for triggering external events, such as downloading a file to the users downloads folder.
+-   `eventReactive()` is used to render or provide some action based on the updated input values.
 
 ## DataTables
 
@@ -115,7 +144,7 @@ server <- function(input, output) {
 shinyApp(ui, server)
 ```
 
-## Computation output
+### Computation output
 
 But what if we wanted to perform some operations on the data, such as to use the summarizing functions you did in earlier chapters on the mtcars dataset? In the code below, we first import some data from a remote location, then create a DataTable for exploration. Then we summarize the data.
 
@@ -220,32 +249,50 @@ server <- function(input, output) {
 shinyApp(ui, server)
 ```
 
-You can see from this example, there are new options added to the `renderDataTable()` function. We also modified our data *before* the `ui`. You can find an excellent explanation of options as well as integration with the formattable library from [this blog](https://clarewest.github.io/blog/post/making-tables-shiny/).
+You can see from this example, there are new options added to the `renderDataTable()` function. We also modified our data *before* the `ui`. You can find an excellent explanation of options as well as beautiful integration with the formattable library from [this blog](https://clarewest.github.io/blog/post/making-tables-shiny/).
 
-## Visualization
+[![](images/formattable.png){fig-align="left" width="100"}](https://github.com/renkun-ken/formattable)
 
-Ok, we have some table options with the data.table library and the more dynamic DT library. Let's seem what this data looks like. We're going to introduce the ggplot library, introduce the igraph llibrary for networks, and provide some resources for plotly and leaflet for further exploration in visualilzation.
+# Dashboards
 
-### Basic graphs
+Dashboards provide a quick overview of your dataset, and can be used for further exploration. We can use the shinydashboard library to create a dashboard with multiple graphs and tables. You can find the documentation for shinydashboard [here](https://rstudio.github.io/shinydashboard/get_started.html).
 
-### Network
+[![](images/shinydashboard.png){width="150" height="24"}](https://rstudio.github.io/shinydashboard/get_started.html)
 
-## Dashboards
+You will need to install the package.
 
-flexdashboard: [link](https://pkgs.rstudio.com/flexdashboard/articles/flexdashboard.html "dashboard basics")
+``` R
+install.packages("shinydashboard")
+```
 
-uses R Markdown, easy, support static or dynamic visualizations, and uses CSS flexbox layout. (what's that?)
+Basics
 
-shinydashboard: [link](https://rstudio.github.io/shinydashboard/get_started.html "shiny dashboard")
+``` R
+## app.R ##
+library(shiny)
+library(shinydashboard)
 
-shinuy UI code, not quite as easy, dynamic visualizations, and uses Bootstrap grid layout
+ui <- dashboardPage(
+
+  dashboardHeader(),
+  
+  dashboardSidebar(),
+  
+  dashboardBody()
+  
+) #close dashboardPage
+
+server <- function(input, output) { }
+
+shinyApp(ui, server)
+```
 
 ### multiple graphs, tables, networks
 
 ### styling dashboards
 
-#### The shinydashboard way
-
 #### using shiny.semantic
+
+This is an alternative that provides different styling options. You may find its use of HTML style syntax helpful and similar to Shiny.
 
 https://appsilon.github.io/shiny.semantic/
