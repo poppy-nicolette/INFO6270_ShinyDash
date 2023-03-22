@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.2.335">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -113,11 +113,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#text-input" id="toc-text-input" class="nav-link" data-scroll-target="#text-input">Text input</a></li>
   <li><a href="#number-inputs" id="toc-number-inputs" class="nav-link" data-scroll-target="#number-inputs">Number inputs</a></li>
   </ul></li>
-  <li><a href="#outputs" id="toc-outputs" class="nav-link" data-scroll-target="#outputs">Outputs</a>
-  <ul class="collapse">
+  <li><a href="#outputs" id="toc-outputs" class="nav-link" data-scroll-target="#outputs">Outputs</a></li>
   <li><a href="#themes" id="toc-themes" class="nav-link" data-scroll-target="#themes">Themes</a></li>
-  </ul></li>
   <li><a href="#formatting-text" id="toc-formatting-text" class="nav-link" data-scroll-target="#formatting-text">Formatting text</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
+  <li><a href="#reactive-pages" id="toc-reactive-pages" class="nav-link" data-scroll-target="#reactive-pages">Reactive pages</a>
+  <ul class="collapse">
+  <li><a href="#basics-of-reactivity" id="toc-basics-of-reactivity" class="nav-link" data-scroll-target="#basics-of-reactivity">Basics of reactivity</a>
+  <ul class="collapse">
+  <li><a href="#two-different-types-of-programming-imperative-and-declarative" id="toc-two-different-types-of-programming-imperative-and-declarative" class="nav-link" data-scroll-target="#two-different-types-of-programming-imperative-and-declarative">Two different types of programming: imperative and declarative</a></li>
+  <li><a href="#code-execution-order" id="toc-code-execution-order" class="nav-link" data-scroll-target="#code-execution-order">Code execution order</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  </ul></li>
+  <li><a href="#datatables" id="toc-datatables" class="nav-link" data-scroll-target="#datatables">DataTables</a>
+  <ul class="collapse">
+  <li><a href="#computation-output" id="toc-computation-output" class="nav-link" data-scroll-target="#computation-output">Computation output</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#putting-it-all-together" id="toc-putting-it-all-together" class="nav-link" data-scroll-target="#putting-it-all-together">Putting it all together</a></li>
   <li><a href="#wrap-up" id="toc-wrap-up" class="nav-link" data-scroll-target="#wrap-up">Wrap up</a></li>
   </ul>
 </nav>
@@ -145,18 +158,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>In this chapter, we’ll be looking in more detail at the input and output functions by example using a standard R dataset. This chapter introduces you to:</p>
 <ul>
 <li><p>input functions for text, numbers, dates, choices, file uploads and actions,</p></li>
-<li><p>output functions for text, tables, plots, images, and download formats, and</p></li>
-<li><p>an introduction to themes to change the appearance of your application.</p></li>
+<li><p>output functions for text, tables, plots, images, and download formats,</p></li>
+<li><p>an introduction to themes to change the appearance of your application,</p></li>
+<li><p>an explanation of reactivity and how its used, and</p></li>
+<li><p>the in-class exercise of putting all this knowledge together to explore a dataset</p></li>
 </ul>
-<p>You can see all the datasets included in R by typing <code>data()</code> in the console. You may also find the RStudio <a href="https://posit.co/resources/cheatsheets/">cheatsheet</a> helpful to learn some hotkeys to speed up your workflow.</p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You can see all the datasets included in R by typing <code>data()</code> in the console.</p>
+<p>You may also find the RStudio and Shiny <a href="https://posit.co/resources/cheatsheets/">cheatsheets</a> helpful.</p>
+</div>
+</div>
 <section id="inputs-widgets" class="level2">
 <h2 class="anchored" data-anchor-id="inputs-widgets">Inputs &amp; Widgets</h2>
 <p>Inputs are the ways users can enter, filter, or select information within your app. Widgets are a type of input that requires a different mode of input than text, such as a slider or button. There is a basic format to the inputs &amp; widgets. First there is the input type, in this case a <em><code>textAreaInput()</code></em>. In the first position inside is the <em>inputID</em> parameter, followed by the label parameter. These two will be consistent with all inputs. After the <em>inputID</em> and the label, arguments that may be unique to each follow. In this case, there is an argument for the number of <em>rows</em>. In general, all inputs, (including widgets) keep this order of <em>inputID, label, arguments</em>.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">textAreaInput</span>(<span class="st">"story"</span>, <span class="st">"Tell me about yourself"</span>, <span class="at">rows =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>While, we will address a few of these, you can find all of them and their code on the <a href="https://shiny.rstudio.com/gallery/widget-gallery.html">shiny gallery</a></p>
-<p>The syntax of the widget the same as other inputs. Let’s look at the code below:</p>
+<p>The syntax of the widget is the same as other inputs. Let’s look at the code below:</p>
 <p><img src="images/Screen%20Shot%202023-02-17%20at%201.27.30%20PM.png" class="img-fluid"></p>
-<p>The <em>inputID</em> has some rules, just like any variable in R. It must be a string consisting of letters, numbers, and/or underscores. Other characters like spaces, symbols, dashes, periods, etc., won’t work. Second, it must be unique as you will call this in output functions.</p>
+<p>The <em>inputID</em> has some rules, just like any variable in R. It must be:</p>
+<ul>
+<li><p>First, a string consisting of letters, numbers, and/or underscores. Other characters like spaces, symbols, dashes, periods, etc., won’t work.</p></li>
+<li><p>Second, it must be unique as you will call this in output functions.</p></li>
+</ul>
 <p>You can find all of these in the input section in the shiny references documentation <a href="https://shiny.rstudio.com/reference/shiny/1.7.4/">here.</a> The following selection are some of the more commonly used ones to get you started. Inputs and outputs will be shown in context of the ui or server component. You can build an app as you go along. You may want to start with the basic structure first and try different inputs as your read through the chapter.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -186,7 +218,7 @@ Tip
 <h3 class="anchored" data-anchor-id="text-input">Text input</h3>
 <section id="textinput" class="level5">
 <h5 class="anchored" data-anchor-id="textinput">textInput()</h5>
-<p>This is for small amounts of text, like asking for someone’s name, address, or country. More info <a href="https://shiny.rstudio.com/reference/shiny/0.14/textinput">here</a>. To format text, for size, emphasis, color, etc, please see the <em>Formatting text</em> section at the end of the chapter.</p>
+<p>This is for small amounts of text, like asking for someone’s name, address, or what type of cheese they like. More info <a href="https://shiny.rstudio.com/reference/shiny/0.14/textinput">here</a>. To format text, for size, emphasis, color, etc, please see the <em>Formatting text</em> section at the end of the chapter.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">textInput</span>(<span class="st">"input_1"</span>, <span class="st">"What's your favorite donut?"</span>),</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  )<span class="co">#close fluidPage</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -571,8 +603,9 @@ Important
 <span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Next, let’s play with themes.</p>
 </section>
-<section id="themes" class="level3">
-<h3 class="anchored" data-anchor-id="themes">Themes</h3>
+</section>
+<section id="themes" class="level2">
+<h2 class="anchored" data-anchor-id="themes">Themes</h2>
 <p>Themes control the styling of the application, unifying colors and fonts, for example. Themes are assigned in the <code>ui()</code>. You can find the shinythemes library <a href="https://rstudio.github.io/shinythemes/">here</a>.</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shinythemes)</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -600,17 +633,19 @@ Important
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">fg =</span> <span class="st">"white"</span>, </span>
 <span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">base_font =</span> <span class="st">"Times New Roman"</span></span>
 <span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
+<p>There is also the shiny.semantic library for a different look. You can find the link <a href="https://appsilon.github.io/shiny.semantic/">here.</a></p>
 </section>
 <section id="formatting-text" class="level2">
 <h2 class="anchored" data-anchor-id="formatting-text">Formatting text</h2>
 <section id="html-functions" class="level4">
 <h4 class="anchored" data-anchor-id="html-functions">HTML functions</h4>
+<p>You can apply HTML equivalent functions in shiny to format your text by creating distinct paragraphs, emphasize text, or change the font or color. The table below shows the shiny function, such as p(), and its HTML equivalent and what is modified.</p>
+<p>Table source: https://shiny.rstudio.com/tutorial/written-tutorial/lesson2/</p>
 <table class="table">
 <colgroup>
-<col style="width: 21%">
 <col style="width: 23%">
-<col style="width: 54%">
+<col style="width: 23%">
+<col style="width: 52%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -678,7 +713,7 @@ Important
 <tr class="even">
 <td style="text-align: left;"><code>pre</code></td>
 <td style="text-align: left;"><code>&lt;pre&gt;</code></td>
-<td style="text-align: left;">Text 'as is' in a fixed width font</td>
+<td style="text-align: left;">Text ‘as is’ in a fixed width font</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>code</code></td>
@@ -707,6 +742,7 @@ Important
 </tr>
 </tbody>
 </table>
+<p>Below is an example with many types of the HTML modifiers.</p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
@@ -742,10 +778,247 @@ Important
 <span id="cb29-33"><a href="#cb29-33" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
-<section id="wrap-up" class="level2">
-<h2 class="anchored" data-anchor-id="wrap-up">Wrap up</h2>
-<p>That’s chapter 11b! By the end of this you have learned more about the inputs and output functions, how they work together, an introduction to reactivity with file uploads and downloads, and a brief look at themes.</p>
-<p>In the next chapter, we’ll look more at reactivity and how to create dashboards!!</p>
+<section id="section" class="level2">
+<h2 class="anchored" data-anchor-id="section"></h2>
+<p>In this section, we will look at how to make your do stuff, respond, and calculate multiple tables and visualizations</p>
+</section>
+<section id="reactive-pages" class="level1">
+<h1>Reactive pages</h1>
+<section id="basics-of-reactivity" class="level2">
+<h2 class="anchored" data-anchor-id="basics-of-reactivity">Basics of reactivity</h2>
+<p>Reactivity refers to the ability of an app to recalculate or perform some action when an input is changed. In a non-reactive Shiny app, all calculations are run when the session begins. However, if you want a user to change an input and display a new <em>calculated</em> result, then reactivity in Shiny apps allow only that part of the app to be computed and re-displayed, not the entire app. This is important for making things fast and able to display immediate changes. So, in a sense, reactivity is something that happens in the background. But, knowing about it will help you use the following functions successfully.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#insert code that shows what happens with input a with and without a reactive function</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sliderInput</span>(<span class="st">"input_1"</span>, )</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>)<span class="co">#close fluidPage</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output){</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>  output</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="two-different-types-of-programming-imperative-and-declarative" class="level3">
+<h3 class="anchored" data-anchor-id="two-different-types-of-programming-imperative-and-declarative">Two different types of programming: imperative and declarative</h3>
+<p>imperative is like the analysis functions you’ve been running. you write a series of commands and R executes them. You see errors if something doesn’t match. The UI layout is imperative. you write code that says where something will be, like a radio button or sidebar text.</p>
+<p>declarative provides options for the program if conditions are right. So, it might execute the code if conditions are met. This is what we see on the server side function. Its a series of codes that will run if something happens in the UI.</p>
+<p>declarative is harder to identify errors, typos, etc. because it running depends on the conditions provided for it.</p>
+</section>
+<section id="code-execution-order" class="level3">
+<h3 class="anchored" data-anchor-id="code-execution-order">Code execution order</h3>
+<p>Unlike imperative, declarative coding such as in the <code>server</code>, run only when needed. so order is not as important in the <code>server</code> function. However, this can make code very difficult to read for humans as we tend to assume top to bottom.</p>
+<p>Data can be very large. To prevent this from slowing down the application, every time a new input is sent to the server function, do as much of your data cleaning and manipulation outside of the ShinyApp as possible. Of course, there are just some situations where this is not possible. But as a general rule, keep it minimal inside the ShinyApp. However, you can run code before the <code>ui</code> and <code>server</code> functions if data needs to be cleaned.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">#insert example code</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>take mtcars and apply some calculation based on existing data, maybe <span class="sc">$</span> to drive <span class="dv">100</span> miles or km <span class="cf">in</span> today.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In the context of reactive expressions, all code is run when you start a session and results are stored in the cache. This means that if you move a slider and a new value can be retrieved from that cache, your app will show the result. However, if you move a slider and a new calculated value needs to be shown, this value will not be in your cache. You need some part of the app to calculate and store a new value to be shown. This is where reactivity steps in. Only the part of the code that needs to run, is executed - not the entire app. These declarative bits of code are wrapped in reactive function.</p>
+<p>In the following section, let’s look at two reactive functions commonly found. More information on reactive functions can be found <a href="https://shiny.rstudio.com/reference/shiny/1.7.4/">here</a> in the Shiny documentation.</p>
+<section id="eventreactive" class="level4">
+<h4 class="anchored" data-anchor-id="eventreactive">eventReactive()</h4>
+<p>This is basic reactivity in that there is no display of information when the session is first run. When you select the <code>actionButton()</code>, the just the part of the code that needs to run updates what you see. This is great for click events like action buttons, radio buttons, or check boxes. Details of the options and examples of eventReactive() can be found <a href="https://shiny.rstudio.com/reference/shiny/1.7.4/observeevent">here in the documentation</a>.</p>
+</section>
+<section id="observeevent" class="level4">
+<h4 class="anchored" data-anchor-id="observeevent">observeEvent()</h4>
+<p><code>observeEvent()</code> has two arguments: <code>eventExpr</code> and <code>handlerExpr</code>. The first input is the input or expression to take a dependency upon, the second is the code that will be executed.</p>
+<p><code>observeEvent()</code> functions provide the set-up for the <code>eventReactive()</code> by observing the data to check for updates. When updates are noticed, the <code>eventReactive()</code> pulls the new updated data and the HTML updates. Note that the following code changes in the HTML to the webpage with the reactive and also prints something in the console.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">#source: https://shiny.rstudio.com/reference/shiny/1.7.4/observeevent</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">=</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">column</span>(<span class="dv">4</span>,</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>           <span class="fu">numericInput</span>(<span class="st">"x"</span>, <span class="st">"# of rows of the mtcars dataset"</span>, <span class="dv">5</span>),</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>           <span class="fu">br</span>(),</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>           <span class="fu">actionButton</span>(<span class="st">"button"</span>, <span class="st">"Show the rows"</span>)</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">column</span>(<span class="dv">8</span>, <span class="fu">tableOutput</span>(<span class="st">"table"</span>))</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>server <span class="ot">=</span> <span class="cf">function</span>(input, output) {</span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">observeEvent</span>(input<span class="sc">$</span>button, {</span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cat</span>(<span class="st">"Showing"</span>, input<span class="sc">$</span>x, <span class="st">"rows</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>    df <span class="ot">&lt;-</span> <span class="fu">eventReactive</span>(input<span class="sc">$</span>button, {</span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a>      <span class="fu">head</span>(mtcars, input<span class="sc">$</span>x)</span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a>    output<span class="sc">$</span>table <span class="ot">&lt;-</span> <span class="fu">renderTable</span>({</span>
+<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a>      <span class="fu">df</span>()</span>
+<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb32-24"><a href="#cb32-24" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Reactivity in Shiny is regretably complex. However the two functions above cover the most common ones you’ll see. The free, online book, <a href="https://mastering-shiny.org/reactivity-intro.html"><em>Mastering Shiny</em></a>, has 4 chapters dedicated to reactivity in Shiny. For now, when you see <code>observeEvent()</code> and <code>eventReactive()</code> functions in code you are getting from other sources, you should recognize these as reactive parts of the app that will update when some input has been changed.</p>
+</div>
+</div>
+</section>
+<section id="what-is-session" class="level4">
+<h4 class="anchored" data-anchor-id="what-is-session">What is session?</h4>
+<p>Session is an optional argument passed to the server function that enables inputs or outputs related to the current instance of the app to be used. You may see some examples with this.</p>
+<p>If you see it in a code example, its likely there to pull an input or output that is unique to this instance and do something with it. You can experiment with removing it or adding it back in with this code;</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output, session){</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    <span class="do">## some operation here</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>}<span class="co">#close server</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The session state is used when we need to retrieve some data that has been stored as a result of calculations or inputs from a user’s session. It could be user data, or it could be a file they uploaded that your Shiny app then performed an operation on.</p>
+</section>
+</section>
+<section id="summary" class="level3">
+<h3 class="anchored" data-anchor-id="summary">Summary</h3>
+<p>Reactivity is different due to the nature of declarative programming. It makes code less complex and providies conditions that could be met, rather than a linear progression of code to be executed. We use reactivity so that people can change inputs and receive different outputs or make external actions happen.</p>
+<p>Recognizing reactive functions of <code>eventReactive()</code> and <code>observeEvent()</code> and why its used on the back-end of a Shiny app will help in diagnosing and designing your code.</p>
+<ul>
+<li><p>session is added as an optional argument to the server function call</p></li>
+<li><p>you can put code before the shiny code to reduce calculation time.</p></li>
+<li><p><code>observeEvent()</code> sets up the reactivity by signaling which inputs the app should look for change.</p></li>
+<li><p><code>eventReactive()</code> is used to render or provide some action based on the updated input values.</p></li>
+</ul>
+</section>
+</section>
+<section id="datatables" class="level2">
+<h2 class="anchored" data-anchor-id="datatables">DataTables</h2>
+<p>In this section, we are going to explore importing data and displaying it in a DataTable using the DT library. This is different than the data.table library. The DT library makes a lovely table that can be searched, filtered, and sorted which is great for data exploration. You can find more info <a href="https://shiny.rstudio.com/articles/datatables.html">here</a> and <a href="https://rstudio.github.io/DT/shiny.html">here</a> for the DT documentation.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DT)</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">h2</span>(<span class="st">"Some data about flowers"</span>),</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  DT<span class="sc">::</span><span class="fu">dataTableOutput</span>(<span class="st">"table_1"</span>)</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>)<span class="co">#close fluidPage</span></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) {</span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>table_1 <span class="ot">=</span> DT<span class="sc">::</span><span class="fu">renderDataTable</span>({</span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>  iris</span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>  })<span class="co">#close output</span></span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>}<span class="co">#close server</span></span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="computation-output" class="level3">
+<h3 class="anchored" data-anchor-id="computation-output">Computation output</h3>
+<p>But what if we wanted to perform some operations on the data, such as to use the summarizing functions you did in earlier chapters on the mtcars dataset? In the code below, we first import some data from a remote location, then create a DataTable for exploration. Then we summarize the data.</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DT)</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>path <span class="ot">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/fivethirtyeight/data/master/comic-characters/marvel-wikia-data.csv"</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="co"># This will read the first sheet of the Excel file</span></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>comics_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(path)</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sidebarLayout</span>(</span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sidebarPanel</span>(</span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>      <span class="fu">h2</span>(<span class="st">"How to use DataTables from the DT library"</span>),</span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>      <span class="fu">br</span>(),</span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>      <span class="fu">p</span>(<span class="st">"To the right is a dataset displayed as a DataTable"</span>), </span>
+<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a>      <span class="fu">p</span>(<span class="st">"This dataset is from the fivethirtyeight GitHub repository."</span>)</span>
+<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a>    ),<span class="co">#close sidebarPanel</span></span>
+<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mainPanel</span>(</span>
+<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">h2</span>(<span class="st">"the dataset"</span>),</span>
+<span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">br</span>(),</span>
+<span id="cb35-22"><a href="#cb35-22" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb35-23"><a href="#cb35-23" aria-hidden="true" tabindex="-1"></a>  DT<span class="sc">::</span><span class="fu">dataTableOutput</span>(<span class="st">"table_1"</span>), </span>
+<span id="cb35-24"><a href="#cb35-24" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb35-25"><a href="#cb35-25" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb35-26"><a href="#cb35-26" aria-hidden="true" tabindex="-1"></a>    )<span class="co">#close mainPanel</span></span>
+<span id="cb35-27"><a href="#cb35-27" aria-hidden="true" tabindex="-1"></a>  )<span class="co">#close sidebarLayout</span></span>
+<span id="cb35-28"><a href="#cb35-28" aria-hidden="true" tabindex="-1"></a>)<span class="co">#close fluidPage</span></span>
+<span id="cb35-29"><a href="#cb35-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-30"><a href="#cb35-30" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) {</span>
+<span id="cb35-31"><a href="#cb35-31" aria-hidden="true" tabindex="-1"></a>  data_to_display <span class="ot">&lt;-</span> comics_data</span>
+<span id="cb35-32"><a href="#cb35-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-33"><a href="#cb35-33" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>table_1 <span class="ot">&lt;-</span> <span class="fu">renderDataTable</span>({</span>
+<span id="cb35-34"><a href="#cb35-34" aria-hidden="true" tabindex="-1"></a>   (data_to_display)</span>
+<span id="cb35-35"><a href="#cb35-35" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb35-36"><a href="#cb35-36" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb35-37"><a href="#cb35-37" aria-hidden="true" tabindex="-1"></a>}<span class="co">#close server</span></span>
+<span id="cb35-38"><a href="#cb35-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-39"><a href="#cb35-39" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>First, we can drop urlslug, and page_id. We also want to correct the column names.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DT)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>path <span class="ot">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/fivethirtyeight/data/master/comic-characters/marvel-wikia-data.csv"</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="co"># This will read the first sheet of the Excel file</span></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>comics_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(path)</span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>comics_data <span class="ot">&lt;-</span> <span class="fu">select</span>(comics_data, <span class="st">"name"</span>, <span class="st">"ID"</span>, <span class="st">"ALIGN"</span>, <span class="st">"EYE"</span>, </span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"HAIR"</span>, <span class="st">"SEX"</span>, <span class="st">"GSM"</span>, <span class="st">"ALIVE"</span>, <span class="st">"APPEARANCES"</span>,</span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"FIRST APPEARANCE"</span>, <span class="st">"Year"</span> ) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>                <span class="fu">rename</span>(<span class="at">Name =</span> name,</span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a>                       <span class="at">Alignment=</span>ALIGN,</span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a>                       <span class="at">Eye =</span> EYE, </span>
+<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a>                       <span class="at">Hair =</span> HAIR,</span>
+<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a>                       <span class="at">Gender =</span> SEX, </span>
+<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a>                       <span class="at">Gender_or_sexual_identity =</span> GSM,</span>
+<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a>                       <span class="at">Status =</span> ALIVE, </span>
+<span id="cb36-21"><a href="#cb36-21" aria-hidden="true" tabindex="-1"></a>                       <span class="at">Appearances =</span> APPEARANCES,</span>
+<span id="cb36-22"><a href="#cb36-22" aria-hidden="true" tabindex="-1"></a>                       <span class="at">First_appearance =</span> <span class="st">'FIRST APPEARANCE'</span>)</span>
+<span id="cb36-23"><a href="#cb36-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-24"><a href="#cb36-24" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb36-25"><a href="#cb36-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sidebarLayout</span>(</span>
+<span id="cb36-26"><a href="#cb36-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sidebarPanel</span>(</span>
+<span id="cb36-27"><a href="#cb36-27" aria-hidden="true" tabindex="-1"></a>      <span class="fu">h2</span>(<span class="st">"How to use DataTables from the DT library"</span>),</span>
+<span id="cb36-28"><a href="#cb36-28" aria-hidden="true" tabindex="-1"></a>      <span class="fu">br</span>(),</span>
+<span id="cb36-29"><a href="#cb36-29" aria-hidden="true" tabindex="-1"></a>      <span class="fu">p</span>(<span class="st">"To the right is a dataset displayed as a DataTable"</span>), </span>
+<span id="cb36-30"><a href="#cb36-30" aria-hidden="true" tabindex="-1"></a>      <span class="fu">p</span>(<span class="st">"This dataset is from the fivethirtyeight GitHub repository."</span>)</span>
+<span id="cb36-31"><a href="#cb36-31" aria-hidden="true" tabindex="-1"></a>    ),<span class="co">#close sidebarPanel</span></span>
+<span id="cb36-32"><a href="#cb36-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mainPanel</span>(</span>
+<span id="cb36-33"><a href="#cb36-33" aria-hidden="true" tabindex="-1"></a>      <span class="fu">h2</span>(<span class="st">"the dataset"</span>),</span>
+<span id="cb36-34"><a href="#cb36-34" aria-hidden="true" tabindex="-1"></a>      <span class="fu">br</span>(),</span>
+<span id="cb36-35"><a href="#cb36-35" aria-hidden="true" tabindex="-1"></a>      DT<span class="sc">::</span><span class="fu">dataTableOutput</span>(<span class="st">"table_1"</span>)<span class="co">#close dataTableOutput</span></span>
+<span id="cb36-36"><a href="#cb36-36" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb36-37"><a href="#cb36-37" aria-hidden="true" tabindex="-1"></a>    )<span class="co">#close mainPanel</span></span>
+<span id="cb36-38"><a href="#cb36-38" aria-hidden="true" tabindex="-1"></a>  )<span class="co">#close sidebarLayout</span></span>
+<span id="cb36-39"><a href="#cb36-39" aria-hidden="true" tabindex="-1"></a>)<span class="co">#close fluidPage</span></span>
+<span id="cb36-40"><a href="#cb36-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-41"><a href="#cb36-41" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) {</span>
+<span id="cb36-42"><a href="#cb36-42" aria-hidden="true" tabindex="-1"></a>  data_to_display <span class="ot">&lt;-</span> comics_data</span>
+<span id="cb36-43"><a href="#cb36-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-44"><a href="#cb36-44" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>table_1 <span class="ot">&lt;-</span> <span class="fu">renderDataTable</span>(</span>
+<span id="cb36-45"><a href="#cb36-45" aria-hidden="true" tabindex="-1"></a>   data_to_display,</span>
+<span id="cb36-46"><a href="#cb36-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">options =</span> <span class="fu">list</span>(</span>
+<span id="cb36-47"><a href="#cb36-47" aria-hidden="true" tabindex="-1"></a>      <span class="at">scrollX =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb36-48"><a href="#cb36-48" aria-hidden="true" tabindex="-1"></a>      <span class="at">scrollY =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb36-49"><a href="#cb36-49" aria-hidden="true" tabindex="-1"></a>      <span class="at">autoWidth =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb36-50"><a href="#cb36-50" aria-hidden="true" tabindex="-1"></a>      <span class="at">rownames =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb36-51"><a href="#cb36-51" aria-hidden="true" tabindex="-1"></a>    ) <span class="co">#close renderDataTable</span></span>
+<span id="cb36-52"><a href="#cb36-52" aria-hidden="true" tabindex="-1"></a>}<span class="co">#close server</span></span>
+<span id="cb36-53"><a href="#cb36-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-54"><a href="#cb36-54" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You can see from this example, there are new options added to the <code>renderDataTable()</code> function. We also modified our data <em>before</em> the <code>ui</code>. You can find an excellent explanation of options as well as beautiful integration with the formattable library from <a href="https://clarewest.github.io/blog/post/making-tables-shiny/">this blog</a>.</p>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="images/formattable.png" class="img-fluid figure-img" width="100"></p>
+</figure>
+</div>
+</section>
+</section>
+</section>
+<section id="putting-it-all-together" class="level1">
+<h1>Putting it all together</h1>
+<p>comics dataset from above</p>
+<p>layout in shiny</p>
+<p>decide on features we want to explore and what data we need to show and calculate</p>
+<p>data to clean (First appearance), correct (gender)</p>
+<p>data to show: summary, sort by, mean, distribution</p>
+<p>data to calculate based on new input:</p>
+</section>
+<section id="wrap-up" class="level1">
+<h1>Wrap up</h1>
+<p>That’s chapter 11b! By the end of this you have learned more about many of the Shiny inputs and output functions, how they work together, an introduction to themes, and formatting text.</p>
 </section>
 
 </main>
