@@ -253,46 +253,16 @@ You can see from this example, there are new options added to the `renderDataTab
 
 [![](images/formattable.png){fig-align="left" width="100"}](https://github.com/renkun-ken/formattable)
 
-# Dashboards
+# Putting it all together
 
-Dashboards provide a quick overview of your dataset, and can be used for further exploration. We can use the shinydashboard library to create a dashboard with multiple graphs and tables. You can find the documentation for shinydashboard [here](https://rstudio.github.io/shinydashboard/get_started.html).
+comics dataset from above
 
-[![](images/shinydashboard.png){width="150" height="24"}](https://rstudio.github.io/shinydashboard/get_started.html)
+layout in shiny
 
-You will need to install the package.
+decide on features we want to explore and what data we need to show and calculate
 
-``` R
-install.packages("shinydashboard")
-```
+data to clean (First appearance), correct (gender)
 
-Basics
+data to show: summary, sort by, mean, distribution
 
-``` R
-## app.R ##
-library(shiny)
-library(shinydashboard)
-
-ui <- dashboardPage(
-
-  dashboardHeader(),
-  
-  dashboardSidebar(),
-  
-  dashboardBody()
-  
-) #close dashboardPage
-
-server <- function(input, output) { }
-
-shinyApp(ui, server)
-```
-
-### multiple graphs, tables, networks
-
-### styling dashboards
-
-#### using shiny.semantic
-
-This is an alternative that provides different styling options. You may find its use of HTML style syntax helpful and similar to Shiny.
-
-https://appsilon.github.io/shiny.semantic/
+data to calculate based on new input:

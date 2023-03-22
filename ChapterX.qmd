@@ -1,0 +1,137 @@
+---
+title: "Chapter_X_shinydashboard"
+subtitle: "Using the shinydashboard library"
+format: html
+editor: visual
+---
+
+# Dashboards
+
+Dashboards provide a quick overview of your dataset, and can be used for monitoring or supporting further exploration. Of course, you can use what you've just learned about Shiny apps to create a dashboard.
+
+``` R
+#example of shinyapp with fluidrows and columns for a dashboard
+```
+
+We can also use the shinydashboard library to create a dashboard with multiple graphs and tables. You can find the documentation for shinydashboard [here](https://rstudio.github.io/shinydashboard/get_started.html). In the rest of this chapter, we'll be going through shinydashboard. shinydashboard uses an HTML template which makes layout of a dashboard a little easier to manage.
+
+![](images/shinydashboard.png){width="150" height="24"}
+
+You will need to install the package in the command line of your console.
+
+``` R
+install.packages("shinydashboard")
+```
+
+### Basic structure
+
+Below is a basic shinydashboard. Within the ui, everything is wrapped in a `dashboardPage()` function and includes the header, sidebar, and body. Elements that are to be in the header are placed within the `dashboardHeader()` function, and sidebar elements are placed within the `dashboardSidebar()` function, and so on. You can find examples of shinydashboard apps [here in the GitHub repository.](https://github.com/rstudio/shinydashboard/tree/gh-pages/_apps)
+
+``` R
+library(shiny)
+library(shinydashboard)
+
+ui <- dashboardPage(
+
+  dashboardHeader(),
+  
+  dashboardSidebar(),
+  
+  dashboardBody()
+  
+) #close dashboardPage
+
+server <- function(input, output) { }
+
+shinyApp(ui, server)
+```
+
+However, for more complicated dashboards, you can also split the app into peices, assigning header, sidebar, and body as variables that you call later within the Shiny app. You will see examples of both these structures in the documentation.
+
+``` R
+library (shinydashboard)
+
+header <- dashboardHeader()
+
+sidebar <- dashboardSidebar()
+
+body <- dashboardBody()
+
+ui<- dashboardPage(header, sidebar, body)
+
+server <- function(input, output) {}
+
+shinyApp(ui, server)
+```
+
+### File Management
+
+As shinydashboard creates HTML for displaying a webpage, we need to follow some protocols. The convention is to have a working directory that you are creating the app.R file in. Included in the working directory is a folder called 'www'. Anything related to the shinydashboard goes in here, whether you are linking to an image or a CSS style sheet.
+
+![](images/www_folder.png){width="450"}
+
+![](images/shinydashboard_css.png){width="600"}
+
+#### Header options
+
+The header can not only contain the title, but it can also be a useful space to include a logo.
+
+``` R
+library (shinydashboard)
+
+logo = tags$a(href="https://thenounproject.com/icon/pony-29745/",
+              tags$img(src='pony_tiny.png'),
+              "Pony")
+
+header <- dashboardHeader(title = logo, 
+                          titleWidth = 100)
+                          
+sidebar <- dashboardSidebar()
+
+body <- dashboardBody()
+
+ui<- dashboardPage(header, sidebar, body)
+
+server <- function(input, output) {}
+
+shinyApp(ui, server)
+```
+
+There are other options for headers such as messages and tasks that can be found in the [documentation here.](https://rstudio.github.io/shinydashboard/structure.html#message-menus)
+
+#### Sidebar options
+
+The sidebar offers a place to select different body content, (similar to tabs in Shiny) and inputs. There are menus, search bars, as well as Shiny inputs.
+
+#### Body options
+
+### Multiple graphs & tables 
+
+Of course, a dashboards are meant to convey a lot of information in a concise way, so having multiple graphs and supporting tables is important. The code below shows how mulltiple graphics along with a table are created in the `ui` and called in the `server` function.
+
+``` R
+# lots of graphs and a table for the mtcars dataset
+# or comics dataset from fivethirtyeight?
+```
+
+Icons
+
+Using icons is a great way to reduce visual clutter on your dashboard. Shinydashboard pulls icons from FontAwesome. Below is an example of using icons in a sidebar menu.
+
+``` R
+#icons in use in the sidebar
+```
+
+### Styling dashboards
+
+Shinydashboards can be styled beyond the basics, however, this requires some rather indepth knowledge of Javascript. Basic styling can be achieved by....
+
+There are also two other libraries that may be of interest if styling is required for your project. One is shiny.semantic and the other is shinydashboardplus.
+
+#### Using shiny.semantic
+
+This is an alternative that provides different styling options. You may find its use of HTML style syntax helpful and similar to Shiny.
+
+https://appsilon.github.io/shiny.semantic/
+
+#### shinydashboardplus

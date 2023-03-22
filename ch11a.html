@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.2.335">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -111,7 +111,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#what-is-shiny" id="toc-what-is-shiny" class="nav-link active" data-scroll-target="#what-is-shiny"><strong>What is Shiny?</strong></a></li>
   <li><a href="#what-can-it-do" id="toc-what-can-it-do" class="nav-link" data-scroll-target="#what-can-it-do"><strong>What can it do?</strong></a>
   <ul class="collapse">
-  <li><a href="#examples-of-dashboards" id="toc-examples-of-dashboards" class="nav-link" data-scroll-target="#examples-of-dashboards">Examples of dashboards</a></li>
+  <li><a href="#examples-of-dashboards-and-data-visualization-websites" id="toc-examples-of-dashboards-and-data-visualization-websites" class="nav-link" data-scroll-target="#examples-of-dashboards-and-data-visualization-websites">Examples of dashboards and data visualization websites</a></li>
   </ul></li>
   <li><a href="#how-does-it-integrate-with-other-things" id="toc-how-does-it-integrate-with-other-things" class="nav-link" data-scroll-target="#how-does-it-integrate-with-other-things"><strong>How does it integrate with other things?</strong></a>
   <ul class="collapse">
@@ -160,11 +160,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Chapter 11b will take a deeper look at many of the commonly used functions for input and output so that you can begin to customize and build your own applications.</p>
 <section id="what-is-shiny" class="level2">
 <h2 class="anchored" data-anchor-id="what-is-shiny"><strong>What is Shiny?</strong></h2>
-<p>Shiny is an R package that builds interactive web applications using R and RStudio to compile HTML files. The HTML files can be used locally, (just opened up using your browser from a local directory), or placed on a server to make public to anyone to use. Its not just for data, either! There are used as an education tool, a map for finding resources, business intelligence (BI) dashboards, tracking activities, calculators, file type conversion, and of course, for displaying the results of data analysis through interactive visualizations.</p>
-<p>You are not restricted to just the web browser. You can configure your shiny app to include export to other document types, like PDFs, Word, or Excel.</p>
-<p>The most important aspects of shiny are that its interactive and it is <em>responsive</em>, which means that it resizes automatically to adjust to the device being used. This means you design once, and it can be viewed on a laptop, desktop, tablet, or phone.</p>
-<p>[image of other document types]</p>
-<p>In Shiny, we code in R. In the following sections code will be shown in cells:</p>
+<p>Shiny is an R package that builds interactive web applications using R and RStudio to compile HTML files. The HTML files can be used locally, (just opened up using your browser from a local directory), or placed on a server to make public for anyone to use. Its not just for data, either! They are used as an education tool, a map for finding resources, business intelligence (BI) dashboards, tracking activities, calculators, file type conversion, and of course, for displaying the results of data analysis through interactive visualizations.</p>
+<p>You are not restricted to just the web browser. You can configure your shiny app to export other document types, like PDFs, Word, or Excel.</p>
+<p>The most important aspects of Shiny are that it is interactive and it is <em>responsive</em>. Interactivity provides an opportunity for your viewers to engage with your materials, rather than just read it. Responsive applications resize automatically to adjust to the device being used. This means you design once, and it can be viewed on a laptop, desktop, tablet, or phone.</p>
+<p>In Shiny, we code in R. In the following sections, code will be shown in cells:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># this is written in R</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Hello lovely people!"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -172,7 +171,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>[1] "Hello lovely people!"</code></pre>
 </div>
 </div>
-<p>In the second chapter we’ll explore R Markdown, which is a markdown language similiar to HTML but easier! We’ll explore this as another method of creating a dashboard. We won’t be spending much time on R Markdown, but as you have begun your journey in R and RStudio, you may want to consider it as it can make publishing much easier. You can learn more about R Markdown <a href="https://shiny.rstudio.com/articles/rmarkdown.html" title="link to R Markdown page">here</a>. This document was created using Quarto in RStudio using RMarkdown.</p>
 </section>
 <section id="what-can-it-do" class="level2">
 <h2 class="anchored" data-anchor-id="what-can-it-do"><strong>What can it do?</strong></h2>
@@ -183,50 +181,38 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p></p><figcaption class="figure-caption">An example of a simple application from this chapter.</figcaption><p></p>
 </figure>
 </div>
-<section id="examples-of-dashboards" class="level3">
-<h3 class="anchored" data-anchor-id="examples-of-dashboards">Examples of dashboards</h3>
-<p>A dashboard is one that uses data that has been placed on the server, (or you have uploaded) or streams real-time and shows a variety of graphs, charts, and tables. In this case, we use data from OpenAlex and we perform simple calculations on the results.</p>
-<p>Here is a link to one from the shinydashboard gallery.</p>
-<p>source: https://www.delreyanalytics.com/post/an-simple-r-shiny-dashboard-for-real-time-streaming-data</p>
-<p>Here is a link to one from the shinydashboard gallery.</p>
-<div class="callout-important callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Important
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<div>
-<p>Ok, those are impressive. But you will get there and we’re going to walk through each of the elements step by step.</p>
-</div>
-</div>
-</div>
+<section id="examples-of-dashboards-and-data-visualization-websites" class="level3">
+<h3 class="anchored" data-anchor-id="examples-of-dashboards-and-data-visualization-websites">Examples of dashboards and data visualization websites</h3>
+<p>A dashboard is one that uses data that has been placed on the server, (or you have uploaded) or streams real-time and shows a variety of graphs, charts, and tables. In our examples case, we’ll use standard datasets from R as well as some from the <a href="https://github.com/fivethirtyeight/data">fivethirtyeight GitHub repository</a>. You can see the all the R data sets by typing the following in the console:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The term ‘dashboard’ does apply to specific libraries made for Shiny that use a template HTML file. We are calling any website for the purpose of showing, exploring, or manipulating data with multiple visualization methods - a dashboard. So, we use it rather casually, rather than specifying specific libraries.</p>
 </section>
 </section>
 <section id="how-does-it-integrate-with-other-things" class="level2">
 <h2 class="anchored" data-anchor-id="how-does-it-integrate-with-other-things"><strong>How does it integrate with other things?</strong></h2>
-<p>[insert diagram]</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/3partDiagram.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
 <section id="rstudio" class="level3">
 <h3 class="anchored" data-anchor-id="rstudio">RStudio</h3>
-<p>This is the IDE, the integrated development environment, for R, (among many other prgramming languages). We’ll be using RStudio to create our shiny apps, test the code, preview results, and manage files.</p>
+<p>This is the IDE, the integrated development environment, for R, (among many other programming languages). We’ll be using RStudio to create our shiny apps, test the code, preview results, and manage files.</p>
 </section>
 <section id="shiny" class="level3">
 <h3 class="anchored" data-anchor-id="shiny">Shiny</h3>
-<p>Shiny apps are built on Bootstrap. But you don’t need to worry about that. The Shiny app code does all the work to place the elements you design into an html files and automatically manages all file dependencies. We’ll briefly discuss files when getting started with your first app.</p>
+<p>Shiny apps are built on Bootstrap which is an open-source, template HTML file with CSS and Javascript that makes it adapt to different browsers and devices. The Shiny app code does all the work to place the elements you design into an HTMLL files and automatically manages all file dependencies. We’ll briefly discuss files when getting started with your first app.</p>
 </section>
 <section id="shinyapps.io" class="level3">
 <h3 class="anchored" data-anchor-id="shinyapps.io">shinyapps.io</h3>
-<p>When running a shiny application from RStudio, you can publish directly to a server. Thankfully, the R community has a server location where you can host up to 5 apps for free at shinyapps.io. Of course, you can pay for more space, but for now, this works for us!. Later on, we’ll walk you through publishing to the server directly from RStudio. Its surprisingly easy!</p>
+<p>When running a shiny application from RStudio, you can publish directly to a server. Thankfully, the R community has a server location where you can host up to 5 apps for free at shinyapps.io. Of course, you can pay for more space, but for now, this works for us! Later on, we’ll walk you through publishing to the server directly from RStudio. Its surprisingly easy!</p>
 </section>
 </section>
 <section id="how-do-i-get-started" class="level2">
 <h2 class="anchored" data-anchor-id="how-do-i-get-started"><strong>How do I get started?</strong></h2>
 <p>This link to the tutorials at <a href="https://shiny.rstudio.com/tutorial/">shiny.rstudio.com</a> can also guide you through steps to creating your own apps, including more detailed information on how to change elements to meet your needs.</p>
 <p>Install the package down below in the console. You only need to do this once. If you uninstall and re-install your RStudio, you may need to reinstall packages.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"shiny"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"shiny"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <section id="starting-a-new-app" class="level3">
 <h3 class="anchored" data-anchor-id="starting-a-new-app">Starting a new app</h3>
 <p>from Files&gt;New File &gt; Shiny Web app OR select new file from the pull down menu in the top toolbar.</p>
@@ -280,9 +266,9 @@ Warning
 <li>First set up a new working directory. In RStudio you can do this in the Files tab (usually on right lower panel). You can navigate where you want a directory, create, or modify existing directories.</li>
 </ol>
 <p>Under <em>More</em>, select <em>Set as working directory</em>. You can also do this in the console with:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"~/your_folder_name"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"~/your_folder_name"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ol start="2" type="1">
-<li>Download the following file from <a href="https://raw.githubusercontent.com/poppy-nicolette/INFO6270_ShinyDash/main/FirstAppDemo/FirstAppDemo.R?token=GHSAT0AAAAAABUWXK4ASXIXEO55MQKBPVKOY7XTYUQ">github</a> and <code>Save Page As...</code> from your browser to this directory. Then rename the file from <em>FirstAppDemo.txt</em> to <em>FirstAppDemo.R</em></li>
+<li>Download the following file from <a href="https://raw.githubusercontent.com/poppy-nicolette/INFO6270_ShinyDash/main/FirstAppDemo/FirstAppDemo.R?token=GHSAT0AAAAAAB7NARJ5VTIOASUAXZOHJ24MZA3BFIQ">github</a> and <code>Save Page As...</code> from your browser to this directory. Then rename the file from <em>FirstAppDemo.txt</em> to <em>FirstAppDemo.R</em></li>
 <li>Let’s open up a shiny app file, called FirstAppDemo.R. You can see there is the <code>ui</code>, the <code>server</code>, and the <code>shinyApp()</code> function.</li>
 </ol>
 <div class="quarto-figure quarto-figure-center">
@@ -312,7 +298,7 @@ Warning
 <h3 class="anchored" data-anchor-id="publishing-on-shinyapps.io">Publishing on shinyapps.io</h3>
 <p>Now we can start publishing online for the world to experience your brilliant research! A free account at shinyapps.io provides space for 5 applications and 25 active hours of server time. (<a href="https://support.posit.co/hc/en-us/articles/217717407-What-is-an-Active-Hour-for-shinyapps-io-">what are active hours?</a>)</p>
 <ol type="1">
-<li><p>Create a shinyapps.io account. You will need this <a href="https://www.shinyapps.io/admin/#/signup">login</a> info to set up your RStudio to publish directly to shinyapps.io. I recommend connecting via your GitHub account, if you have one. Otherwise, just start a new account.</p></li>
+<li><p>Create a shinyapps.io account. You will need your login info to set up your RStudio to publish directly to shinyapps.io. <a href="https://www.shinyapps.io/admin/#/signup">Click here</a> to set up a shinyapps.io account. I recommend connecting via your GitHub account, if you have one. Otherwise, just start a new account.</p></li>
 <li><p>Back in RStudio, we need to connect to your shinyapp.io account. To the right of the <em>Run</em> icon, select the pull down menu.</p>
 <p><img src="images/pull_down_menu.png" class="img-fluid" width="450"></p></li>
 <li><p>Select <em>Connect…</em> and then choose <em>shinyapps.io</em></p>
@@ -330,21 +316,21 @@ Warning
 <p><a href="https://www.shinyapps.io/admin/#/login"><img src="images/shinyapps.png" class="img-fluid figure-img" width="150"></a></p>
 </figure>
 </div>
-<p>At this point, you know enough to open existing apps on Shiny Gallery, modify their open code, and publish them on shinyapps.io. In chapter 11b, we’ll be going over many of the inputs and outputs with an exercise that will help you design apps based on your needs.</p>
+<p>At this point, you know enough to open existing apps on Shiny Gallery, copy and modify their code, and publish them on shinyapps.io. In chapter 11b, we’ll be going over many of the inputs and outputs with an exercise that will help you design apps based on your needs.</p>
 </section>
 </section>
 <section id="conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
 <p>In this chapter, we’ve covered what shiny is and how to get started. You can open existing Shiny apps, and start exploring their code, or adapting them to your own needs.</p>
 <p>There is an extensive amount of tutorials and documentation on making apps with Shiny and you can find some of those in the References section below. Chapters in this course are a living document, so if you have suggestions for materials you found helpful, please send them along to us.</p>
-<p>The next section of chapter 11 moves into a more detailed view of the inputs and outputs. Chapter 12 will show you how to make shiny apps shine with layouts and interactivity.</p>
+<p>The next section of chapter 11 moves into a more detailed view of the inputs and outputs, layout options, and discusses <em>reactivity</em> in more depth.</p>
 </section>
 <section id="references" class="level2">
 <h2 class="anchored" data-anchor-id="references">References:</h2>
 <p>I took inspiration and guidance from many sources which I’ve tried to include here:</p>
-<p>The Bookdown library for R, at bookdown.org, provides a <a href="https://bookdown.org/hadrien/how_to_build_a_shiny_app_from_scratch/user-interface.html" title="Link to tutorial at bookdown.org">tutorial</a> on how to build Shiny apps.</p>
-<p>Mastering Shiny https://mastering-shiny.org/index.html</p>
-<p>W3 color resources: https://www.w3schools.com/colors/default.asp</p>
+<p>The Bookdown library for R, at bookdown.org, provides a <a href="https://bookdown.org/hadrien/how_to_build_a_shiny_app_from_scratch/" title="Link to tutorial at bookdown.org">tutorial</a> on how to build Shiny apps.</p>
+<p><em>Mastering Shiny</em> by Hadley Wickham <a href="https://mastering-shiny.org/index.html" class="uri">https://mastering-shiny.org/index.html</a></p>
+<p>W3 color resources: <a href="https://www.w3schools.com/colors/default.asp" class="uri">https://www.w3schools.com/colors/default.asp</a></p>
 </section>
 
 </main>

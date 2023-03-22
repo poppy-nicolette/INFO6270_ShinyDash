@@ -352,25 +352,106 @@ Important
 </section>
 <section id="dashboards" class="level1">
 <h1>Dashboards</h1>
-<p>There are two ways to create dashboards: flexdashboards and shinydashboard. flexdashboards use R markdown language with a Shiny runtime to create a</p>
-<section id="flexdashboard-link" class="level3">
-<h3 class="anchored" data-anchor-id="flexdashboard-link">flexdashboard: <a href="https://pkgs.rstudio.com/flexdashboard/articles/flexdashboard.html" title="dashboard basics">link</a></h3>
-<p>uses R Markdown, easy, support static or dynamic visualizations, and uses CSS flexbox layout. (what’s that?)</p>
-<p>shinydashboard: <a href="https://rstudio.github.io/shinydashboard/get_started.html" title="shiny dashboard">link</a></p>
-<p>shinuy UI code, not quite as easy, dynamic visualizations, and uses Bootstrap grid layout</p>
+<p>Dashboards provide a quick overview of your dataset, and can be used for monitoring or supporting further exploration. Of course, you can use what you’ve just learned about Shiny apps to create a dashboard.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#example of shinyapp with fluidrows and columns for a dashboard</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>We can also use the shinydashboard library to create a dashboard with multiple graphs and tables. You can find the documentation for shinydashboard <a href="https://rstudio.github.io/shinydashboard/get_started.html">here</a>. In the rest of this chapter, we’ll be going through shinydashboard. shinydashboard uses an HTML template which makes layout of a dashboard a little easier to manage.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://rstudio.github.io/shinydashboard/get_started.html"><img src="images/shinydashboard.png" width="150" height="24" class="figure-img"></a></p>
+</figure>
+</div>
+<p>You will need to install the package in the command line of your console.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"shinydashboard"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="basic-structure" class="level3">
+<h3 class="anchored" data-anchor-id="basic-structure">Basic structure</h3>
+<p>Below is a basic shinydashboard. Within the ui, everything is wrapped in a <code>dashboardPage()</code> function and includes the header, sidebar, and body. Elements that are to be in the header are placed within the <code>dashboardHeader()</code> function, and sidebar elements are placed within the <code>dashboardSidebar()</code> function, and so on. You can find examples of shinydashboard apps <a href="https://github.com/rstudio/shinydashboard/tree/gh-pages/_apps">here in the GitHub repository.</a></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shinydashboard)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">dashboardPage</span>(</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dashboardHeader</span>(),</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dashboardSidebar</span>(),</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dashboardBody</span>()</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>) <span class="co">#close dashboardPage</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) { }</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>However, for more complicated dashboards, you can also split the app into peices, assigning header, sidebar, and body as variables that you call later within the Shiny app. You will see examples of both these structures in the documentation.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span> (shinydashboard)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>header <span class="ot">&lt;-</span> <span class="fu">dashboardHeader</span>()</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>sidebar <span class="ot">&lt;-</span> <span class="fu">dashboardSidebar</span>()</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>body <span class="ot">&lt;-</span> <span class="fu">dashboardBody</span>()</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>ui<span class="ot">&lt;-</span> <span class="fu">dashboardPage</span>(header, sidebar, body)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) {}</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="multiple-graphs-tables-networks" class="level3">
-<h3 class="anchored" data-anchor-id="multiple-graphs-tables-networks">multiple graphs, tables, networks</h3>
+<section id="file-management" class="level3">
+<h3 class="anchored" data-anchor-id="file-management">File Management</h3>
+<p>As shinydashboard creates HTML for displaying a webpage, we need to follow some protocols. The convention is to have a working directory that you are creating the app.R file in. Included in the working directory is a folder called ‘www’. Anything related to the shinydashboard goes in here, whether you are linking to an image or a CSS style sheet.</p>
+<p><img src="images/www_folder.png" class="img-fluid" width="450"></p>
+<p><img src="images/shinydashboard_css.png" class="img-fluid" width="600"></p>
+<section id="header-options" class="level4">
+<h4 class="anchored" data-anchor-id="header-options">Header options</h4>
+<p>The header can not only contain the title, but it can also be a useful space to include a logo.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span> (shinydashboard)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>logo <span class="ot">=</span> tags<span class="sc">$</span><span class="fu">a</span>(<span class="at">href=</span><span class="st">"https://thenounproject.com/icon/pony-29745/"</span>,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>              tags<span class="sc">$</span><span class="fu">img</span>(<span class="at">src=</span><span class="st">'pony_tiny.png'</span>),</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>              <span class="st">"Pony"</span>)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>header <span class="ot">&lt;-</span> <span class="fu">dashboardHeader</span>(<span class="at">title =</span> logo, </span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>                          <span class="at">titleWidth =</span> <span class="dv">100</span>)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>                          </span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>sidebar <span class="ot">&lt;-</span> <span class="fu">dashboardSidebar</span>()</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>body <span class="ot">&lt;-</span> <span class="fu">dashboardBody</span>()</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>ui<span class="ot">&lt;-</span> <span class="fu">dashboardPage</span>(header, sidebar, body)</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) {}</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>There are other options for headers such as messages and tasks that can be found in the <a href="https://rstudio.github.io/shinydashboard/structure.html#message-menus">documentation here.</a></p>
+</section>
+<section id="sidebar-options" class="level4">
+<h4 class="anchored" data-anchor-id="sidebar-options">Sidebar options</h4>
+<p>The sidebar offers a place to select different body content, (similar to tabs in Shiny) and inputs.</p>
+</section>
+<section id="body-options" class="level4">
+<h4 class="anchored" data-anchor-id="body-options">Body options</h4>
+</section>
+</section>
+<section id="multiple-graphs-tables" class="level3">
+<h3 class="anchored" data-anchor-id="multiple-graphs-tables">Multiple graphs &amp; tables</h3>
+<p>Of course, a dashboards are meant to convey a lot of information in a concise way, so having multiple graphs and supporting tables is important. The code below shows how mulltiple graphics along with a table are created in the <code>ui</code> and called in the <code>server</code> function.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># lots of graphs and a table for the mtcars dataset</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># or comics dataset from fivethirtyeight?</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Icons</p>
+<p>Using icons is a great way to reduce visual clutter on your dashboard. Shinydashboard pulls icons from FontAwesome. Below is an example of using icons in a sidebar menu.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#icons in use in the sidebar</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="styling-dashboards" class="level3">
-<h3 class="anchored" data-anchor-id="styling-dashboards">styling dashboards</h3>
-<section id="the-shinydashboard-way" class="level4">
-<h4 class="anchored" data-anchor-id="the-shinydashboard-way">The shinydashboard way</h4>
-</section>
+<h3 class="anchored" data-anchor-id="styling-dashboards">Styling dashboards</h3>
+<p>Shinydashboards can be styled beyond the basics, however, this requires some rather indepth knowledge of Javascript. Basic styling can be achieved by….</p>
+<p>There are also two other libraries that may be of interest if styling is required for your project. One is shiny.semantic and the other is shinydashboardplus.</p>
 <section id="using-shiny.semantic" class="level4">
-<h4 class="anchored" data-anchor-id="using-shiny.semantic">using shiny.semantic</h4>
-<p>This is an alternative that provides more advanced styling. You may find its inclusion of HTML style</p>
+<h4 class="anchored" data-anchor-id="using-shiny.semantic">Using shiny.semantic</h4>
+<p>This is an alternative that provides different styling options. You may find its use of HTML style syntax helpful and similar to Shiny.</p>
 <p>https://appsilon.github.io/shiny.semantic/</p>
+</section>
+<section id="shinydashboardplus" class="level4">
+<h4 class="anchored" data-anchor-id="shinydashboardplus">shinydashboardplus</h4>
 </section>
 </section>
 </section>
