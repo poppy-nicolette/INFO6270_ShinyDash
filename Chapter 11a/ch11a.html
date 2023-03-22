@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Chapter 11a:</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="ch11a_files/libs/clipboard/clipboard.min.js"></script>
+<script src="ch11a_files/libs/quarto-html/quarto.js"></script>
+<script src="ch11a_files/libs/quarto-html/popper.min.js"></script>
+<script src="ch11a_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="ch11a_files/libs/quarto-html/anchor.min.js"></script>
+<link href="ch11a_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="ch11a_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="ch11a_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="ch11a_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="ch11a_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#what-is-shiny" id="toc-what-is-shiny" class="nav-link active" data-scroll-target="#what-is-shiny"><strong>What is Shiny?</strong></a></li>
+  <li><a href="#what-can-it-do" id="toc-what-can-it-do" class="nav-link" data-scroll-target="#what-can-it-do"><strong>What can it do?</strong></a>
+  <ul class="collapse">
+  <li><a href="#examples-of-dashboards-and-data-visualization-websites" id="toc-examples-of-dashboards-and-data-visualization-websites" class="nav-link" data-scroll-target="#examples-of-dashboards-and-data-visualization-websites">Examples of dashboards and data visualization websites</a></li>
+  </ul></li>
+  <li><a href="#how-does-it-integrate-with-other-things" id="toc-how-does-it-integrate-with-other-things" class="nav-link" data-scroll-target="#how-does-it-integrate-with-other-things"><strong>How does it integrate with other things?</strong></a>
+  <ul class="collapse">
+  <li><a href="#rstudio" id="toc-rstudio" class="nav-link" data-scroll-target="#rstudio">RStudio</a></li>
+  <li><a href="#shiny" id="toc-shiny" class="nav-link" data-scroll-target="#shiny">Shiny</a></li>
+  <li><a href="#shinyapps.io" id="toc-shinyapps.io" class="nav-link" data-scroll-target="#shinyapps.io">shinyapps.io</a></li>
+  </ul></li>
+  <li><a href="#how-do-i-get-started" id="toc-how-do-i-get-started" class="nav-link" data-scroll-target="#how-do-i-get-started"><strong>How do I get started?</strong></a>
+  <ul class="collapse">
+  <li><a href="#starting-a-new-app" id="toc-starting-a-new-app" class="nav-link" data-scroll-target="#starting-a-new-app">Starting a new app</a></li>
+  <li><a href="#basic-anatomy-of-a-shiny-app" id="toc-basic-anatomy-of-a-shiny-app" class="nav-link" data-scroll-target="#basic-anatomy-of-a-shiny-app">Basic anatomy of a shiny app</a></li>
+  <li><a href="#set-up-a-working-directory" id="toc-set-up-a-working-directory" class="nav-link" data-scroll-target="#set-up-a-working-directory">Set up a working directory</a></li>
+  <li><a href="#publishing-on-shinyapps.io" id="toc-publishing-on-shinyapps.io" class="nav-link" data-scroll-target="#publishing-on-shinyapps.io">Publishing on shinyapps.io</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References:</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Chapter 11a:</h1>
+<p class="subtitle lead">What’s a ShinyApp?</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>This chapter introduces you to ShinyApps using R code to create and publish data, research materials, or informative tutorials. Chapter 11 is divided into two parts, 11a and 11b. In chapter 11a, you will learn:</p>
+<ul>
+<li><p>what a ShinyApp is and how to find resources,</p></li>
+<li><p>how to use RStudio and shinyapps.io to publish your application and,</p></li>
+<li><p>how to recognize the main components of a Shiny application.</p></li>
+</ul>
+<p>Chapter 11b will take a deeper look at many of the commonly used functions for input and output so that you can begin to customize and build your own applications.</p>
+<section id="what-is-shiny" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-shiny"><strong>What is Shiny?</strong></h2>
+<p>Shiny is an R package that builds interactive web applications using R and RStudio to compile HTML files. The HTML files can be used locally, (just opened up using your browser from a local directory), or placed on a server to make public for anyone to use. Its not just for data, either! They are used as an education tool, a map for finding resources, business intelligence (BI) dashboards, tracking activities, calculators, file type conversion, and of course, for displaying the results of data analysis through interactive visualizations.</p>
+<p>You are not restricted to just the web browser. You can configure your shiny app to export other document types, like PDFs, Word, or Excel.</p>
+<p>The most important aspects of Shiny are that it is interactive and it is <em>responsive</em>. Interactivity provides an opportunity for your viewers to engage with your materials, rather than just read it. Responsive applications resize automatically to adjust to the device being used. This means you design once, and it can be viewed on a laptop, desktop, tablet, or phone.</p>
+<p>In Shiny, we code in R. In the following sections, code will be shown in cells:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># this is written in R</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Hello lovely people!"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Hello lovely people!"</code></pre>
+</div>
+</div>
+</section>
+<section id="what-can-it-do" class="level2">
+<h2 class="anchored" data-anchor-id="what-can-it-do"><strong>What can it do?</strong></h2>
+<p>The <a href="https://shiny.rstudio.com/gallery/">Shiny Gallery</a> is really helpful when learning as the examples provided include their code, so you can see how they created the interfaces. Below, is an example of where we’re heading with this chapter and where we’ll be going in the next chapter which will lead you through the steps to creating a dashboard.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Screen%20Shot%202023-02-17%20at%208.14.16%20AM.png" class="img-fluid figure-img" width="500"></p>
+<p></p><figcaption class="figure-caption">An example of a simple application from this chapter.</figcaption><p></p>
+</figure>
+</div>
+<section id="examples-of-dashboards-and-data-visualization-websites" class="level3">
+<h3 class="anchored" data-anchor-id="examples-of-dashboards-and-data-visualization-websites">Examples of dashboards and data visualization websites</h3>
+<p>A dashboard is one that uses data that has been placed on the server, (or you have uploaded) or streams real-time and shows a variety of graphs, charts, and tables. In our examples case, we’ll use standard datasets from R as well as some from the <a href="https://github.com/fivethirtyeight/data">fivethirtyeight GitHub repository</a>. You can see the all the R data sets by typing the following in the console:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The term ‘dashboard’ does apply to specific libraries made for Shiny that use a template HTML file. We are calling any website for the purpose of showing, exploring, or manipulating data with multiple visualization methods - a dashboard. So, we use it rather casually, rather than specifying specific libraries.</p>
+</section>
+</section>
+<section id="how-does-it-integrate-with-other-things" class="level2">
+<h2 class="anchored" data-anchor-id="how-does-it-integrate-with-other-things"><strong>How does it integrate with other things?</strong></h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/3partDiagram.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+<section id="rstudio" class="level3">
+<h3 class="anchored" data-anchor-id="rstudio">RStudio</h3>
+<p>This is the IDE, the integrated development environment, for R, (among many other programming languages). We’ll be using RStudio to create our shiny apps, test the code, preview results, and manage files.</p>
+</section>
+<section id="shiny" class="level3">
+<h3 class="anchored" data-anchor-id="shiny">Shiny</h3>
+<p>Shiny apps are built on Bootstrap which is an open-source, template HTML file with CSS and Javascript that makes it adapt to different browsers and devices. The Shiny app code does all the work to place the elements you design into an HTMLL files and automatically manages all file dependencies. We’ll briefly discuss files when getting started with your first app.</p>
+</section>
+<section id="shinyapps.io" class="level3">
+<h3 class="anchored" data-anchor-id="shinyapps.io">shinyapps.io</h3>
+<p>When running a shiny application from RStudio, you can publish directly to a server. Thankfully, the R community has a server location where you can host up to 5 apps for free at shinyapps.io. Of course, you can pay for more space, but for now, this works for us! Later on, we’ll walk you through publishing to the server directly from RStudio. Its surprisingly easy!</p>
+</section>
+</section>
+<section id="how-do-i-get-started" class="level2">
+<h2 class="anchored" data-anchor-id="how-do-i-get-started"><strong>How do I get started?</strong></h2>
+<p>This link to the tutorials at <a href="https://shiny.rstudio.com/tutorial/">shiny.rstudio.com</a> can also guide you through steps to creating your own apps, including more detailed information on how to change elements to meet your needs.</p>
+<p>Install the package down below in the console. You only need to do this once. If you uninstall and re-install your RStudio, you may need to reinstall packages.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"shiny"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="starting-a-new-app" class="level3">
+<h3 class="anchored" data-anchor-id="starting-a-new-app">Starting a new app</h3>
+<p>from Files&gt;New File &gt; Shiny Web app OR select new file from the pull down menu in the top toolbar.</p>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="images/Screen%20Shot%202023-02-17%20at%208.56.52%20AM-01.png" class="img-fluid figure-img" width="159"></p>
+<p></p><figcaption class="figure-caption">Starting up a new Shiny app.</figcaption><p></p>
+</figure>
+</div>
+<p>This brings up a dialog box. Enter your project name. This will become the name of the folder that is created in the location you select.</p>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="images/Screen%20Shot%202023-02-17%20at%209.02.05%20AM.png" class="img-fluid figure-img" width="396"></p>
+<p></p><figcaption class="figure-caption">Selecting your new directory location.</figcaption><p></p>
+</figure>
+</div>
+<p>Once you select <em>Create</em> you will see the template shiny app. This has three sections which we will cover next.</p>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="images/Screen%20Shot%202023-02-17%20at%2010.53.57%20AM.png" class="img-fluid figure-img" width="600"></p>
+<p></p><figcaption class="figure-caption">The starting template for a Shiny app.</figcaption><p></p>
+</figure>
+</div>
+</section>
+<section id="basic-anatomy-of-a-shiny-app" class="level3">
+<h3 class="anchored" data-anchor-id="basic-anatomy-of-a-shiny-app">Basic anatomy of a shiny app</h3>
+<p>There are three parts of a shiny app: the ui, the server, and the <code>shinyApp()</code> function that calls the ui and server.</p>
+<p>The <em><code>ui</code></em> (the user interface object) specifies the layout: where items are placed on the webpage.</p>
+<p>The <em><code>server</code></em> function is the instructions for how shiny builds your app.</p>
+<p>The <code>shinyApp()</code> function creates the actual app from the <em>ui</em> and <em>server</em> components</p>
+<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<div>
+<p>Past versions of shiny used multi-page layouts with the ui and server components saved as separate files, such as <em>ui.R</em> and <em>server.R</em>. While this is still supported, the rest of this chapter will assume that we’re using the single-page version in which the ui and server are together in one app.R file.</p>
+</div>
+</div>
+</div>
+<p>The UI and the server both have inputs and outputs that will be assigned and called. We’ll go over those in the Inputs &amp; Widgets section later on.</p>
+</section>
+<section id="set-up-a-working-directory" class="level3">
+<h3 class="anchored" data-anchor-id="set-up-a-working-directory">Set up a working directory</h3>
+<ol type="1">
+<li>First set up a new working directory. In RStudio you can do this in the Files tab (usually on right lower panel). You can navigate where you want a directory, create, or modify existing directories.</li>
+</ol>
+<p>Under <em>More</em>, select <em>Set as working directory</em>. You can also do this in the console with:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">"~/your_folder_name"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="2" type="1">
+<li>Download the following file from <a href="https://raw.githubusercontent.com/poppy-nicolette/INFO6270_ShinyDash/main/FirstAppDemo/FirstAppDemo.R?token=GHSAT0AAAAAAB7NARJ5VTIOASUAXZOHJ24MZA3BFIQ">github</a> and <code>Save Page As...</code> from your browser to this directory. Then rename the file from <em>FirstAppDemo.txt</em> to <em>FirstAppDemo.R</em></li>
+<li>Let’s open up a shiny app file, called FirstAppDemo.R. You can see there is the <code>ui</code>, the <code>server</code>, and the <code>shinyApp()</code> function.</li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/basic.png" class="img-fluid figure-img" alt="image of a basic shiny app components" width="450"></p>
+<p></p><figcaption class="figure-caption">Figure 1: Image of a basic shiny app components</figcaption><p></p>
+</figure>
+</div>
+<p>We’ll be going through each of these items in more detail, but for now, you can see the basic structure.</p>
+<p>To run the app, use the <em>Run</em> icon shown below. This will run in the RStudio viewer by default, but you can also run in your browser with the <em>Run external</em> option checked.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/run_icon.png" class="img-fluid figure-img" width="450"></p>
+<p></p><figcaption class="figure-caption">Figure 2: Image of the run icon. Note the pull down menu arrow on the right.</figcaption><p></p>
+</figure>
+</div>
+<p>That’s it to run a basic Shiny app!!! The shiny library comes with many examples you can explore as well as even more sophisticated examples on the <a href="https://shiny.rstudio.com/gallery/" title="Link to the Shiny app Gallery page">Gallery page</a>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/shiny_examples.png" class="img-fluid figure-img" width="800"></p>
+<p></p><figcaption class="figure-caption">Figure 3: Examples of shiny apps and functions. Image source: https://shiny.rstudio.com/tutorial/written-tutorial/lesson1/</figcaption><p></p>
+</figure>
+</div>
+<p>That’s it! you’ve created a new app. Its simple right now, but we’ll explore more options later for designing something that works for your needs. Let’s discuss how we publish next so that you get a sense of the entire workflow.</p>
+</section>
+<section id="publishing-on-shinyapps.io" class="level3">
+<h3 class="anchored" data-anchor-id="publishing-on-shinyapps.io">Publishing on shinyapps.io</h3>
+<p>Now we can start publishing online for the world to experience your brilliant research! A free account at shinyapps.io provides space for 5 applications and 25 active hours of server time. (<a href="https://support.posit.co/hc/en-us/articles/217717407-What-is-an-Active-Hour-for-shinyapps-io-">what are active hours?</a>)</p>
+<ol type="1">
+<li><p>Create a shinyapps.io account. You will need your login info to set up your RStudio to publish directly to shinyapps.io. <a href="https://www.shinyapps.io/admin/#/signup">Click here</a> to set up a shinyapps.io account. I recommend connecting via your GitHub account, if you have one. Otherwise, just start a new account.</p></li>
+<li><p>Back in RStudio, we need to connect to your shinyapp.io account. To the right of the <em>Run</em> icon, select the pull down menu.</p>
+<p><img src="images/pull_down_menu.png" class="img-fluid" width="450"></p></li>
+<li><p>Select <em>Connect…</em> and then choose <em>shinyapps.io</em></p>
+<p><img src="images/connect.png" class="img-fluid" width="450"></p></li>
+<li><p>Follow the instructions to find the token and paste into the space provided.</p>
+<p><img src="images/tokens.png" class="img-fluid" width="450"></p></li>
+<li><p>So exciting! Now, you are ready to publish to shinyapps.io!</p>
+<p><img src="images/publish_pull_down.png" class="img-fluid" width="450"></p></li>
+<li><p>Check all the files you want uploaded to the shinyapps.io server. In our case with this demo, it should only be one file, FirstDemoApp.R.</p>
+<p><img src="images/publish.png" class="img-fluid" width="450"></p></li>
+</ol>
+<p>That’s it! You’ve done it!! Now sit back and watch the cash and attention role in! If you want to find your app on the shinyapps.io dashboard, you can login <a href="https://www.shinyapps.io/admin/#/login">here</a> or below.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://www.shinyapps.io/admin/#/login"><img src="images/shinyapps.png" class="img-fluid figure-img" width="150"></a></p>
+</figure>
+</div>
+<p>At this point, you know enough to open existing apps on Shiny Gallery, copy and modify their code, and publish them on shinyapps.io. In chapter 11b, we’ll be going over many of the inputs and outputs with an exercise that will help you design apps based on your needs.</p>
+</section>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>In this chapter, we’ve covered what shiny is and how to get started. You can open existing Shiny apps, and start exploring their code, or adapting them to your own needs.</p>
+<p>There is an extensive amount of tutorials and documentation on making apps with Shiny and you can find some of those in the References section below. Chapters in this course are a living document, so if you have suggestions for materials you found helpful, please send them along to us.</p>
+<p>The next section of chapter 11 moves into a more detailed view of the inputs and outputs, layout options, and discusses <em>reactivity</em> in more depth.</p>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References:</h2>
+<p>I took inspiration and guidance from many sources which I’ve tried to include here:</p>
+<p>The Bookdown library for R, at bookdown.org, provides a <a href="https://bookdown.org/hadrien/how_to_build_a_shiny_app_from_scratch/" title="Link to tutorial at bookdown.org">tutorial</a> on how to build Shiny apps.</p>
+<p><em>Mastering Shiny</em> by Hadley Wickham <a href="https://mastering-shiny.org/index.html" class="uri">https://mastering-shiny.org/index.html</a></p>
+<p>W3 color resources: <a href="https://www.w3schools.com/colors/default.asp" class="uri">https://www.w3schools.com/colors/default.asp</a></p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
