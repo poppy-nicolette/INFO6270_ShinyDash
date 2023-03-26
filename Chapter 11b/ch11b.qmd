@@ -607,7 +607,7 @@ shinyApp(ui, server)
 
 It is possible to create your own themes, use themes other than Bootstrap, or modify Bootstrap themes to your own aesthetic needs. *Mastering Shiny* has a brief chapter on themes [here,](https://mastering-shiny.org/action-layout.html) and you can also find more information [here](https://bootswatch.com/) on Bootswatch themes. [Here is a link](https://www.w3schools.com/colors/default.asp) for the hex codes or names you'll need for colors.
 
-You can even start making your own theme by specifying items to be used throughout your app in the `ui`. Colors are hex or by HTML names. Collections of web safe fonts can be found [here.](https://www.w3schools.com/csSref/css_websafe_fonts.php) Note how the bslib library is called and the theme is identified in the first part of the page layout.
+You can even start making your own theme by specifying items to be used throughout your app in the `ui`. Colors are hex or by HTML names. Collections of web safe fonts can be found [here.](https://www.w3schools.com/csSref/css_websafe_fonts.php) Note how the bslib library is called and the theme is identified in the first part of the page layout. You can find the documentation on bslib [here.](https://rstudio.github.io/bslib/articles/bslib.html) In this case, the open-source fonts came from [Google Fonts.](https://fonts.google.com/)
 
 ``` r
 library(shiny)
@@ -618,8 +618,8 @@ ui <- fluidPage(
     bg = "#175d8d", 
     fg = "#d5fbfc", 
     primary = "	#e3fffc", 
-    base_font = font_google("Open Sans"),
-    code_font = font_google("Atkinson Hyperlegible")
+    base_font = font_google("Atkinson Hyperlegible"),
+    code_font = font_google("Roboto Mono")
   ),
   sidebarLayout(
     sidebarPanel(
@@ -717,36 +717,21 @@ shinyApp(ui, server)
 
 ## 
 
-In this section, we will look at how to make your do stuff, respond, and calculate multiple tables and visualizations
-
 # Reactive pages
+
+In this section, we will look at how to make your app respond to inputs and do stuff!
 
 ## Basics of reactivity
 
-Reactivity refers to the ability of an app to recalculate or perform some action when an input is changed. In a non-reactive Shiny app, all calculations are run when the session begins. However, if you want a user to change an input and display a new *calculated* result, then reactivity in Shiny apps allow only that part of the app to be computed and re-displayed, not the entire app. This is important for making things fast and able to display immediate changes. So, in a sense, reactivity is something that happens in the background. But, knowing about it will help you use the following functions successfully.
-
-``` r
-#insert code that shows what happens with input a with and without a reactive function
-
-ui <- fluidPage(
-  sliderInput("input_1", )
-  
-)#close fluidPage
-
-server <- function(input, output){
-  output
-}
-
-shinyApp(ui, server)
-```
+Reactivity refers to the ability of an app to recalculate or perform some action when an input is changed. In a non-reactive Shiny app, all calculations are run when the session begins. However, if you want a user to change an input and display a new *calculated* result, then reactivity in Shiny apps allow only that part of the app to be computed and re-displayed, not the entire app. This is important for making things fast and able to display immediate changes. So, in a sense, reactivity is something that happens in the background, or more accurately, the back-end. But, knowing about it will help you use the following functions successfully.
 
 ### Two different types of programming: imperative and declarative
 
-imperative is like the analysis functions you've been running. you write a series of commands and R executes them. You see errors if something doesn't match. The UI layout is imperative. you write code that says where something will be, like a radio button or sidebar text.
+Imperative programming is like the analysis functions you've been running so far in this class. You write a series of commands and R executes them. You see errors if something doesn't match. The UI layout is imperative. You write code that says where something will be, like a radio button, sidebar text, or text output in the main panel.
 
-declarative provides options for the program if conditions are right. So, it might execute the code if conditions are met. This is what we see on the server side function. Its a series of codes that will run if something happens in the UI.
+Declarative code provides options for the program if conditions are right. So, it will execute the code ***if*** conditions are met. This is what we see on the server side function. It is a series of codes that will run if something happens in the UI.
 
-declarative is harder to identify errors, typos, etc. because it running depends on the conditions provided for it.
+Declarative can be harder to identify errors, typos, etc. because it running depends on knowing the conditions that trigger it.
 
 ### Code execution order
 

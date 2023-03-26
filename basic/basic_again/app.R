@@ -2,12 +2,12 @@ library(shiny)
 library(bslib)
 
 ui <- fluidPage(
-  theme = bs_theme(
+  theme = bs_theme( 
     bg = "#175d8d", 
     fg = "#d5fbfc", 
     primary = "	#e3fffc", 
     base_font = font_google("Open Sans"),
-    code_font = font_google("Atkinson Hyperlegible")
+    code_font = font_google("Roboto Mono")
   ),
   sidebarLayout(
     sidebarPanel(
