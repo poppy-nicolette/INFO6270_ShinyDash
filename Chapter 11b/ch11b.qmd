@@ -8,17 +8,15 @@ editor: visual
 toc: true
 ---
 
-In this chapter, we'll be looking in more detail at the input and output functions by example using a standard R dataset. This chapter introduces you to:
+In this chapter, we'll be looking in more detail at the input and output functions using examples. This chapter introduces you to:
 
 -   input functions for text, numbers, dates, choices, file uploads and actions,
 
 -   output functions for text, tables, plots, images, and download formats,
 
--   an introduction to themes to change the appearance of your application,
+-   an introduction to themes to change the appearance of your application, and
 
--   an explanation of reactivity and how its used, and
-
--   the in-class exercise of putting all this knowledge together to explore a dataset
+-   an explanation of reactivity and how its used.
 
 We'll be using some of the dataset standards included in R, such as mtcars and iris, as example datasets. Feel free to explore the datasets on your own, or even replace with your own data as you play with these inputs.
 
@@ -28,9 +26,9 @@ You can see all the datasets included in R by typing `data()` in the console.
 You may also find the RStudio and Shiny [cheatsheets](https://posit.co/resources/cheatsheets/) helpful.
 :::
 
-## Inputs & Widgets
+# Inputs & Widgets
 
-Inputs are the ways users can enter, filter, or select information within your app. Widgets are a type of input that requires a different mode of input than text, such as a slider or button. There is a basic format to the inputs & widgets. First there is the input type, in this case a *`textAreaInput()`*. In the first position inside is the *inputID* parameter, followed by the label parameter. These two will be consistent with all inputs. After the *inputID* and the label, arguments that may be unique to each follow. In this case, there is an argument for the number of *rows*. In general, all inputs, (including widgets) keep this order of *inputID, label, arguments*.
+Inputs are the ways users can enter, filter, or select information within your app. Widgets are a type of input that requires a different mode of input than text, such as a slider or button. There is a basic format to the inputs & widgets. First there is the input type, in this case, a *`textAreaInput()`*. In the first position is the *inputID* parameter, followed by the *label* parameter. These two will be consistent with all inputs. After the *inputID* and the *label*, arguments that may be unique to each follow. In this case, there is an argument for the number of *rows*. In general, all inputs, (including widgets) keep this order of *inputID, label, arguments*.
 
 ``` r
 textAreaInput("story", "Tell me about yourself", rows = 3)
@@ -145,7 +143,7 @@ ui <- fluidPage(
 )#close fluidPage
 ```
 
-#### Dates
+### Dates
 
 For single date entry, use the `dateInput()` function. For a range of dates, use the `dateRangeInput()`. Easy, right? There are format options for date inputs, such as `format`, `language`, and `value` which defines the starting date. The default starting date is today's date on your system. You can use the help section to find out more or the documentation [here](https://shiny.rstudio.com/reference/shiny/latest/dateinput) for dateInput() and [here](https://shiny.rstudio.com/reference/shiny/latest/daterangeinput) for dateRangeInput().
 
@@ -159,7 +157,7 @@ ui <- fluidPage(
 )#close fluidPage
 ```
 
-#### Choices from a list
+### Choices from a list
 
 ##### selectInput()
 
@@ -206,7 +204,7 @@ ui <- fluidPage(
 By now, you should be using the `?function,` (such as `?checkboxGroupInput)` in the console or searching for the function in the help page, (usually on the right in RStudio). Or use cheatsheets such as [this one](https://shiny.rstudio.com/articles/cheatsheet.html) for shiny. This is a normal part of workflow and will help you add arguments to control input behaviours.
 :::
 
-#### Action buttons
+### Action buttons
 
 Actions are usually used with the `observeEvent()` or `eventReactive()` functions that trigger a server side function. However, action buttons can alse be used for simple tasks without reactivity.
 
@@ -248,7 +246,7 @@ ui <- fluidPage(
 
 There are many more inputs available on the Shiny reference documentation, these most common ones will get you started making apps. OK! Enough with the donuts! Next, let's go over types of outputs and how these work with inputs using a standard R dataset.
 
-## Outputs
+# Outputs
 
 Outputs are assigned in the UI to define spaces where outputs will be seen. They include a unique ID in the first position of its arguments. UI outputs are always paired with a server output function.
 
@@ -258,7 +256,7 @@ Output ID's are called from the server side preceded by `output$outputID` in whi
 
 Some important new fuctions are called. In the `server()` function, you see `renderText()`. This calls the values you assigned in *`input_1`* and places it where you assigned it in *`output_1`*. In addition to text, you can also render tables, data tables, plots, images, and text. We'll look at these pairings of *`ui()`* outputs and *`server()`* outputs next.
 
-#### Text output
+### Text output
 
 ##### textOutput() & renderText()
 
@@ -303,7 +301,7 @@ server <- function(input, output) {
 }#close server
 ```
 
-#### Tables
+### Tables
 
 Oh, tables! Tables are powerful. There are two types of tables, static tables of data, and dynamic tables that are interactive.
 
@@ -340,12 +338,143 @@ server <- function(input, output) {
 DataTables are more appropriate for larger dataframes where someone may need to explore, filter, and sort data. You can find more information on modifying DataTables [here.](https://shiny.rstudio.com/articles/datatables.html)
 
 ::: callout-important
-DataTables refers to both functions in Shiny and from the DT library. For any examples in this chapter, we'll be refering to the Shiny version.
-
-You can find more on the DT library [here](https://rstudio.github.io/DT/shiny.html). We will be looking at DT in the Reactive pages section later in this chapter. While DataTables in Shiny provides only server-side tables, the DT package can provide both server-side and client-side tables. This may be an important consideration if you are trying to reduce how many hours your appication runs on shinyapps.io, for example.
+DataTables refers to both functions in Shiny and from the DT library. For any examples in this chapter, we'll be refering to the Shiny version. While dataTables in the Shiny library provides only server-side tables, the DT package can provide both server-side and client-side tables. This may be an important consideration if you are trying to reduce how many working hours your application runs on shinyapps.io, for example.
 :::
 
-#### Plots
+### DataTables
+
+In this section, we are going to explore importing data and displaying it in a DataTable using the DT library. This is different than the `data.table` function included in the Shiny library. The DT library makes a lovely table that can be searched, filtered, and sorted which is great for data exploration. You can find more info [here](https://shiny.rstudio.com/articles/datatables.html) and [here](https://rstudio.github.io/DT/shiny.html) for the DT documentation.
+
+``` r
+library(shiny)
+library(DT)
+
+ui <- fluidPage(
+  h2("Some data about flowers"),
+  DT::dataTableOutput("table_1")
+
+)#close fluidPage
+
+server <- function(input, output) {
+  output$table_1 = DT::renderDataTable({
+  iris
+  })#close output
+
+}#close server
+
+shinyApp(ui, server)
+```
+
+### Computation output
+
+But what if we wanted to perform some operations on the data, such as to use the summarizing functions you did in earlier chapters on the mtcars dataset? In the code below, we first import some data from a remote location, then create a DataTable for exploration. Then we summarize the data.
+
+``` r
+library(shiny)
+library(DT)
+library(tidyverse)
+
+
+path <- "https://raw.githubusercontent.com/fivethirtyeight/data/master/comic-characters/marvel-wikia-data.csv"
+
+# This will read the first sheet of the Excel file
+comics_data <- read_csv(path)
+
+ui <- fluidPage(
+  sidebarLayout(
+    sidebarPanel(
+      h2("How to use DataTables from the DT library"),
+      br(),
+      p("To the right is a dataset displayed as a DataTable"), 
+      p("This dataset is from the fivethirtyeight GitHub repository.")
+    ),#close sidebarPanel
+    mainPanel(
+  h2("the dataset"),
+  br(),
+  
+  DT::dataTableOutput("table_1"), 
+  
+  
+    )#close mainPanel
+  )#close sidebarLayout
+)#close fluidPage
+
+server <- function(input, output) {
+  data_to_display <- comics_data
+
+  output$table_1 <- renderDataTable({
+   (data_to_display)
+    })
+  
+}#close server
+
+shinyApp(ui, server)
+```
+
+First, we can drop urlslug, and page_id. We also want to correct the column names.
+
+``` r
+library(shiny)
+library(DT)
+library(tidyverse)
+
+
+path <- "https://raw.githubusercontent.com/fivethirtyeight/data/master/comic-characters/marvel-wikia-data.csv"
+
+# This will read the first sheet of the Excel file
+comics_data <- read_csv(path)
+
+comics_data <- select(comics_data, "name", "ID", "ALIGN", "EYE", 
+                      "HAIR", "SEX", "GSM", "ALIVE", "APPEARANCES",
+                      "FIRST APPEARANCE", "Year" ) %>% 
+                rename(Name = name,
+                       Alignment=ALIGN,
+                       Eye = EYE, 
+                       Hair = HAIR,
+                       Gender = SEX, 
+                       Gender_or_sexual_identity = GSM,
+                       Status = ALIVE, 
+                       Appearances = APPEARANCES,
+                       First_appearance = 'FIRST APPEARANCE')
+
+ui <- fluidPage(
+  sidebarLayout(
+    sidebarPanel(
+      h2("How to use DataTables from the DT library"),
+      br(),
+      p("To the right is a dataset displayed as a DataTable"), 
+      p("This dataset is from the fivethirtyeight GitHub repository.")
+    ),#close sidebarPanel
+    mainPanel(
+      h2("the dataset"),
+      br(),
+      DT::dataTableOutput("table_1")#close dataTableOutput
+  
+    )#close mainPanel
+  )#close sidebarLayout
+)#close fluidPage
+
+server <- function(input, output) {
+  data_to_display <- comics_data
+
+  output$table_1 <- renderDataTable(
+   data_to_display,
+    options = list(
+      scrollX = TRUE, 
+      scrollY = TRUE,
+      autoWidth = TRUE,
+      rownames = FALSE)
+    ) #close renderDataTable
+}#close server
+
+shinyApp(ui, server)
+```
+
+You can see from this example, there are new options added to the `renderDataTable()` function. We also modified our data *before* the `ui`. You can find an excellent explanation of options as well as beautiful integration with the formattable library from [this blog](https://clarewest.github.io/blog/post/making-tables-shiny/).
+
+![](images/formattable.png){fig-align="left" width="100"}
+
+### Plots
 
 Plots are graphs and charts from packages like [ggplot2](https://r-graph-gallery.com/ggplot2-package.html), [plotly](https://plotly.com/r/), [r2d3,](https://rstudio.github.io/r2d3/) and many others. *Mastering Shiny* has an excellent [chapter](https://mastering-shiny.org/action-graphics.html) dedicated to ggplot2 for more info on making ggplot2 interactive. For now, we're going to stick with some simple ones to explain the basic plot output functions.
 
@@ -400,7 +529,7 @@ More plot types can be found on the [R Graph Library](https://r-graph-gallery.co
 
 [![](images/chart%20types.png){width="900"}](https://r-graph-gallery.com/index.html)
 
-#### Images
+### Images
 
 You can place images or logos in your app! Of course, you also use `fluidRow()` and `column` arguments to organize your space with text and images. In this case, we are pointing to an image located at a website.
 
@@ -481,7 +610,7 @@ Placing many logos across a page can be very tedious and difficult to control. F
 ![](images/donutsTogether.png)
 :::
 
-#### File uploads
+### File uploads
 
 ##### fileInput()
 
@@ -517,7 +646,7 @@ server <- function(input, output) {
 shinyApp(ui, server)
 ```
 
-#### Downloads
+### Downloads
 
 The download button is a special case and it's a super useful output for people to download a dataset or whatever, such as a manipulated data from a DataTable. The `downloadHandler()` function is critical to this working. In this case the `downloadHandler()` is sending the file named *data* to the `write.csv()` function.
 
@@ -721,6 +850,10 @@ shinyApp(ui, server)
 
 In this section, we will look at how to make your app respond to inputs and do stuff!
 
+::: callout-important
+This section is difficult to understand. Take your time with it, and its ok if it doesn't make sense right away. We'll be working with this more in class.
+:::
+
 ## Basics of reactivity
 
 Reactivity refers to the ability of an app to recalculate or perform some action when an input is changed. In a non-reactive Shiny app, all calculations are run when the session begins. However, if you want a user to change an input and display a new *calculated* result, then reactivity in Shiny apps allow only that part of the app to be computed and re-displayed, not the entire app. This is important for making things fast and able to display immediate changes. So, in a sense, reactivity is something that happens in the background, or more accurately, the back-end. But, knowing about it will help you use the following functions successfully.
@@ -731,11 +864,11 @@ Imperative programming is like the analysis functions you've been running so far
 
 Declarative code provides options for the program if conditions are right. So, it will execute the code ***if*** conditions are met. This is what we see on the server side function. It is a series of codes that will run if something happens in the UI.
 
-Declarative can be harder to identify errors, typos, etc. because it running depends on knowing the conditions that trigger it.
+In the context of reactive expressions, all code is run when you start a session and results are stored in the cache. This means that if you move a slider and a new value can be retrieved from that cache, your app will show the result. However, if you move a slider and a new calculated value needs to be shown, this value will not be in your cache. You need some part of the app to calculate and store a new value to be shown. This is where reactivity steps in. Only the part of the code that needs to run, is executed - not the entire app. These declarative bits of code are wrapped in reactive function.
 
 ### Code execution order
 
-Unlike imperative, declarative coding such as in the `server`, run only when needed. so order is not as important in the `server` function. However, this can make code very difficult to read for humans as we tend to assume top to bottom.
+Unlike imperative, declarative coding such as in the `server`, run only when needed. So order is not as important in the `server` function. However, this can make code very difficult to read for humans as we tend to assume top to bottom. In practice, its best to keep your code human readable. For example, following the order of the `ui` can be helpful in navigating through the `server` code.
 
 Data can be very large. To prevent this from slowing down the application, every time a new input is sent to the server function, do as much of your data cleaning and manipulation outside of the ShinyApp as possible. Of course, there are just some situations where this is not possible. But as a general rule, keep it minimal inside the ShinyApp. However, you can run code before the `ui` and `server` functions if data needs to be cleaned.
 
@@ -744,13 +877,7 @@ Data can be very large. To prevent this from slowing down the application, every
 take mtcars and apply some calculation based on existing data, maybe $ to drive 100 miles or km in today.
 ```
 
-In the context of reactive expressions, all code is run when you start a session and results are stored in the cache. This means that if you move a slider and a new value can be retrieved from that cache, your app will show the result. However, if you move a slider and a new calculated value needs to be shown, this value will not be in your cache. You need some part of the app to calculate and store a new value to be shown. This is where reactivity steps in. Only the part of the code that needs to run, is executed - not the entire app. These declarative bits of code are wrapped in reactive function.
-
 In the following section, let's look at two reactive functions commonly found. More information on reactive functions can be found [here](https://shiny.rstudio.com/reference/shiny/1.7.4/) in the Shiny documentation.
-
-#### eventReactive()
-
-This is basic reactivity in that there is no display of information when the session is first run. When you select the `actionButton()`, the just the part of the code that needs to run updates what you see. This is great for click events like action buttons, radio buttons, or check boxes. Details of the options and examples of eventReactive() can be found [here in the documentation](https://shiny.rstudio.com/reference/shiny/1.7.4/observeevent).
 
 #### observeEvent()
 
@@ -758,32 +885,13 @@ This is basic reactivity in that there is no display of information when the ses
 
 `observeEvent()` functions provide the set-up for the `eventReactive()` by observing the data to check for updates. When updates are noticed, the `eventReactive()` pulls the new updated data and the HTML updates. Note that the following code changes in the HTML to the webpage with the reactive and also prints something in the console.
 
-``` r
-#source: https://shiny.rstudio.com/reference/shiny/1.7.4/observeevent
-ui = fluidPage(
-    column(4,
-           numericInput("x", "# of rows of the mtcars dataset", 5),
-           br(),
-           actionButton("button", "Show the rows")
-    ),
-    column(8, tableOutput("table"))
-  )
-  
-server = function(input, output) {
+#### eventReactive()
 
-    observeEvent(input$button, {
-      cat("Showing", input$x, "rows\n")
-    })
+When you select the `actionButton()`, the just the part of the code that needs to run updates what you see. This is great for click events like action buttons, where a user may expect something to occur. Details of the options and examples of `eventReactive()` and `observeEvent()` can be found [here in the documentation](https://shiny.rstudio.com/reference/shiny/1.7.4/observeevent).
 
-    df <- eventReactive(input$button, {
-      head(mtcars, input$x)
-    })
-    output$table <- renderTable({
-      df()
-    })
-  }
-shinyApp(ui, server)
-```
+Below, we've used the example from the documentation to illlustrate basic reactivity. When the app first runs, nothing is displayed as there was no information in the cache for the `button` ID. Once the button is pressed, the `x` value is attached to it and the first `x` rows of data are shown. It does nothing until the cache is updated again when both the `x` value and the `button` values have changed.
+
+![](images/reactive.png)
 
 ::: callout-important
 Reactivity in Shiny is regretably complex. However the two functions above cover the most common ones you'll see. The free, online book, [*Mastering Shiny*](https://mastering-shiny.org/reactivity-intro.html), has 4 chapters dedicated to reactivity in Shiny. For now, when you see `observeEvent()` and `eventReactive()` functions in code you are getting from other sources, you should recognize these as reactive parts of the app that will update when some input has been changed.
@@ -791,179 +899,25 @@ Reactivity in Shiny is regretably complex. However the two functions above cover
 
 #### What is session?
 
-Session is an optional argument passed to the server function that enables inputs or outputs related to the current instance of the app to be used. You may see some examples with this.
-
-If you see it in a code example, its likely there to pull an input or output that is unique to this instance and do something with it. You can experiment with removing it or adding it back in with this code;
+Session is an optional argument passed to the server function that enables inputs or outputs related to the current instance of the app to be used. You may see some examples with this. If you see it in a code example, its likely there to pull an input or output that is unique to this instance and do something with it. You can read more in its documentation [here](https://shiny.rstudio.com/reference/shiny/latest/session.html).
 
 ``` r
-server <- function(input, output, session){
-    ## some operation here
-}#close server
 ```
 
 The session state is used when we need to retrieve some data that has been stored as a result of calculations or inputs from a user's session. It could be user data, or it could be a file they uploaded that your Shiny app then performed an operation on.
 
-### Summary
+## Summary
 
 Reactivity is different due to the nature of declarative programming. It makes code less complex and providies conditions that could be met, rather than a linear progression of code to be executed. We use reactivity so that people can change inputs and receive different outputs or make external actions happen.
 
-Recognizing reactive functions of `eventReactive()` and `observeEvent()` and why its used on the back-end of a Shiny app will help in diagnosing and designing your code.
+Recognizing reactive functions of `eventReactive()` and `observeEvent()` and why its used on the back-end of a Shiny app will help in designing and debugging your code.
 
--   session is added as an optional argument to the server function call
-
--   you can put code before the shiny code to reduce calculation time.
+-   You can put code before the Shiny `ui` code to reduce calculation time.
 
 -   `observeEvent()` sets up the reactivity by signaling which inputs the app should look for change.
 
 -   `eventReactive()` is used to render or provide some action based on the updated input values.
 
-## DataTables
-
-In this section, we are going to explore importing data and displaying it in a DataTable using the DT library. This is different than the data.table library. The DT library makes a lovely table that can be searched, filtered, and sorted which is great for data exploration. You can find more info [here](https://shiny.rstudio.com/articles/datatables.html) and [here](https://rstudio.github.io/DT/shiny.html) for the DT documentation.
-
-``` r
-library(shiny)
-library(DT)
-
-ui <- fluidPage(
-  h2("Some data about flowers"),
-  DT::dataTableOutput("table_1")
-
-)#close fluidPage
-
-server <- function(input, output) {
-  output$table_1 = DT::renderDataTable({
-  iris
-  })#close output
-
-}#close server
-
-shinyApp(ui, server)
-```
-
-### Computation output
-
-But what if we wanted to perform some operations on the data, such as to use the summarizing functions you did in earlier chapters on the mtcars dataset? In the code below, we first import some data from a remote location, then create a DataTable for exploration. Then we summarize the data.
-
-``` r
-library(shiny)
-library(DT)
-library(tidyverse)
-
-
-path <- "https://raw.githubusercontent.com/fivethirtyeight/data/master/comic-characters/marvel-wikia-data.csv"
-
-# This will read the first sheet of the Excel file
-comics_data <- read_csv(path)
-
-ui <- fluidPage(
-  sidebarLayout(
-    sidebarPanel(
-      h2("How to use DataTables from the DT library"),
-      br(),
-      p("To the right is a dataset displayed as a DataTable"), 
-      p("This dataset is from the fivethirtyeight GitHub repository.")
-    ),#close sidebarPanel
-    mainPanel(
-  h2("the dataset"),
-  br(),
-  
-  DT::dataTableOutput("table_1"), 
-  
-  
-    )#close mainPanel
-  )#close sidebarLayout
-)#close fluidPage
-
-server <- function(input, output) {
-  data_to_display <- comics_data
-
-  output$table_1 <- renderDataTable({
-   (data_to_display)
-    })
-  
-}#close server
-
-shinyApp(ui, server)
-```
-
-First, we can drop urlslug, and page_id. We also want to correct the column names.
-
-``` r
-library(shiny)
-library(DT)
-library(tidyverse)
-
-
-path <- "https://raw.githubusercontent.com/fivethirtyeight/data/master/comic-characters/marvel-wikia-data.csv"
-
-# This will read the first sheet of the Excel file
-comics_data <- read_csv(path)
-
-comics_data <- select(comics_data, "name", "ID", "ALIGN", "EYE", 
-                      "HAIR", "SEX", "GSM", "ALIVE", "APPEARANCES",
-                      "FIRST APPEARANCE", "Year" ) %>% 
-                rename(Name = name,
-                       Alignment=ALIGN,
-                       Eye = EYE, 
-                       Hair = HAIR,
-                       Gender = SEX, 
-                       Gender_or_sexual_identity = GSM,
-                       Status = ALIVE, 
-                       Appearances = APPEARANCES,
-                       First_appearance = 'FIRST APPEARANCE')
-
-ui <- fluidPage(
-  sidebarLayout(
-    sidebarPanel(
-      h2("How to use DataTables from the DT library"),
-      br(),
-      p("To the right is a dataset displayed as a DataTable"), 
-      p("This dataset is from the fivethirtyeight GitHub repository.")
-    ),#close sidebarPanel
-    mainPanel(
-      h2("the dataset"),
-      br(),
-      DT::dataTableOutput("table_1")#close dataTableOutput
-  
-    )#close mainPanel
-  )#close sidebarLayout
-)#close fluidPage
-
-server <- function(input, output) {
-  data_to_display <- comics_data
-
-  output$table_1 <- renderDataTable(
-   data_to_display,
-    options = list(
-      scrollX = TRUE, 
-      scrollY = TRUE,
-      autoWidth = TRUE,
-      rownames = FALSE)
-    ) #close renderDataTable
-}#close server
-
-shinyApp(ui, server)
-```
-
-You can see from this example, there are new options added to the `renderDataTable()` function. We also modified our data *before* the `ui`. You can find an excellent explanation of options as well as beautiful integration with the formattable library from [this blog](https://clarewest.github.io/blog/post/making-tables-shiny/).
-
-![](images/formattable.png){fig-align="left" width="100"}
-
-# Putting it all together
-
-comics dataset from above
-
-layout in shiny
-
-decide on features we want to explore and what data we need to show and calculate
-
-data to clean (First appearance), correct (gender)
-
-data to show: summary, sort by, mean, distribution
-
-data to calculate based on new input:
-
 # Wrap up
 
-That's chapter 11b! By the end of this you have learned more about many of the Shiny inputs and output functions, how they work together, an introduction to themes, and formatting text.
+That's chapter 11b! By the end of this you have learned more about many of the Shiny inputs and output functions, how they work together, and an introduction to themes and formatting text. We also introduced reactivity in Shiny which is an important concept as you move forward into more complex interactions. You now have enough information to create and publish web-based applications. Combined with what you have covered in the previous chapters, you are now well prepared to create, modify, calculate, and publish your own research!
