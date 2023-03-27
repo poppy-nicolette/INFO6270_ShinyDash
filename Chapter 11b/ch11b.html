@@ -112,7 +112,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul class="collapse">
   <li><a href="#text-input" id="toc-text-input" class="nav-link" data-scroll-target="#text-input">Text input</a></li>
   <li><a href="#number-inputs" id="toc-number-inputs" class="nav-link" data-scroll-target="#number-inputs">Number inputs</a></li>
-  <li><a href="#dates" id="toc-dates" class="nav-link" data-scroll-target="#dates">Dates</a></li>
   <li><a href="#choices-from-a-list" id="toc-choices-from-a-list" class="nav-link" data-scroll-target="#choices-from-a-list">Choices from a list</a></li>
   <li><a href="#action-buttons" id="toc-action-buttons" class="nav-link" data-scroll-target="#action-buttons">Action buttons</a></li>
   </ul></li>
@@ -126,7 +125,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#images" id="toc-images" class="nav-link" data-scroll-target="#images">Images</a></li>
   <li><a href="#file-uploads" id="toc-file-uploads" class="nav-link" data-scroll-target="#file-uploads">File uploads</a></li>
   <li><a href="#downloads" id="toc-downloads" class="nav-link" data-scroll-target="#downloads">Downloads</a></li>
-  <li><a href="#themes" id="toc-themes" class="nav-link" data-scroll-target="#themes">Themes</a></li>
+  </ul></li>
+  <li><a href="#themes" id="toc-themes" class="nav-link" data-scroll-target="#themes">Themes</a>
+  <ul class="collapse">
   <li><a href="#formatting-text" id="toc-formatting-text" class="nav-link" data-scroll-target="#formatting-text">Formatting text</a></li>
   <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
   </ul></li>
@@ -189,7 +190,7 @@ Tip
 <h1>Inputs &amp; Widgets</h1>
 <p>Inputs are the ways users can enter, filter, or select information within your app. Widgets are a type of input that requires a different mode of input than text, such as a slider or button. There is a basic format to the inputs &amp; widgets. First there is the input type, in this case, a <em><code>textAreaInput()</code></em>. In the first position is the <em>inputID</em> parameter, followed by the <em>label</em> parameter. These two will be consistent with all inputs. After the <em>inputID</em> and the <em>label</em>, arguments that may be unique to each follow. In this case, there is an argument for the number of <em>rows</em>. In general, all inputs, (including widgets) keep this order of <em>inputID, label, arguments</em>.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">textAreaInput</span>(<span class="st">"story"</span>, <span class="st">"Tell me about yourself"</span>, <span class="at">rows =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>While, we will address a few of these, you can find all of them and their code on the <a href="https://shiny.rstudio.com/gallery/widget-gallery.html">shiny gallery</a></p>
+<p>While we will address a few of these, you can find all of them and their code on the <a href="https://shiny.rstudio.com/gallery/widget-gallery.html">shiny gallery</a>.</p>
 <p>The syntax of the widget is the same as other inputs. Let’s look at the code below:</p>
 <p><img src="images/Screen%20Shot%202023-02-17%20at%201.27.30%20PM.png" class="img-fluid"></p>
 <p>The <em>inputID</em> has some rules, just like any variable in R. It must be:</p>
@@ -226,7 +227,7 @@ Tip
 <h3 class="anchored" data-anchor-id="text-input">Text input</h3>
 <section id="textinput" class="level5">
 <h5 class="anchored" data-anchor-id="textinput">textInput()</h5>
-<p>This is for small amounts of text, like asking for someone’s name, address, or what type of cheese they like. You can find the documentation on this input <a href="https://shiny.rstudio.com/reference/shiny/0.14/textinput">here</a>. To format text, for size, emphasis, color, etc, please see the <em>Formatting text</em> section at the end of the chapter.</p>
+<p>This is for small amounts of text, like asking for someone’s name, address, or what type of donut they like. You can find the documentation on this input <a href="https://shiny.rstudio.com/reference/shiny/0.14/textinput">here</a>. To format text, for size, emphasis, color, etc, please see the <em>Formatting text</em> section at the end of the Outputs section.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">textInput</span>(<span class="st">"input_1"</span>, <span class="st">"What's your favorite donut?"</span>),</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  )<span class="co">#close fluidPage</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -281,12 +282,9 @@ Tip
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sliderInput</span>(<span class="st">"num_3"</span>, <span class="st">"Enter the range of donuts you have been known to eat"</span>, <span class="at">value=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">9</span>), <span class="at">min=</span><span class="dv">0</span>, <span class="at">max=</span><span class="dv">12</span> )</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>)<span class="co">#close fluidPage</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-</section>
-<section id="dates" class="level3">
-<h3 class="anchored" data-anchor-id="dates">Dates</h3>
-<p>For single date entry, use the <code>dateInput()</code> function. For a range of dates, use the <code>dateRangeInput()</code>. Easy, right? There are format options for date inputs, such as <code>format</code>, <code>language</code>, and <code>value</code> which defines the starting date. The default starting date is today’s date on your system. You can use the help section to find out more or the documentation <a href="https://shiny.rstudio.com/reference/shiny/latest/dateinput">here</a> for dateInput() and <a href="https://shiny.rstudio.com/reference/shiny/latest/daterangeinput">here</a> for dateRangeInput().</p>
 <section id="dateinput-and-daterangeinput" class="level5">
 <h5 class="anchored" data-anchor-id="dateinput-and-daterangeinput">dateInput() and dateRangeInput()</h5>
+<p>For single date entry, use the <code>dateInput()</code> function. For a range of dates, use the <code>dateRangeInput()</code>. Easy, right? There are format options for date inputs, such as <code>format</code>, <code>language</code>, and <code>value</code> which defines the starting date. The default starting date is today’s date on your system. You can use the help section to find out more or the documentation <a href="https://shiny.rstudio.com/reference/shiny/latest/dateinput">here</a> for dateInput() and <a href="https://shiny.rstudio.com/reference/shiny/latest/daterangeinput">here</a> for dateRangeInput().</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dateInput</span>(<span class="st">"order_1"</span>, <span class="st">"What date do you want to order donuts?"</span>),</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dateRangeInput</span>(<span class="st">"delivery_1"</span>,<span class="st">"Between what dates do you want the donuts delivered?"</span>)</span>
@@ -374,7 +372,7 @@ Note
 <span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  )<span class="co">#close fluidRow</span></span>
 <span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>)<span class="co">#close fluidPage</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>You can also pass icons from the <a href="https://fontawesome.com/v4/icons/">FontAwesome library</a> to buttons and connect to web links. Shiny currently only supports the v4 FontAwesome library, but if you want to use later versions, (its currently up to 6.3) then you can try the <a href="https://github.com/rstudio/fontawesome">fontawesome</a>R library.</p>
+<p>You can also pass icons from the <a href="https://fontawesome.com/v4/icons/">FontAwesome library</a> to buttons and connect to web links. Shiny currently only supports the v4 FontAwesome library, but if you want to use later versions, (its currently up to 6.3) then you can try the <a href="https://github.com/rstudio/fontawesome">fontawesome</a> R library.</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">actionButton</span>(<span class="at">inputId=</span><span class="st">'link_1'</span>, <span class="at">label=</span><span class="st">"See our location"</span>, </span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">icon =</span> <span class="fu">icon</span>(<span class="st">"heart"</span>), </span>
@@ -387,10 +385,10 @@ Note
 </section>
 <section id="outputs" class="level1">
 <h1>Outputs</h1>
-<p>Outputs are assigned in the UI to define spaces where outputs will be seen. They include a unique ID in the first position of its arguments. UI outputs are always paired with a server output function.</p>
+<p>Outputs are paired functions with one assigned in the <code>ui</code> to define spaces where outputs will be seen and the other in the <code>server</code> function to render the result. They include a unique ID in the first position of its arguments.</p>
 <p>Output ID’s are called from the server side preceded by <code>output$outputID</code> in which <code>outputID</code> is the ID (like a variable name) you’ve assigned it. You’ll see these are always calling a render* function, such as <code>renderText()</code>. As an example:</p>
 <p><img src="images/Screen%20Shot%202023-02-17%20at%203.37.39%20PM.png" class="img-fluid" width="499"></p>
-<p>Some important new fuctions are called. In the <code>server()</code> function, you see <code>renderText()</code>. This calls the values you assigned in <em><code>input_1</code></em> and places it where you assigned it in <em><code>output_1</code></em>. In addition to text, you can also render tables, data tables, plots, images, and text. We’ll look at these pairings of <em><code>ui()</code></em> outputs and <em><code>server()</code></em> outputs next.</p>
+<p>Some important new fuctions are called. In the <code>server()</code> function, you see <code>renderText()</code>. This calls the values you assigned in <em><code>input_1</code></em> and places it where you assigned it in <em><code>output_1</code></em>. In addition to text, you can also render tables, data tables, plots, images, and text. <code>*Output()</code> and <code>render*()</code> functions work together, with <code>*Output()</code> in the ui to show where output will be displayed, and <code>render*() i</code>n the server to produce the desired information.</p>
 <section id="text-output" class="level3">
 <h3 class="anchored" data-anchor-id="text-output">Text output</h3>
 <section id="textoutput-rendertext" class="level5">
@@ -468,7 +466,7 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>DataTables refers to both functions in Shiny and from the DT library. For any examples in this chapter, we’ll be refering to the Shiny version. While dataTables in the Shiny library provides only server-side tables, the DT package can provide both server-side and client-side tables. This may be an important consideration if you are trying to reduce how many working hours your application runs on shinyapps.io, for example.</p>
+<p>DataTables refers to both functions in Shiny and from the DT library. Unless the library(DT) is called, references to dataTables are for the version in the Shiny library. While dataTables in the Shiny library provides only server-side tables, the DT package can provide both server-side and client-side tables. This may be an important consideration if you are trying to reduce how many working hours your application runs on shinyapps.io, for example.</p>
 </div>
 </div>
 </section>
@@ -493,6 +491,20 @@ Important
 <span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>}<span class="co">#close server</span></span>
 <span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You can in the code above that the DT library has been called. Its also good practice to call directly from the library for functions that are present in more than one library. In this case, renderDataTable() exists in both Shiny and DT. To make it more human readable and prevent conflicts, its advised to call the function directly from the library as in the following:</p>
+<p>DT::renderDataTable()</p>
+</div>
+</div>
 </section>
 <section id="computation-output" class="level3">
 <h3 class="anchored" data-anchor-id="computation-output">Computation output</h3>
@@ -808,8 +820,9 @@ Tip
 <span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Next, let’s play with themes.</p>
 </section>
-<section id="themes" class="level2">
-<h2 class="anchored" data-anchor-id="themes">Themes</h2>
+</section>
+<section id="themes" class="level1">
+<h1>Themes</h1>
 <p>Themes control the styling of the application, unifying colors and fonts, for example. Themes are assigned in the <code>ui()</code>. You can find the shinythemes library <a href="https://rstudio.github.io/shinythemes/">here</a>.</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shinythemes)</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -868,7 +881,6 @@ Tip
 <span id="cb33-34"><a href="#cb33-34" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-35"><a href="#cb33-35" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>There is also the shiny.semantic library for a different look. You can find the link <a href="https://appsilon.github.io/shiny.semantic/">here.</a></p>
-</section>
 <section id="formatting-text" class="level2">
 <h2 class="anchored" data-anchor-id="formatting-text">Formatting text</h2>
 <section id="html-functions" class="level4">
@@ -879,7 +891,7 @@ Tip
 <colgroup>
 <col style="width: 25%">
 <col style="width: 25%">
-<col style="width: 50%">
+<col style="width: 49%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1093,7 +1105,7 @@ Important
 </section>
 <section id="wrap-up" class="level1">
 <h1>Wrap up</h1>
-<p>That’s chapter 11b! By the end of this you have learned more about many of the Shiny inputs and output functions, how they work together, and an introduction to themes and formatting text. We also introduced reactivity in Shiny which is an important concept as you move forward into more complex interactions. You now have enough information to create and publish web-based applications. Combined with what you have covered in the previous chapters, you are now well prepared to create, modify, calculate, and publish your own research!</p>
+<p>That’s chapter 11b! That was a massive chapter, but this is intended to be used as a reference for you for your future explorations in Shiny. By the end of this you have learned more about many of the Shiny inputs and output functions, how they work together, and an introduction to themes and formatting text. We also introduced reactivity in Shiny which is an important concept as you move forward into more complex interactions. You now have enough information to create and publish web-based applications. Combined with what you have covered in the previous chapters, you are now well prepared to create, modify, calculate, and publish your own research!</p>
 </section>
 
 </main>

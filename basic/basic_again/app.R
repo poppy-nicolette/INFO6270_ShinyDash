@@ -1,33 +1,39 @@
 library(shiny)
+library(DT)
+library(tidyverse)
 
-ui <- bootstrapPage(
-  h3("URL components"),
-  verbatimTextOutput("urlText"),
-  
-  h3("Parsed query string"),
-  verbatimTextOutput("queryText")
-)
 
-server <- function(input, output, session) {
+path <- "https://raw.githubusercontent.com/fivethirtyeight/data/master/comic-characters/marvel-wikia-data.csv"
+
+# This will read the first sheet of the Excel file
+comics_data <- read_csv(path)
+
+ui <- fluidPage(
+  sidebarLayout(
+    sidebarPanel(
+      h2("How to use DataTables from the DT library"),
+      br(),
+      p("To the right is a dataset displayed as a DataTable"), 
+      p("This dataset is from the fivethirtyeight GitHub repository.")
+    ),#close sidebarPanel
+    mainPanel(
+      h2("the dataset"),
+      br(),
+      
+      DT::dataTableOutput("table_1"), 
+      
+      
+    )#close mainPanel
+  )#close sidebarLayout
+)#close fluidPage
+
+server <- function(input, output) {
+  data_to_display <- comics_data
   
-  # Return the components of the URL in a string:
-  output$urlText <- renderText({
-    paste(sep = "",
-          "protocol: ", session$clientData$url_protocol, "\n",
-          "hostname: ", session$clientData$url_hostname, "\n",
-          "pathname: ", session$clientData$url_pathname, "\n",
-          "port: ",     session$clientData$url_port,     "\n",
-          "search: ",   session$clientData$url_search,   "\n"
-    )
+  output$table_1 <- renderDataTable({
+    (data_to_display)
   })
   
-  # Parse the GET query string
-  output$queryText <- renderText({
-    query <- parseQueryString(session$clientData$url_search)
-    
-    # Return a string with key-value pairs
-    paste(names(query), query, sep = "=", collapse=", ")
-  })
-}
+}#close server
 
 shinyApp(ui, server)

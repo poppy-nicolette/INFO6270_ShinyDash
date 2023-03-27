@@ -34,7 +34,7 @@ Inputs are the ways users can enter, filter, or select information within your a
 textAreaInput("story", "Tell me about yourself", rows = 3)
 ```
 
-While, we will address a few of these, you can find all of them and their code on the [shiny gallery](https://shiny.rstudio.com/gallery/widget-gallery.html)
+While we will address a few of these, you can find all of them and their code on the [shiny gallery](https://shiny.rstudio.com/gallery/widget-gallery.html).
 
 The syntax of the widget is the same as other inputs. Let's look at the code below:
 
@@ -70,7 +70,7 @@ If you ever want to know more about a function, you can always use the help sect
 
 ##### textInput()
 
-This is for small amounts of text, like asking for someone's name, address, or what type of cheese they like. You can find the documentation on this input [here](https://shiny.rstudio.com/reference/shiny/0.14/textinput). To format text, for size, emphasis, color, etc, please see the *Formatting text* section at the end of the chapter.
+This is for small amounts of text, like asking for someone's name, address, or what type of donut they like. You can find the documentation on this input [here](https://shiny.rstudio.com/reference/shiny/0.14/textinput). To format text, for size, emphasis, color, etc, please see the *Formatting text* section at the end of the Outputs section.
 
 ``` r
 ui <- fluidPage(
@@ -143,11 +143,9 @@ ui <- fluidPage(
 )#close fluidPage
 ```
 
-### Dates
+##### dateInput() and dateRangeInput()
 
 For single date entry, use the `dateInput()` function. For a range of dates, use the `dateRangeInput()`. Easy, right? There are format options for date inputs, such as `format`, `language`, and `value` which defines the starting date. The default starting date is today's date on your system. You can use the help section to find out more or the documentation [here](https://shiny.rstudio.com/reference/shiny/latest/dateinput) for dateInput() and [here](https://shiny.rstudio.com/reference/shiny/latest/daterangeinput) for dateRangeInput().
-
-##### dateInput() and dateRangeInput()
 
 ``` r
 ui <- fluidPage(
@@ -233,7 +231,7 @@ ui <- fluidPage(
 )#close fluidPage
 ```
 
-You can also pass icons from the [FontAwesome library](https://fontawesome.com/v4/icons/) to buttons and connect to web links. Shiny currently only supports the v4 FontAwesome library, but if you want to use later versions, (its currently up to 6.3) then you can try the [fontawesome](https://github.com/rstudio/fontawesome)R library.
+You can also pass icons from the [FontAwesome library](https://fontawesome.com/v4/icons/) to buttons and connect to web links. Shiny currently only supports the v4 FontAwesome library, but if you want to use later versions, (its currently up to 6.3) then you can try the [fontawesome](https://github.com/rstudio/fontawesome) R library.
 
 ``` r
 ui <- fluidPage(
@@ -248,13 +246,13 @@ There are many more inputs available on the Shiny reference documentation, these
 
 # Outputs
 
-Outputs are assigned in the UI to define spaces where outputs will be seen. They include a unique ID in the first position of its arguments. UI outputs are always paired with a server output function.
+Outputs are paired functions with one assigned in the `ui` to define spaces where outputs will be seen and the other in the `server` function to render the result. They include a unique ID in the first position of its arguments.
 
 Output ID's are called from the server side preceded by `output$outputID` in which `outputID` is the ID (like a variable name) you've assigned it. You'll see these are always calling a render\* function, such as `renderText()`. As an example:
 
 ![](images/Screen%20Shot%202023-02-17%20at%203.37.39%20PM.png){width="499"}
 
-Some important new fuctions are called. In the `server()` function, you see `renderText()`. This calls the values you assigned in *`input_1`* and places it where you assigned it in *`output_1`*. In addition to text, you can also render tables, data tables, plots, images, and text. We'll look at these pairings of *`ui()`* outputs and *`server()`* outputs next.
+Some important new fuctions are called. In the `server()` function, you see `renderText()`. This calls the values you assigned in *`input_1`* and places it where you assigned it in *`output_1`*. In addition to text, you can also render tables, data tables, plots, images, and text. `*Output()` and `render*()` functions work together, with `*Output()` in the ui to show where output will be displayed, and `render*() i`n the server to produce the desired information.
 
 ### Text output
 
@@ -338,7 +336,7 @@ server <- function(input, output) {
 DataTables are more appropriate for larger dataframes where someone may need to explore, filter, and sort data. You can find more information on modifying DataTables [here.](https://shiny.rstudio.com/articles/datatables.html)
 
 ::: callout-important
-DataTables refers to both functions in Shiny and from the DT library. For any examples in this chapter, we'll be refering to the Shiny version. While dataTables in the Shiny library provides only server-side tables, the DT package can provide both server-side and client-side tables. This may be an important consideration if you are trying to reduce how many working hours your application runs on shinyapps.io, for example.
+DataTables refers to both functions in Shiny and from the DT library. Unless the library(DT) is called, references to dataTables are for the version in the Shiny library. While dataTables in the Shiny library provides only server-side tables, the DT package can provide both server-side and client-side tables. This may be an important consideration if you are trying to reduce how many working hours your application runs on shinyapps.io, for example.
 :::
 
 ### DataTables
@@ -364,6 +362,12 @@ server <- function(input, output) {
 
 shinyApp(ui, server)
 ```
+
+::: callout-important
+You can in the code above that the DT library has been called. Its also good practice to call directly from the library for functions that are present in more than one library. In this case, renderDataTable() exists in both Shiny and DT. To make it more human readable and prevent conflicts, its advised to call the function directly from the library as in the following:
+
+DT::renderDataTable()
+:::
 
 ### Computation output
 
@@ -533,7 +537,7 @@ More plot types can be found on the [R Graph Library](https://r-graph-gallery.co
 
 You can place images or logos in your app! Of course, you also use `fluidRow()` and `column` arguments to organize your space with text and images. In this case, we are pointing to an image located at a website.
 
-``` R
+``` r
 library("shiny")
 ui <- fluidPage(
   mainPanel(
@@ -560,7 +564,7 @@ You can also source your image from a directory. Your files should be saved in a
 
 A simple way to call a locally saved image, such as a logo or banner image, might be this:
 
-``` R
+``` r
 library(shiny)
 
 ui <- fluidPage(
@@ -576,7 +580,7 @@ shinyApp(ui, server)
 
 However, if we wanted to call those locally saved images from a choice list, our code would need to look like this:
 
-``` R
+``` r
 library(shiny)
 
 donuts <- tibble::tribble(
@@ -704,7 +708,7 @@ shinyApp(ui, server)
 
 Next, let's play with themes.
 
-## Themes
+# Themes
 
 Themes control the styling of the application, unifying colors and fonts, for example. Themes are assigned in the `ui()`. You can find the shinythemes library [here](https://rstudio.github.io/shinythemes/).
 
@@ -746,7 +750,7 @@ ui <- fluidPage(
   theme = bs_theme( 
     bg = "#175d8d", 
     fg = "#d5fbfc", 
-    primary = "	#e3fffc", 
+    primary = " #e3fffc", 
     base_font = font_google("Atkinson Hyperlegible"),
     code_font = font_google("Roboto Mono")
   ),
@@ -787,7 +791,7 @@ You can apply HTML equivalent functions in shiny to format your text by creating
 Table source: https://shiny.rstudio.com/tutorial/written-tutorial/lesson2/
 
 | **shiny function** | **HTML5 equivalent** | **creates**                                      |
-|:-----------------|:-----------------|:-----------------------------------|
+|:-----------------|:-----------------|:----------------------------------|
 | `p`                | `<p>`                | A paragraph of text                              |
 | `h1`               | `<h1>`               | A first level header                             |
 | `h2`               | `<h2>`               | A second level header                            |
@@ -920,4 +924,4 @@ Recognizing reactive functions of `eventReactive()` and `observeEvent()` and why
 
 # Wrap up
 
-That's chapter 11b! By the end of this you have learned more about many of the Shiny inputs and output functions, how they work together, and an introduction to themes and formatting text. We also introduced reactivity in Shiny which is an important concept as you move forward into more complex interactions. You now have enough information to create and publish web-based applications. Combined with what you have covered in the previous chapters, you are now well prepared to create, modify, calculate, and publish your own research!
+That's chapter 11b! That was a massive chapter, but this is intended to be used as a reference for you for your future explorations in Shiny. By the end of this you have learned more about many of the Shiny inputs and output functions, how they work together, and an introduction to themes and formatting text. We also introduced reactivity in Shiny which is an important concept as you move forward into more complex interactions. You now have enough information to create and publish web-based applications. Combined with what you have covered in the previous chapters, you are now well prepared to create, modify, calculate, and publish your own research!
