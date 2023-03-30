@@ -14,7 +14,8 @@ ui <- fluidPage(
       h2("How to use DataTables from the DT library"),
       br(),
       p("To the right is a dataset displayed as a DataTable"), 
-      p("This dataset is from the fivethirtyeight GitHub repository.")
+      p("This dataset is from the fivethirtyeight GitHub repository."),
+      style="background-color:#6600ff;color:#ffffff;"
     ),#close sidebarPanel
     mainPanel(
       h2("the dataset"),
