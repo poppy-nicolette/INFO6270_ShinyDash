@@ -11,8 +11,16 @@ library(shiny)
 
 # Define UI
 ui <- fluidPage(
+  title = "A basic fluidPage",
+  #titlepanel
+  titlePanel(p("A basic fluidpage with sidebarLayout",
+             style = "height:50px;
+                background-color:#ff66cc;
+                color:#ffffff;
+                text-align:center;"
+             )),
   # Sidebar Layout
-  sidebarLayout(
+  sidebarLayout( 
     # Sidebar Layout Elements
     sidebarPanel = sidebarPanel(
       p("This is the sidebar area. You can have text and widgets here like buttons or sliders."),
