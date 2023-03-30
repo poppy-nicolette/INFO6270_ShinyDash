@@ -14,9 +14,18 @@ ui <- fluidPage(
   # Sidebar Layout
   sidebarLayout(
     # Sidebar Layout Elements
-    sidebarPanel = sidebarPanel("This is the sidebar area. You can have text and widgets here like buttons or sliders."),
-    mainPanel = mainPanel(
-      "This is the main panel text.",
+    sidebarPanel = sidebarPanel(
+      p("This is the sidebar area. You can have text and widgets here like buttons or sliders."),
+      style = "height:600px;
+                background-color:#4d3a7d;
+                color:#ffffff;
+                text-align:center;"
+      ),#close sidebarPanel
+    mainPanel = mainPanel(style = "height:600px;
+                                    background-color:#33ccff;
+                                    color:#ffffff;
+                                    text-align:center;",
+      p("This is the main panel text."),
     ) #close mainPanel
   )#close sidebarLayout
   )#close fluidPage
