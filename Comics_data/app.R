@@ -2,6 +2,7 @@ library(shiny)
 library(DT)
 library(tidyverse)
 
+# source of data is the fivethirtyeight repository: https://github.com/fivethirtyeight/data/tree/master/comic-characters
 
 path <- "https://raw.githubusercontent.com/fivethirtyeight/data/master/comic-characters/marvel-wikia-data.csv"
 
