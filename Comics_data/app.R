@@ -40,10 +40,9 @@ ui <- fluidPage(
 )#close fluidPage
 
 server <- function(input, output) {
-  data_to_display <- comics_data
-  
+
   output$table_1 <- renderDataTable(
-    data_to_display,
+    comics_data,
     options = list(
       scrollX = TRUE, 
       scrollY = TRUE,

@@ -27,7 +27,7 @@ ui <- fluidPage(
       style = "height:600px;
                 background-color:#4d3a7d;
                 color:#ffffff;
-                text-align:center;"
+                text-align: left;"
       ),#close sidebarPanel
     mainPanel = mainPanel(style = "height:600px;
                                     background-color:#33ccff;
