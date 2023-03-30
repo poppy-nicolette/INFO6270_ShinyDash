@@ -1,0 +1,10 @@
+---
+title: "Chapter 12:"
+subtitle: "Dashboards"
+format: html
+editor: visual
+---
+
+In this chapter, we will look at how to make dashboards using a couple of new libraries.
+
+# 
