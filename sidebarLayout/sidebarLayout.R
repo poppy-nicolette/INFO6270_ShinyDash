@@ -24,10 +24,25 @@ ui <- fluidPage(
     # Sidebar Layout Elements
     sidebarPanel = sidebarPanel(
       p("This is the sidebar area. You can have text and widgets here like buttons or sliders."),
+      fluidRow(
+        column(1,"some text"),
+        column(2, "some text")
+      ),#close fluidRow
+      fluidRow(
+        column(3," some more text"),
+        column(2, "yet more text")
+      ),
+      fluidRow(
+        column(6,
+               plotOutput("plot1", click = "plot_click"))
+        
+      ),
+      
       style = "height:600px;
                 background-color:#4d3a7d;
                 color:#ffffff;
                 text-align: left;"
+      
       ),#close sidebarPanel
     mainPanel = mainPanel(style = "height:600px;
                                     background-color:#33ccff;

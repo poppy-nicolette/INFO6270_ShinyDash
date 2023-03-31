@@ -2,11 +2,11 @@ library(shiny)
 
 ui <- fluidPage(
   fluidRow(
-    column(3,
-           "sidebar",
+    column(9,
+           "Some text here",
 
     ),
-    column(9,
+    column(3,
            "main"
     )
   )
