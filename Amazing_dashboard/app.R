@@ -110,9 +110,10 @@ server <- function(input, output) {
     })
   
   # A basic scatterplot with color depending on Species
-  data
+
   output$scatter <- renderPlot({
-  ggplot(data, aes(x=hwy, y=cty, color=class)) + 
+    data <- mpg
+    ggplot(data, aes(x=hwy, y=cty, color=class)) + 
     geom_point(size=6)
     })#close renderplot
   
