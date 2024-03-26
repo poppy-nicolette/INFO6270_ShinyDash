@@ -9,7 +9,7 @@ ui <- fluidPage(
   tags$style("@import url(https://use.fontawesome.com/releases/v6.3.0/css/all.css);"),
   actionButton(inputId='link_1', label="See our location", 
                icon = icon("book"), 
-               onclick ="window.open('https://goo.gl/maps/PrUi3qKEc3WFg9Hz7', '_blank')"),
+               onclick ="window.open('https://maps.app.goo.gl/76jQBejw9oty6Rr89', '_blank')"),
   textOutput("text")
 )
 
