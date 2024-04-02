@@ -31,3 +31,4 @@ licenses <- cr_result %>%
   dplyr::select(license, doi)%>%
   tidyr::unnest(license, .drop = FALSE)
 datatable(licenses)
+

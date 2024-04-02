@@ -18,10 +18,18 @@ library(DT)
 library(tidyr)
 library(dplyr)
 
+#set the CSS to adjust the colors
+css <- HTML(" body {
+    background-color: #ecf5ff;
+}")
+
 
 ui <- fluidPage(
   theme = shinytheme('cosmo'),
     tags$head(HTML("<title>🍩DOI fetcher</title>")),
+    tags$head(tags$style(css)),
+  fluidRow(
+    column(3,offset = .5,
   textInput("doiInput", "DOI, just the DOI"),
   
   checkboxInput("data_references", "Just references", FALSE),
@@ -29,11 +37,18 @@ ui <- fluidPage(
   checkboxInput("data_licenses", "Just license information", FALSE),
   
   actionButton("submitButton", "Press me!"),
-
+  ),
+  column(8, 
+         h2("Crossref API Fetcherator"),
+         p("This simple app fetches works information for a given DOI using the rcrossref library from Crossref.org.
+           Enter a single DOI with no handle, such as the https://doi.org/ thingy. For example, 10.1007/s11192-012-0662-4"),
+         br(),
+         h5("Author: Poppy Riddle  Source: https://github.com/poppy-nicolette/INFO6270_ShinyDash/tree/main/Crossref_API/Crossref_API"))),
+  fluidRow(
   tags$hr(style = "border-top: 1.5px solid #000000;"),
 
   DT::dataTableOutput("apiOutput2")
-  
+  )#close fluidRow
 )
 
 server <- function(input, output) {
