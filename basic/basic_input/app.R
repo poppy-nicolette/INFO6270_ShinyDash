@@ -10,13 +10,16 @@ ui <- fluidPage(
   actionButton(inputId='link_1', label="See our location", 
                icon = icon("book"), 
                onclick ="window.open('https://maps.app.goo.gl/76jQBejw9oty6Rr89', '_blank')"),
-  textOutput("text")
+  textOutput("text"), 
+  h5("you like this type of donut: "),
+  textOutput("text2")
 )
 
 server <- function(input, output){
   output$text <- renderText({input$input_1})
-}
 
+output$text2 <- renderText({input$flavor_1})
+}
 # Run the application 
 shinyApp(ui = ui, server = server)
 
